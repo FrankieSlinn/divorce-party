@@ -17,7 +17,7 @@ const User = require('../models/user')
 
 
 router.get('/users', (req, res) => {
-    User.find()
+    User.find().populate('posts')
     .then((allUsers) => {
         res.json({users: allUsers})
     })
@@ -51,7 +51,7 @@ router.post('/users', (req, res) => {
  */
 
 router.get('/users/:id', (req, res) => {
-    User.findById(req.params.id)
+    User.findById(req.params.id).populate('posts')
     .then(user => {
         if (user) {
             res.json({user: user})
@@ -80,7 +80,7 @@ router.get('/users/:id', (req, res) => {
  */
 
 router.put('/users/:id', (req, res) => {
-    User.findByIdAndUpdate(req.params.id, req.body, {new: true})
+    User.findByIdAndUpdate(req.params.id, req.body, {new: true}).populate('posts')
     .then(user => {
         if (user) {
             res.json({user: user})
@@ -131,6 +131,93 @@ router.delete('/users/:id', (req, res) => {
     })
 })
 
+/**
+ * Action:      INDEX
+ * Method:      GET
+ * URI:         /users/644ef2f60bf76b599d86f44d/posts
+ * Description: Get all posts from a User by User ID
+ */
+
+router.get('/users/:id/posts', async (req, res) => {
+    try {
+        const data = await User.findById(req.params.id).populate('posts')
+        res.json(data.posts)
+    } catch {
+        res.status(500).json({error: 'Internal Server Error'})
+    }
+})
+
+/**
+ * Action:      CREATE
+ * Method:      POST
+ * URI:         /users/644ef2f60bf76b599d86f44d/posts
+ * Description: Create a new post for a User
+ */
+
+router.post('/users/:id/posts', async (req, res) => {
+    try {
+        console.log(req.body)
+        const newPost = await Post.create(req.body)
+        const data = await User.findByIdAndUpdate(req.params.id, {$push: {posts: newPost}}, {new: true}).populate('posts')
+        res.json(data)
+    } catch {
+        res.status(500).json({error: 'Internal Server Error'})
+    }
+    
+})
+
+/**
+ * Action:      SHOW
+ * Method:      GET
+ * URI:         /users/644ef2f60bf76b599d86f44d/posts/64552ba83b906c65ed9db73b
+ * Description: Get a single Post (by post ID) from a User (by User ID)
+ */
+
+router.get('/users/:id/posts/:postId', async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id).populate('posts')
+        const data = user.posts.find((post) => (post._id == req.params.postId))
+        res.json(data)
+    } catch {
+        res.status(500).json({error: 'Internal Server Error'})
+    }
+})
+
+/**
+ * Action:      UPDATE
+ * Method:      PUT
+ * URI:         /users/644ef2f60bf76b599d86f44d/posts/64552ba83b906c65ed9db73b
+ * Description: Update a single Post (by Post ID) from a User (by User ID)
+ */
+
+router.put('/users/:id/posts/:postId', async (req, res) => {
+    try {
+        const data = await Post.findByIdAndUpdate(req.params.postId, {...req.body}, {new: true})
+        res.json(data)
+
+    } catch {
+        res.status(500).json({error: 'Internal Server Error'})
+    }
+})
+
+/**
+ * Action:      DESTROY
+ * Method:      DELETE
+ * URI:         /users/644ef2f60bf76b599d86f44d/posts/64552ba83b906c65ed9db73b
+ * Description: Delete a single Post (by Post ID) from a User (by User ID)
+ */
+
+router.delete('/users/:id/posts/:postId', async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id).populate('posts')
+        const updatedPostsArr = user.posts.filter((post) => (post._id != req.params.postId))
+        const data = await User.findByIdAndUpdate(req.params.id, {posts: updatedPostsArr}, {new: true}).populate('posts')
+        res.json(data)
+
+    } catch {
+        res.status(500).json({error: 'Internal Server Error'})
+    }
+})
 
 
 
