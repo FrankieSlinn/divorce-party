@@ -18,11 +18,9 @@ const User = require('../models/user')
 
 router.get('/users', (req, res) => {
     User.find()
-    //Return all Articles as an array
     .then((allUsers) => {
         res.json({users: allUsers})
     })
-    //Catch any errors that might occur
     .catch(error => {
         res.status(500).json({error: error})
     })
@@ -32,7 +30,7 @@ router.get('/users', (req, res) => {
  * Action:      CREATE
  * Method:      POST
  * URI:         /users
- * Description: Create a new Article
+ * Description: Create a new User
  */
 
 router.post('/users', (req, res) => {
@@ -44,6 +42,95 @@ router.post('/users', (req, res) => {
         res.status(500).json({error: error})
     })
 })
+
+/**
+ * Action:      SHOW
+ * Method:      GET
+ * URI:         /users/644ef2f60bf76b599d86f44d
+ * Description: Get a User by User ID
+ */
+
+router.get('/users/:id', (req, res) => {
+    User.findById(req.params.id)
+    .then(user => {
+        if (user) {
+            res.json({user: user})
+        } else {
+            res.status(404).json({
+                error: {
+                    name: 'DocumentNotFound',
+                    message: "The provided ID doesn't match any documents"
+                }
+            })
+
+        }
+        
+    })
+    .catch((error) => {
+        console.log(error)
+        res.status(500).json({error: error})
+    })
+})
+
+/**
+ * Action:      UPDATE
+ * Method:      PUT/PATCH
+ * URI:         /users/644ef2f60bf76b599d86f44d
+ * Description: Update a User by User ID
+ */
+
+router.put('/users/:id', (req, res) => {
+    User.findByIdAndUpdate(req.params.id, req.body, {new: true})
+    .then(user => {
+        if (user) {
+            res.json({user: user})
+        } else {
+            res.status(404).json({
+                error: {
+                    name: 'DocumentNotFound',
+                    message: "The provided ID doesn't match any documents"
+                }
+            })
+
+        }
+        
+    })
+    .catch((error) => {
+        console.log(error)
+        res.status(500).json({error: error})
+    })
+})
+
+
+/**
+ * Action:      DESTROY
+ * Method:      DELETE
+ * URI:         /users/644ef2f60bf76b599d86f44d
+ * Description: Delete a User by User ID
+ */
+
+router.delete('/users/:id', (req, res) => {
+    User.findByIdAndRemove(req.params.id)
+    .then(user => {
+        if (user) {
+            res.json({user: user})
+        } else {            
+            res.status(404).json({
+                error: {
+                    name: 'DocumentNotFound',
+                    message: "The provided ID doesn't match any documents"
+                }
+            })
+
+        }
+        
+    })
+    .catch((error) => {
+        console.log(error)
+        res.status(500).json({error: error})
+    })
+})
+
 
 
 
