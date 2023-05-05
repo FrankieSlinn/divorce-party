@@ -12,9 +12,9 @@ import {useState, useEffect } from "react"
 
 function App() {
   const [posts, setPosts] = useState([])
-  const [author, setAuthor] = useState([])
-  const [title, setTitle] = useState([])
-  const [content, setContent] = useState([])
+  const [author, setAuthor] = useState("")
+  const [title, setTitle] = useState("")
+  const [content, setContent] = useState("")
   return (
     <div className="App">
       <Routes>

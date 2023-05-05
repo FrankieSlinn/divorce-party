@@ -6,7 +6,7 @@ export default function Post(props) {
         <div className ="post">
             <h3>Title: {props.title}</h3>
             <p>
-                Entry: {props.entry}
+                Entry: {props.content}
             </p>
             <p>Author: {props.author}</p>
 
