@@ -4,14 +4,14 @@ import Homepage from './Components/Homepage/Homepage';
 import PageNotFound from './Components/PageNotFound/PageNotFound';
 import Posts from './Components/Posts/Posts';
 import Post from './Components/Posts/Post';
+import NavBar from './Components/NavBar/NavBar';
 
 
 function App() {
   return (
     <div className="App">
+      <NavBar />
       <Routes>
-       
-       
         <Route path='/' element={<Homepage />}></Route>
         <Route path='/posts' element={<Posts />}></Route>
         <Route path='/post/:id' element={<Post />}></Route>
