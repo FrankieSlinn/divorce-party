@@ -1,6 +1,7 @@
 import React from 'react'
 import User from './User'
 
+
 export default function Users(props) {
 
     let allUsers = <h3>Loading...</h3>
@@ -9,9 +10,10 @@ export default function Users(props) {
 
     if (props.users.length > 0) {
         allUsers = props.users.map((user) => {
+            console.log(user.posts)
             return <User username={user.username}
                             name={user.name}
-                            // posts={user.posts}
+                            posts={user.posts}
                             id={user._id}
                             key={user._id}
                             setUsers={props.setUsers}/>

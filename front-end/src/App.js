@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router-dom';
 import Homepage from './Components/Homepage/Homepage';
 import PageNotFound from './Components/PageNotFound/PageNotFound';
-import Posts from './Components/Posts/Posts';
-import Post from './Components/Posts/Post';
 import NavBar from './Components/NavBar/NavBar';
 import Users from './Components/Users/Users';
 import { getAllUsers } from './Components/Users/api';
@@ -34,8 +32,8 @@ function App() {
         <Route path='/users/:id' element={<ShowUser setUsers={setUsers}/>}></Route>
         <Route path='/users/create' element={<NewUserForm setUsers={setUsers}/>}></Route>
 
-        <Route path='/posts' element={<Posts />}></Route>
-        <Route path='/post/:id' element={<Post />}></Route>
+        <Route path='/posts' element={<h1>Coming soon...</h1>}></Route>
+        <Route path='/post/:id' element={<h1>Coming soon...</h1>}></Route>
 
         <Route path='*' element={<PageNotFound />}></Route>
       </Routes>
