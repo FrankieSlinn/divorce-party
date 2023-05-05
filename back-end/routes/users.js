@@ -72,6 +72,65 @@ router.get('/users/:id', (req, res) => {
     })
 })
 
+/**
+ * Action:      UPDATE
+ * Method:      PUT/PATCH
+ * URI:         /users/644ef2f60bf76b599d86f44d
+ * Description: Update a User by User ID
+ */
+
+router.put('/users/:id', (req, res) => {
+    User.findByIdAndUpdate(req.params.id, req.body, {new: true})
+    .then(user => {
+        if (user) {
+            res.json({user: user})
+        } else {
+            res.status(404).json({
+                error: {
+                    name: 'DocumentNotFound',
+                    message: "The provided ID doesn't match any documents"
+                }
+            })
+
+        }
+        
+    })
+    .catch((error) => {
+        console.log(error)
+        res.status(500).json({error: error})
+    })
+})
+
+
+/**
+ * Action:      DESTROY
+ * Method:      DELETE
+ * URI:         /users/644ef2f60bf76b599d86f44d
+ * Description: Delete a User by User ID
+ */
+
+router.delete('/users/:id', (req, res) => {
+    User.findByIdAndRemove(req.params.id)
+    .then(user => {
+        if (user) {
+            res.json({user: user})
+        } else {            
+            res.status(404).json({
+                error: {
+                    name: 'DocumentNotFound',
+                    message: "The provided ID doesn't match any documents"
+                }
+            })
+
+        }
+        
+    })
+    .catch((error) => {
+        console.log(error)
+        res.status(500).json({error: error})
+    })
+})
+
 
 
 
