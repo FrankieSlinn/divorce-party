@@ -47,18 +47,19 @@ async function handleFormSubmit(e) {
 
 
   return (
-    <div className='form-div'>
+    <div>
         <form onSubmit={handleFormSubmit}>
-            <h1>Sign Up</h1>
-            <ul>
-                <li>Username: <input name='username' onChange={handleFormChange}></input></li>
-                <li>Display Name: <input name='name' onChange={handleFormChange}></input></li>
-                <li>Password: <input name='password' type='password' onChange={handleFormChange}></input></li>
-            </ul>
-            <div className='form-btns'>
-                <button type="submit">Submit</button>
-                <button type="button" onClick={handleCancel}>Cancel</button>
-            </div>
+            <h1 className='text-2xl font-bold pb-8'>Sign Up</h1>
+            <ul className='flex flex-col'>
+                <li className='py-1'><label>Username:</label></li>
+                <li className='py-2'><input className='px-2 py-1' name='username' onChange={handleFormChange}></input></li>
+                <li className='py-1'><label>Display Name:</label></li>
+                <li className='py-2'><input className='px-2 py-1' name='name' onChange={handleFormChange}></input></li>
+                <li className='py-1'><label>Password:</label></li>
+                <li className='py-2'><input className='px-2 py-1' name='password' type='password' onChange={handleFormChange}></input></li>
+                <li className='py-2'><button type="submit">Submit</button></li>
+                <li className='py-2'> <button type="button" onClick={handleCancel}>Cancel</button></li>
+            </ul> 
         </form>
     </div>
   )

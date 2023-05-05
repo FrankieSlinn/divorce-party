@@ -5,7 +5,7 @@ export default function NavBar() {
 
   return (
     <div className='text-[black]content-center'>
-        <h1 className='text-center text-3xl font-bold text-[black]'>Divorce Party Guest Book</h1>
+        <h1 className='text-center text-3xl font-bold text-[black] pt-5'>Divorce Party Guest Book</h1>
         <ul className='flex items-center text-center justify-center	'>
             <li className='p-4'><Link to='/'>Home</Link></li>
             <li className='p-4'><Link to='/posts'>Posts</Link></li>

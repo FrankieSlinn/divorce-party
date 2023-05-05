@@ -12,7 +12,6 @@ export default function User(props) {
   return (
         <div className='hover:cursor-pointer' onClick={handleClick}>
           <h2>{props.name}</h2>
-          <h2>{props.username}</h2>
         </div>
 
   )
