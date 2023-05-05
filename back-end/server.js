@@ -1,1 +1,0 @@
-const message = 'Hi!'
