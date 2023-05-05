@@ -1,4 +1,4 @@
-const localDB = 'mongodb://localhost:27017/posts'
+const localDB = 'mongodb://localhost:27017/divorce'
 
 const currentDB = process.env.MONGODB_URI || localDB
 
