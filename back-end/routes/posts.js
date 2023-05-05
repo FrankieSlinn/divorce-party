@@ -12,22 +12,22 @@ const router = express.Router()
 
 
 // Index
-// router.get('/logs', (req, res) => {
-// 	Log.find()
-// 		.then((allLogs) => {
-// 			res.json({logs: allLogs})
-// 		})
-// 		.catch((error) => {
-// 			console.log(error)
-// 			res.status(500).send('Internal Server Error')
-// 		})
-// })
+router.get('/posts', (req, res) => {
+	Post.find()
+		.then((allPosts) => {
+			res.json({posts: allPosts})
+		})
+		.catch((error) => {
+			console.log(error)
+			res.status(500).send('Internal Server Error')
+		})
+})
 
 // console.log("Post", Post)
 
-//Test
-router.get('/posts', (req, res) => {
-	res.send("hi hi hi")})
+// //Test
+// router.get('/posts', (req, res) => {
+// 	res.send("hi hi hi")})
 
 router.post('/posts', (req, res) => {
 	console.log("req.body",req.body)
