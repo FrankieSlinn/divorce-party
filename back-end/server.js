@@ -1,7 +1,7 @@
 // Essential NPM packages
 const express = require('express');
 const mongoose = require('mongoose');
-const cores = require('cors');
+const cors = require('cors');
 
 const port = process.env.PORT|| 5000;
 
