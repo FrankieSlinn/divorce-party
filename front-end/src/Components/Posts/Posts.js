@@ -4,47 +4,56 @@ import Post from "./Post";
 import { getAllPosts } from "../../api";
 
 export default function Posts(props) {
-  console.log("props in Posts", props, props.posts);
-
-  // function showAllPosts() {
-  //   getAllPosts()
-  //     .then((data) => data.json())
-  //     .then((newPosts) => props.setPosts(newPosts));
-  // }
-
   // Display Posts
 
   useEffect(() => {
     getAllPosts()
       .then((data) => data.json())
       .then((newPosts) => props.setPosts(newPosts));
-    console.log("posts after api in props.posts", props.posts);
   }, []);
 
-  const postAPI=function(){fetch("http://172.17.28.19:5000/posts", {method: "post",       
-  headers: {
-          'Content-Type':'application/json',
-          'Accept':'application/json'
+  //PostAPI
+
+  const postAPI = function () {
+    fetch("http://172.17.28.19:5000/posts", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
       },
-body: JSON.stringify({
- author: props.author, title:props.title,
-  content: props.content
-})
-})
-.then(data => data.json())
-.then(posts => console.log(posts))}
+      body: JSON.stringify({
+        author: props.author,
+        title: props.title,
+        content: props.content,
+      }),
+    })
+      .then((data) => data.json())
+      .then((posts) => console.log(posts));
+  };
+
+  //DeleteAPI
+
+  const deleteAPI = function () {
+    fetch(`http://172.17.28.19:5000/posts/${props.id}`, {
+      method: "delete",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((data) => data.json())
+      .then((posts) => console.log(posts));
+  };
 
   let allPosts = <h3>No Posts</h3>;
 
   if (props.posts.posts) {
-    console.log("Posts are here!", props.posts);
   }
   if (props.posts.posts) {
     if (props.posts.posts.length > 0) {
-      console.log("yes");
       allPosts = props.posts.posts.map((post, index) => {
         return (
           <Post
+            id={post._id}
             author={post.author}
             title={post.title}
             content={post.content}
@@ -55,18 +64,21 @@ body: JSON.stringify({
       });
     }
   }
- 
+
   //Create a Post
 
- function createPost(e) {
-
-  if(props.author!==""&&props.content!==""){
-postAPI()}
+  function createPost(e) {
+    if (props.author !== "" && props.content !== "") {
+      postAPI();
+    }
   }
 
   //ensure post API Call doesn't run longer than necessary
-useEffect(function(){ if(props.author!==""&&props.content!==""){postAPI()}}
-, [])
+  useEffect(function () {
+    if (props.author !== "" && props.content !== "") {
+      postAPI();
+    }
+  }, []);
 
   function changeAuthor(e) {
     e.preventDefault();
@@ -81,11 +93,30 @@ useEffect(function(){ if(props.author!==""&&props.content!==""){postAPI()}}
     e.preventDefault();
     props.setContent(e.target.value);
   }
+
+  //Delete Post
+  function deletePost() {
+    if (props.id !== "") {
+      deleteAPI();
+    }
+  }
+
+  useEffect(function () {
+    if (props.id !== "") {
+      deleteAPI();
+    }
+  }, []);
+
+  function changeId(e) {
+    e.preventDefault();
+    props.setId(e.target.value);
+  }
+
   return (
     <div>
-      {allPosts}
-      {/* {props.posts} */}
       <h1>POSTS</h1>
+      {allPosts}
+
       <h4>Add a Post</h4>
       <form class="postform">
         <label></label>
@@ -100,7 +131,6 @@ useEffect(function(){ if(props.author!==""&&props.content!==""){postAPI()}}
         <label for="content">Content</label>
         <input
           id="content"
-          width="500px"
           value={props.content}
           onChange={changeContent}
         ></input>
@@ -110,6 +140,18 @@ useEffect(function(){ if(props.author!==""&&props.content!==""){postAPI()}}
           Submit New Post
         </button>
       </form>
+      <h4>Delete a Post</h4>
+      <form class="deleteform">
+        <label for="id">ID</label>
+        <input id="id" value={props.id} onChange={changeId}></input>
+        <br />
+        <br />
+        <button type="submit" onClick={deletePost}>
+          Delete Post
+        </button>
+      </form>
+      <br />
+      <br />
     </div>
   );
 }

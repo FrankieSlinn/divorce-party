@@ -14,6 +14,7 @@ function App() {
   const [posts, setPosts] = useState([])
   const [author, setAuthor] = useState("")
   const [title, setTitle] = useState("")
+  const [id, setId] = useState("")
   const [content, setContent] = useState("")
   return (
     <div className="App">
@@ -32,6 +33,8 @@ function App() {
     setAuthor={setAuthor}
     title={title}
     setTitle={setTitle}
+    id={id}
+    setId={setId}
     content={content}
     setContent={setContent}
  
