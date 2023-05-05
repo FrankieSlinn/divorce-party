@@ -42,24 +42,34 @@ router.post('/posts', (req, res) => {
 })
 
 // Show
-// router.get('/logs/:id', (req, res) => {
-// 	Log.findById(req.params.id)
-// 		.then((newLog) => res.json(newLog))
-// 		.catch((error) => {
-// 			console.log(error)
-// 			res.status(500).send('Internal Server Error')
-// 		})
-// })
+router.get('/posts/:id', (req, res) => {
+	Post.findById(req.params.id)
+		.then((newPost) => res.json(newPost))
+		.catch((error) => {
+			console.log(error)
+			res.status(500).send('Internal Server Error')
+		})
+})
 
 // // // Update
-// router.put('/logs/:id', (req, res) => {
-// 	Log.findByIdAndUpdate(req.params.id, req.body, { new: true })
-// 		.then((updatedLog) => res.json(updatedLog))
-// 		.catch((error) => {    
-// 			console.log(error)
-// 			res.status(500).send('Internal Server Error')
-// 		})
-// })
+router.put('/posts/:id', (req, res) => {
+	Post.findByIdAndUpdate(req.params.id, req.body, { new: true })
+		.then((updatedPost) => res.json(updatedPost))
+		.catch((error) => {    
+			console.log(error)
+			res.status(500).send('Internal Server Error')
+		})
+})
+
+// // Destroy
+router.delete('/posts/:id', (req, res) => {
+	Post.findByIdAndRemove(req.params.id)
+		.then((deletedPost) => res.json(deletedPost))
+		.catch((error) => {
+			console.log(error)
+			res.status(500).send('Internal Server Error')
+		})
+})
 // router.put('/logs/:id/comments', (req, res) => {
 // 	//console.log("comment", comment)
 // 	Log.findByIdAndUpdate(req.params.id,
@@ -73,14 +83,6 @@ router.post('/posts', (req, res) => {
 // })
 
 
-// // Destroy
-// router.delete('/logs/:id', (req, res) => {
-// 	Log.findByIdAndRemove(req.params.id)
-// 		.then((deletedLog) => res.json(deletedLog))
-// 		.catch((error) => {
-// 			console.log(error)
-// 			res.status(500).send('Internal Server Error')
-// 		})
-// })
+
 
 module.exports = router
