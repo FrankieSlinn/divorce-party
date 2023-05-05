@@ -10,6 +10,7 @@ export default function ShowUser() {
         getOneUser(params.id)
         .then(results => results.json())
         .then(data => {
+            // console.log(data)
             setUser(data)})
     }, [])
 
