@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const logRoutes = require('./routes/posts')
+const userRoutes = require('./routes/users')
 
 //Import Schema
 const Post = require('./models/post');
@@ -16,6 +17,7 @@ const app = express()
 app.use(express.json())
 
 app.use(logRoutes)
+app.use(userRoutes)
 
 
 
