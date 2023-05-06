@@ -4,6 +4,7 @@ import Post from "./Post";
 import { getAllPosts } from "../../api";
 
 export default function Posts(props) {
+  console.log("props in posts", props)
   // Display Posts
 
   useEffect(() => {
@@ -155,3 +156,4 @@ export default function Posts(props) {
     </div>
   );
 }
+

@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const logRoutes = require('./routes/posts')
+const userRoutes = require('./routes/users')
 
 //Import Schema
 const Post = require('./models/post');
@@ -12,15 +13,18 @@ const app = express()
 
 //Middleware
 
-//Bodyparser
 
+//Set CORS headers on response from this API use the 'cors' NPM package
 app.use(cors({
     origin: 'http://172.17.28.19:3000'
 }))
-
+//Bodyparser
 app.use(express.json())
 
+
+
 app.use(logRoutes)
+app.use(userRoutes)
 
 
 
