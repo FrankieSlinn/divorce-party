@@ -16,7 +16,7 @@ const app = express()
 
 //Set CORS headers on response from this API use the 'cors' NPM package
 app.use(cors({
-    origin: 'http://172.17.28.19:3000'
+    origin: 'http://localhost:3000'
 }))
 //Bodyparser
 app.use(express.json())

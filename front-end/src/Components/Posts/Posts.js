@@ -5,6 +5,9 @@ import { getAllPosts } from "../../api";
 
 export default function Posts(props) {
   console.log("props in posts", props)
+
+  //APIs
+
   // Display Posts
 
   useEffect(() => {
@@ -45,6 +48,25 @@ export default function Posts(props) {
       .then((posts) => console.log(posts));
   };
 
+  //UpdateAPI
+  const updateAPI=function(){
+    props.setId(props.updateId)
+    console.log("in update, id, auth, title", props.id, props.author, props.title)
+    fetch(`http://172.17.28.19:5000/posts/${props.id}`, {method: "put",       
+    headers: {
+            'Content-Type':'application/json',
+            'Accept':'application/json'
+        },
+  body: JSON.stringify({
+   author: props.author, title: props.title,
+    content: props.content
+  })
+})
+.then(data => data.json())
+.then(posts => console.log(posts))
+  }
+
+  //Map data into individual post elements
   let allPosts = <h3>No Posts</h3>;
 
   if (props.posts.posts) {
@@ -55,11 +77,16 @@ export default function Posts(props) {
         return (
           <Post
             id={post._id}
+            // updateId={post.updateId}
             author={post.author}
+            // updateAuthor={post.updateAuthor}
             title={post.title}
+            updateTitle={post.updateTitle}
             content={post.content}
+            updateContent={post.updateContent}
             posts={props.posts}
             setPosts={props.setPosts}
+            key={props.index}
           />
         );
       });
@@ -74,7 +101,7 @@ export default function Posts(props) {
     }
   }
 
-  //ensure post API Call doesn't run longer than necessary
+  //ensure not more API Calls made than necessary
   useEffect(function () {
     if (props.author !== "" && props.content !== "") {
       postAPI();
@@ -112,6 +139,50 @@ export default function Posts(props) {
     e.preventDefault();
     props.setId(e.target.value);
   }
+
+  //Update Post
+
+
+  // function changeAuthor(e) {
+  //   e.preventDefault();
+  //   props.setAuthor(e.target.value);
+  //   console.log("updateAuthor in changeupdate author", props.updateAuthor)
+  // }
+  // function changeTitle(e) {
+  //   e.preventDefault();
+  //   props.setTitle(e.target.value);
+  // }
+  // function changeContent(e) {
+  //   e.preventDefault();
+  //   props.setContent(e.target.value);
+  // }
+  function changeUpdateId(e) {
+    e.preventDefault();
+    props.setId(e.target.value);
+  }
+  function editPost(){
+    console.log("editPost running")
+    props.setAuthor(props.updateAuthor)
+    props.setTitle(props.updateTitle)
+    props.setContent(props.updateContent)
+    console.log("props for id, author, title, content", props.id, props.author, props.title)
+    console.log("update props", props.updateId, props.updateAuthor)
+    if (props.author !== "" && props.content !== "") {
+      console.log("update API is running!!!!")
+      console.log("just before api author, content", props.author, props.updateContent)
+      updateAPI()
+
+  
+   
+  }
+}
+    //ensure post API Call doesn't run longer than necessary
+    useEffect(function () {
+      if (props.author !== "" && props.content !== "") {
+        postAPI();
+      }
+    }, []);
+
 
   return (
     <div>
@@ -153,7 +224,26 @@ export default function Posts(props) {
       </form>
       <br />
       <br />
+      <h4>Edit a Post</h4>
+      <form class="editform">
+        <label for="updateId">ID</label>
+        <input id="updateId" value={props.updateId} onChange={changeUpdateId}></input>
+        <label for="author">Author</label>
+        <input id="author" value={props.author} onChange={changeAuthor}></input>
+        <label for="updateTitle">Title</label>
+        <input id="updateTitle" value={props.title} onChange={changeTitle}></input>
+        <label for="updateContent">Content</label>
+        <input id="updateContent" value={props.content} onChange={changeContent}></input>
+        <br />
+        <br />
+        <button type="submit" onClick={editPost}>
+          EditPost
+        </button>
+      </form>
+      <br />
+      <br />
     </div>
   );
 }
+
 

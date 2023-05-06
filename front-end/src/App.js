@@ -9,14 +9,18 @@ import ShowUser from './Components/Users/ShowUser';
 import NewUserForm from './Components/Users/NewUserForm';
 import Posts from './Components/Posts/Posts'
 
-
 function App() {
 const [users, setUsers] = useState([])
 const [posts, setPosts] = useState([])
 const [author, setAuthor]=useState("")
 const [title, setTitle]=useState("")
-const [id, setId]=useState("")
 const [content, setContent]=useState("")
+const [id, setId]=useState("")
+//separate update parameters to prevent usage of the same parameters in forms
+const [authorUpdate, setAuthorUpdate]=useState("")
+const [titleUpdate, setTitleUpdate]=useState("")
+const [contentUpdate, setContentUpdate]=useState("")
+const [idUpdate, setIdUpdate]=useState("")
 
 
   useEffect(() => {
@@ -34,14 +38,11 @@ const [content, setContent]=useState("")
      
       <Routes>
         <Route path='/' element={<Homepage />}></Route>
-
         <Route path='/users' element={<Users users={users} setUsers={setUsers}/>}></Route>
         <Route path='/users/:id' element={<ShowUser setUsers={setUsers}/>}></Route>
         <Route path='/users/create' element={<NewUserForm setUsers={setUsers}/>}></Route>
-
         <Route path='/posts' element={<h1>Coming soon...</h1>}></Route>
         <Route path='/post/:id' element={<h1>Coming soon...</h1>}></Route>
-
         <Route path='*' element={<PageNotFound />}></Route>
       </Routes>
       <Posts 
@@ -49,17 +50,23 @@ const [content, setContent]=useState("")
     setPosts={setPosts}
     author={author}
     setAuthor={setAuthor}
+    authorUpdate={authorUpdate}
+    setAuthorUpdate={setAuthorUpdate}
     title={title}
     setTitle={setTitle}
-    id={id}
-    setId={setId}
+    titleUpdate={titleUpdate}
+    setTitleUpdate={setTitleUpdate}
     content={content}
     setContent={setContent}
- 
+    contentUpdate={contentUpdate}
+    setContentUpdate={setContentUpdate}
+    id={id}
+    setId={setId}
+    idUpdate={idUpdate}
+    setIdUpdate={setIdUpdate}
   />
     </div>
   );
 }
-
 
 export default App
