@@ -4,4 +4,10 @@
 
 body{
   background-color: white;
+  display: flex;
+  text-align: center;
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+
 }

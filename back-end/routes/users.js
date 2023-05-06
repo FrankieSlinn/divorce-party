@@ -19,7 +19,7 @@ const User = require('../models/user')
 router.get('/users', (req, res) => {
     User.find().populate('posts')
     .then((allUsers) => {
-        res.json({users: allUsers})
+        res.json(allUsers)
     })
     .catch(error => {
         res.status(500).json({error: error})
@@ -35,7 +35,7 @@ router.get('/users', (req, res) => {
 
 router.post('/users', (req, res) => {
     User.create(req.body).then(function(newUser) {
-        res.status(201).json({user: newUser})
+        res.status(201).json(newUser)
     })
 
     .catch((error) => {
@@ -54,7 +54,7 @@ router.get('/users/:id', (req, res) => {
     User.findById(req.params.id).populate('posts')
     .then(user => {
         if (user) {
-            res.json({user: user})
+            res.json(user)
         } else {
             res.status(404).json({
                 error: {
@@ -83,7 +83,7 @@ router.put('/users/:id', (req, res) => {
     User.findByIdAndUpdate(req.params.id, req.body, {new: true}).populate('posts')
     .then(user => {
         if (user) {
-            res.json({user: user})
+            res.json(user)
         } else {
             res.status(404).json({
                 error: {
@@ -113,7 +113,7 @@ router.delete('/users/:id', (req, res) => {
     User.findByIdAndRemove(req.params.id)
     .then(user => {
         if (user) {
-            res.json({user: user})
+            res.json(user)
         } else {            
             res.status(404).json({
                 error: {

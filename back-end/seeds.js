@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 const User = require("./models/user");
 const Post = require("./models/post");
+const currentDB = require("./config/db");
 
-const mongoURI = "mongodb://localhost:27017/posts";
+const mongoURI = currentDB;
 
 mongoose.connect(mongoURI)
  .then(() => console.log("MongoDB Connected..."))
