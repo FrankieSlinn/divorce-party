@@ -1,14 +1,22 @@
 import React from 'react'
 
 export default function Post(props) {
-    return (
-    
-        <div>
-           <div className='p-4'>
-             <h2 className='font-bold text-lg'>{props.title}</h2>
-             <p className='text-justify'>{props.content}</p>
+  return (
+    <div>
+        <div className ="post">
+            <h3>Title: {props.title}</h3>
 
-           </div>
-       </div>
-     )
+            <p>
+                Entry: {props.content}
+            </p>
+            <p>Author: {props.author}</p>
+            <p>
+              Entry ID: {props.id}
+            </p>
+            <br/>
+
+        </div>
+      
+    </div>
+  )
 }

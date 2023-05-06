@@ -7,10 +7,17 @@ import Users from './Components/Users/Users';
 import { getAllUsers } from './Components/Users/api';
 import ShowUser from './Components/Users/ShowUser';
 import NewUserForm from './Components/Users/NewUserForm';
+import Posts from './Components/Posts/Posts'
 
 
 function App() {
-  const [users, setUsers] = useState([])
+const [users, setUsers] = useState([])
+const [posts, setPosts] = useState([])
+const [author, setAuthor]=useState("")
+const [title, setTitle]=useState("")
+const [id, setId]=useState("")
+const [content, setContent]=useState("")
+
 
   useEffect(() => {
       getAllUsers()
@@ -37,8 +44,22 @@ function App() {
 
         <Route path='*' element={<PageNotFound />}></Route>
       </Routes>
+      <Posts 
+    posts={posts}
+    setPosts={setPosts}
+    author={author}
+    setAuthor={setAuthor}
+    title={title}
+    setTitle={setTitle}
+    id={id}
+    setId={setId}
+    content={content}
+    setContent={setContent}
+ 
+  />
     </div>
   );
 }
 
-export default App;
+
+export default App
