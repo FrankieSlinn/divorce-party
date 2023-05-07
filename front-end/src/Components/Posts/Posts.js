@@ -18,19 +18,6 @@ export default function Posts(props) {
     .then((newPosts) => props.setPosts(newPosts));
   }, []);
 
-  // const postProps=[{
-  // posts:props.posts,
-  // setPosts:props.setPosts,
-  // author:props.author,
-  // setAuthor:props.setAuthor,
-  // title:props.title,
-  // setTitle:props.setTitle,
-  // content:props.content,
-  // setContent:props.setContent,
-  // id:props.id,
-  // setId:props.setId,
-  // idUpdate:props.idUpdate,
-  // setIdUpdate:props.setIdUpdate}]
 
 
   //Map data into individual post elements
