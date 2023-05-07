@@ -70,7 +70,7 @@ function handleFormSubmit(e) {
         <input id="id" value={props.id} onChange={changeId}></input>
         <br />
         <br />
-        {/* The API runs after the button has been clicked */}
+      
         <button type="submit" onClick={deletePost}>
           Delete Post
         </button>

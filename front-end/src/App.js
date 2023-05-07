@@ -38,24 +38,23 @@ const [idUpdate, setIdUpdate]=useState("")
         <Route path='/users' element={<Users users={users} setUsers={setUsers}/>}></Route>
         <Route path='/users/:id' element={<ShowUser setUsers={setUsers}/>}></Route>
         <Route path='/users/create' element={<NewUserForm setUsers={setUsers}/>}></Route>
-        <Route path='/posts' element={<h1>Coming soon...</h1>}></Route>
+        <Route path='/posts' element={      <Posts 
+        posts={posts}
+        setPosts={setPosts}
+        author={author}
+        setAuthor={setAuthor}
+        title={title}
+        setTitle={setTitle}
+        content={content}
+        setContent={setContent}
+        id={id}
+        setId={setId}
+        idUpdate={idUpdate}
+        setIdUpdate={setIdUpdate}
+  />}></Route>
         <Route path='/post/:id' element={<h1>Coming soon...</h1>}></Route>
         <Route path='*' element={<PageNotFound />}></Route>
       </Routes>
-      <Posts 
-    posts={posts}
-    setPosts={setPosts}
-    author={author}
-    setAuthor={setAuthor}
-    title={title}
-    setTitle={setTitle}
-    content={content}
-    setContent={setContent}
-    id={id}
-    setId={setId}
-    idUpdate={idUpdate}
-    setIdUpdate={setIdUpdate}
-  />
     </div>
   );
 }

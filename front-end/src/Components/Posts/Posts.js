@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Post from "./Post";
 import { getAllPosts } from "./Postapi";
@@ -7,6 +8,7 @@ import DeletePostForm from "./DeletePostForm";
 import UpdatePostForm from "./UpdatePostForm";
 
 export default function Posts(props) {
+  const navigate = useNavigate();
   console.log("props in Posts", props)
   // Display Posts
 
