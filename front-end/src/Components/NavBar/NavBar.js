@@ -9,6 +9,7 @@ export default function NavBar() {
             <li className='p-4'><Link to='/posts'>Posts</Link></li>
             <li className='p-4'><Link to='/users'>Users</Link></li>
             <li className='p-4'><Link to='/users/create'>Sign Up</Link></li>
+            <li className='p-4'><Link to='/users/login'>Log In</Link></li>
         </ul>
 
         

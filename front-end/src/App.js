@@ -9,6 +9,9 @@ import NewUserForm from './Components/Users/NewUserForm';
 import Posts from './Components/Posts/Posts'
 import Footer from './Components/Footer/Footer';
 import Header from './Components/Header/Header';
+import UserLogin from './Components/Users/UserLogin';
+import ShowUserPosts from './Components/Users/ShowUserPosts';
+import ShowUserPost from './Components/Users/ShowUserPost';
 
 
 function App() {
@@ -36,16 +39,20 @@ const [content, setContent]=useState("")
   }
   
   return (
-  <div className={darkMode ? "dark" : ""} >
+  <body className={darkMode ? "dark" : ""} >
     <Header />
-    <div className=' w-screen h-screen pt-40 text-black dark:bg-gray-900 dark:text-white'>
+      <div className=' w-screen h-screen pt-40 text-black dark:bg-gray-900 dark:text-white'>
      
       <Routes>
         <Route path='/' element={<Homepage />}></Route>
 
         <Route path='/users' element={<Users users={users} setUsers={setUsers}/>}></Route>
         <Route path='/users/:id' element={<ShowUser setUsers={setUsers}/>}></Route>
+        <Route path='/users/:id/posts' element={<ShowUserPosts/>}></Route>
+        <Route path='/users/:id/posts/:postId' element={<ShowUserPost/>}></Route>
+
         <Route path='/users/create' element={<NewUserForm setUsers={setUsers}/>}></Route>
+        <Route path='/users/login' element={<UserLogin setUsers={setUsers}/>}></Route>
 
         <Route path='/posts' element={<h1>Coming soon...</h1>}></Route>
         <Route path='/post/:id' element={<h1>Coming soon...</h1>}></Route>
@@ -63,14 +70,13 @@ const [content, setContent]=useState("")
     setId={setId}
     content={content}
     setContent={setContent}
-    
   />
   <Footer handleDarkMode={handleDarkMode}/>
 
 
 
     </div>
-  </div>
+  </body>
   );
 }
 
