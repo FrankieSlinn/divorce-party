@@ -8,11 +8,12 @@ import { getAllUsers } from './Components/Users/api';
 import ShowUser from './Components/Users/ShowUser';
 import NewUserForm from './Components/Users/NewUserForm';
 import Posts from './Components/Posts/Posts'
+import Footer from './Components/Footer/Footer';
 
 
 function App() {
 const [users, setUsers] = useState([])
-const [darkMode, setDarkMode] = useState(true)
+const [darkMode, setDarkMode] = useState(false)
 
 const [posts, setPosts] = useState([])
 const [author, setAuthor]=useState("")
@@ -35,14 +36,14 @@ const [content, setContent]=useState("")
   }
   
   return (
-  <div className={darkMode ? "dark" : ""}>
-    <div className=' w-screen h-screen text-black dark:bg-gray-900 dark:text-white'>
-      <NavBar/>
+  <div className={darkMode ? "dark" : ""} >
+    <NavBar/>
+    <div className=' w-screen h-screen pt-40 text-black dark:bg-gray-900 dark:text-white'>
      
       <Routes>
         <Route path='/' element={<Homepage />}></Route>
 
-        <Route path='/users' element={<Users users={users} setUsers={setUsers} className={darkMode ? "dark" : ""}/>}></Route>
+        <Route path='/users' element={<Users users={users} setUsers={setUsers}/>}></Route>
         <Route path='/users/:id' element={<ShowUser setUsers={setUsers}/>}></Route>
         <Route path='/users/create' element={<NewUserForm setUsers={setUsers}/>}></Route>
 
@@ -64,11 +65,8 @@ const [content, setContent]=useState("")
     setContent={setContent}
  
   />
-  <div className='pl-5'>
-    <svg onClick={handleDarkMode} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
-    </svg>
-  </div>
+  <Footer handleDarkMode={handleDarkMode}/>
+
 
 
     </div>
