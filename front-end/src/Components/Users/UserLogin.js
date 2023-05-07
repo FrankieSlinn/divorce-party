@@ -42,7 +42,7 @@ async function handleFormSubmit(e) {
   return (
     <div className='h-100'>
         <form onSubmit={handleFormSubmit}>
-            <h1 className='text-2xl font-bold pb-8'>Log In Up</h1>
+            <h1 className='text-2xl font-bold pb-8'>Log In</h1>
             <ul className='flex flex-col'>
                 <li className='py-1'><label>Username:</label></li>
                 <li className='py-2'><input className='px-2 py-1' name='username' onChange={handleFormChange}></input></li>

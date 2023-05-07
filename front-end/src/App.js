@@ -39,7 +39,7 @@ const [content, setContent]=useState("")
   }
   
   return (
-  <body className={darkMode ? "dark" : ""} >
+  <div className={darkMode ? "dark" : ""} >
     <Header />
       <div className=' w-screen h-screen pt-40 text-black dark:bg-gray-900 dark:text-white'>
      
@@ -76,7 +76,7 @@ const [content, setContent]=useState("")
 
 
     </div>
-  </body>
+  </div>
   );
 }
 
