@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 export default function CreatePostForm(props) {
+
+  //Set up use state to display the form as needed
+  
   const [showCreatePost, setShowCreatePost] = useState(false);
 
   //Create a Post

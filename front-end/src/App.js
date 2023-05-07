@@ -16,10 +16,7 @@ const [author, setAuthor]=useState("")
 const [title, setTitle]=useState("")
 const [content, setContent]=useState("")
 const [id, setId]=useState("")
-//separate update parameters to prevent usage of the same parameters in forms
-const [authorUpdate, setAuthorUpdate]=useState("")
-const [titleUpdate, setTitleUpdate]=useState("")
-const [contentUpdate, setContentUpdate]=useState("")
+//separate update parameters to prevent usage of the id across forms
 const [idUpdate, setIdUpdate]=useState("")
 
 
@@ -50,16 +47,10 @@ const [idUpdate, setIdUpdate]=useState("")
     setPosts={setPosts}
     author={author}
     setAuthor={setAuthor}
-    authorUpdate={authorUpdate}
-    setAuthorUpdate={setAuthorUpdate}
     title={title}
     setTitle={setTitle}
-    titleUpdate={titleUpdate}
-    setTitleUpdate={setTitleUpdate}
     content={content}
     setContent={setContent}
-    contentUpdate={contentUpdate}
-    setContentUpdate={setContentUpdate}
     id={id}
     setId={setId}
     idUpdate={idUpdate}
