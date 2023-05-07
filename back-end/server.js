@@ -6,7 +6,7 @@ const logRoutes = require('./routes/posts')
 const userRoutes = require('./routes/users')
 
 //Import Schema
-const Post = require('./models/post');
+const Post =require('./models/post');
 
 
 const app = express()
@@ -16,8 +16,9 @@ const app = express()
 
 //Set CORS headers on response from this API use the 'cors' NPM package
 app.use(cors({
-    origin: 'http://localhost:3000'
+    origin:'http://localhost:3000'
 }))
+
 //Bodyparser
 app.use(express.json())
 

@@ -1,72 +1,40 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import Post from "./Post";
-import { getAllPosts } from "../../api";
+import { getAllPosts } from "./Postapi";
+// import {postAPI} from "./Postapi";
+import {deleteAPI} from "./Postapi";
+import {updateAPI} from "./Postapi";
+import CreatePostForm from "./CreatePostForm.js"
 
 export default function Posts(props) {
-  console.log("props in posts", props)
 
-  //APIs
 
   // Display Posts
 
   useEffect(() => {
     getAllPosts()
-      .then((data) => data.json())
-      .then((newPosts) => props.setPosts(newPosts));
+    .then((data) => data.json())
+    .then((newPosts) => props.setPosts(newPosts));
   }, []);
 
-  //PostAPI
+  // const postProps=[{
+  // posts:props.posts,
+  // setPosts:props.setPosts,
+  // author:props.author,
+  // setAuthor:props.setAuthor,
+  // title:props.title,
+  // setTitle:props.setTitle,
+  // content:props.content,
+  // setContent:props.setContent,
+  // id:props.id,
+  // setId:props.setId,
+  // idUpdate:props.idUpdate,
+  // setIdUpdate:props.setIdUpdate}]
 
-  const postAPI = function () {
-    fetch("http://172.17.28.19:5000/posts", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        author: props.author,
-        title: props.title,
-        content: props.content,
-      }),
-    })
-      .then((data) => data.json())
-      .then((posts) => console.log(posts));
-  };
-
-  //DeleteAPI
-
-  const deleteAPI = function () {
-    fetch(`http://172.17.28.19:5000/posts/${props.id}`, {
-      method: "delete",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((data) => data.json())
-      .then((posts) => console.log(posts));
-  };
-
-  //UpdateAPI
-  const updateAPI=function(){
-    props.setId(props.updateId)
-    console.log("in update, id, auth, title", props.id, props.author, props.title)
-    fetch(`http://172.17.28.19:5000/posts/${props.id}`, {method: "put",       
-    headers: {
-            'Content-Type':'application/json',
-            'Accept':'application/json'
-        },
-  body: JSON.stringify({
-   author: props.author, title: props.title,
-    content: props.content
-  })
-})
-.then(data => data.json())
-.then(posts => console.log(posts))
-  }
 
   //Map data into individual post elements
+
   let allPosts = <h3>No Posts</h3>;
 
   if (props.posts.posts) {
@@ -93,35 +61,7 @@ export default function Posts(props) {
     }
   }
 
-  //Create a Post
-
-  function createPost(e) {
-    if (props.author !== "" && props.content !== "") {
-      postAPI();
-    }
-  }
-
-  //ensure not more API Calls made than necessary
-  useEffect(function () {
-    if (props.author !== "" && props.content !== "") {
-      postAPI();
-    }
-  }, []);
-
-  function changeAuthor(e) {
-    e.preventDefault();
-    props.setAuthor(e.target.value);
-  }
-
-  function changeTitle(e) {
-    e.preventDefault();
-    props.setTitle(e.target.value);
-  }
-  function changeContent(e) {
-    e.preventDefault();
-    props.setContent(e.target.value);
-  }
-
+  
   //Delete Post
   function deletePost() {
     if (props.id !== "") {
@@ -142,76 +82,52 @@ export default function Posts(props) {
 
   //Update Post
 
-
-  // function changeAuthor(e) {
-  //   e.preventDefault();
-  //   props.setAuthor(e.target.value);
-  //   console.log("updateAuthor in changeupdate author", props.updateAuthor)
-  // }
-  // function changeTitle(e) {
-  //   e.preventDefault();
-  //   props.setTitle(e.target.value);
-  // }
-  // function changeContent(e) {
-  //   e.preventDefault();
-  //   props.setContent(e.target.value);
-  // }
   function changeUpdateId(e) {
     e.preventDefault();
     props.setId(e.target.value);
   }
   function editPost(){
-    console.log("editPost running")
+
     props.setAuthor(props.updateAuthor)
     props.setTitle(props.updateTitle)
     props.setContent(props.updateContent)
-    console.log("props for id, author, title, content", props.id, props.author, props.title)
-    console.log("update props", props.updateId, props.updateAuthor)
-    if (props.author !== "" && props.content !== "") {
-      console.log("update API is running!!!!")
-      console.log("just before api author, content", props.author, props.updateContent)
-      updateAPI()
 
-  
-   
+    if (props.author !== "" && props.content !== "") {
+
+      updateAPI() 
   }
 }
-    //ensure post API Call doesn't run longer than necessary
-    useEffect(function () {
-      if (props.author !== "" && props.content !== "") {
-        postAPI();
-      }
-    }, []);
+function changeAuthor(e) {
+  e.preventDefault();
+  props.setAuthor(e.target.value);
+}
 
+function changeTitle(e) {
+  e.preventDefault();
+  props.setTitle(e.target.value);
+}
+function changeContent(e) {
+  e.preventDefault();
+  props.setContent(e.target.value);
+}//ensure post API Call doesn't run longer than necessary
 
   return (
     <div>
+
       <h1>POSTS</h1>
       {allPosts}
+    <CreatePostForm
+ 
+    id={props.id}
+    setId={props.setID}
+    author={props.author}
+    setAuthor={props.setAuthor}
+    title={props.title}
+    setTitle={props.setTitle}
+    content={props.content}
+    setContent={props.setContent}/>
 
-      <h4>Add a Post</h4>
-      <form class="postform">
-        <label></label>
-        <label for="author">Author</label>
-        <input id="title" value={props.author} onChange={changeAuthor}></input>
-        <br />
-        <br />
-        <label for="title">Title</label>
-        <input id="title" value={props.title} onChange={changeTitle}></input>
-        <br />
-        <br />
-        <label for="content">Content</label>
-        <input
-          id="content"
-          value={props.content}
-          onChange={changeContent}
-        ></input>
-        <br />
-        <br />
-        <button type="submit" onClick={createPost}>
-          Submit New Post
-        </button>
-      </form>
+     
       <h4>Delete a Post</h4>
       <form class="deleteform">
         <label for="id">ID</label>
@@ -240,6 +156,7 @@ export default function Posts(props) {
           EditPost
         </button>
       </form>
+
       <br />
       <br />
     </div>
