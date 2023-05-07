@@ -47,7 +47,7 @@ async function handleFormSubmit(e) {
 
 
   return (
-    <div>
+    <div className='h-100'>
         <form onSubmit={handleFormSubmit}>
             <h1 className='text-2xl font-bold pb-8'>Sign Up</h1>
             <ul className='flex flex-col'>

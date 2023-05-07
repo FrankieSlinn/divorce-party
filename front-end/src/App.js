@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router-dom';
 import Homepage from './Components/Homepage/Homepage';
 import PageNotFound from './Components/PageNotFound/PageNotFound';
-import NavBar from './Components/NavBar/NavBar';
 import Users from './Components/Users/Users';
 import { getAllUsers } from './Components/Users/api';
 import ShowUser from './Components/Users/ShowUser';
 import NewUserForm from './Components/Users/NewUserForm';
 import Posts from './Components/Posts/Posts'
 import Footer from './Components/Footer/Footer';
+import Header from './Components/Header/Header';
 
 
 function App() {
@@ -37,7 +37,7 @@ const [content, setContent]=useState("")
   
   return (
   <div className={darkMode ? "dark" : ""} >
-    <NavBar/>
+    <Header />
     <div className=' w-screen h-screen pt-40 text-black dark:bg-gray-900 dark:text-white'>
      
       <Routes>
@@ -63,7 +63,7 @@ const [content, setContent]=useState("")
     setId={setId}
     content={content}
     setContent={setContent}
- 
+    
   />
   <Footer handleDarkMode={handleDarkMode}/>
 
