@@ -1,6 +1,9 @@
 import React from 'react'
 
+
+
 export default function Post(props) {
+  console.log("props in Post", props)
   return (
     <div>
         <div className ="post">

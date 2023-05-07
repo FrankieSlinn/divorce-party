@@ -6,6 +6,7 @@ import { getAllPosts } from "./Postapi";
 import {deleteAPI} from "./Postapi";
 import {updateAPI} from "./Postapi";
 import CreatePostForm from "./CreatePostForm.js"
+import DeletePostForm from "./DeletePostForm";
 
 export default function Posts(props) {
 
@@ -32,13 +33,9 @@ export default function Posts(props) {
         return (
           <Post
             id={post._id}
-            // updateId={post.updateId}
             author={post.author}
-            // updateAuthor={post.updateAuthor}
             title={post.title}
-            updateTitle={post.updateTitle}
             content={post.content}
-            updateContent={post.updateContent}
             posts={props.posts}
             setPosts={props.setPosts}
             key={props.index}
@@ -46,25 +43,6 @@ export default function Posts(props) {
         );
       });
     }
-  }
-
-  
-  //Delete Post
-  function deletePost() {
-    if (props.id !== "") {
-      deleteAPI();
-    }
-  }
-
-  useEffect(function () {
-    if (props.id !== "") {
-      deleteAPI();
-    }
-  }, []);
-
-  function changeId(e) {
-    e.preventDefault();
-    props.setId(e.target.value);
   }
 
   //Update Post
@@ -104,7 +82,6 @@ function changeContent(e) {
       <h1>POSTS</h1>
       {allPosts}
     <CreatePostForm
- 
     id={props.id}
     setId={props.setID}
     author={props.author}
@@ -113,20 +90,12 @@ function changeContent(e) {
     setTitle={props.setTitle}
     content={props.content}
     setContent={props.setContent}/>
-
-     
-      <h4>Delete a Post</h4>
-      <form class="deleteform">
-        <label for="id">ID</label>
-        <input id="id" value={props.id} onChange={changeId}></input>
-        <br />
-        <br />
-        <button type="submit" onClick={deletePost}>
-          Delete Post
-        </button>
-      </form>
-      <br />
-      <br />
+    <br/>
+    <br/>
+    <DeletePostForm
+        id={props.id}
+        setId={props.setId}
+    />
       <h4>Edit a Post</h4>
       <form class="editform">
         <label for="updateId">ID</label>

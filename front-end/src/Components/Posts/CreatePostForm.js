@@ -1,4 +1,3 @@
-import Posts from "./Posts";
 import { useState, useEffect } from "react";
 export default function CreatePostForm(props) {
   const [showCreatePost, setShowCreatePost] = useState(false);
