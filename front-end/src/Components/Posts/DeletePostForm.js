@@ -10,7 +10,7 @@ export default function DeletePostForm(props){
 
     //Define API 
 
-   const deleteAPI= function(){fetch(`http://172.17.28.19:5000/posts/${props.id}`, {
+   const deleteAPI= function(){fetch(`localhost:5000/posts/${props.id}`, {
     method: "delete",
     headers: {
       "Content-Type": "application/json",

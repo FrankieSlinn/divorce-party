@@ -7,7 +7,7 @@ const userRoutes = require('./routes/users')
 const authRoute = require('./routes/auth')
 
 //Import Schema
-const Post =require('./models/post');
+const Post = require('./models/post');
 
 
 const app = express()

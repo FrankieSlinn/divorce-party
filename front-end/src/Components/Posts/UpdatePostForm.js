@@ -20,7 +20,7 @@ export default function UpdatePostForm(props){
           props.author,
           props.title
         );
-        fetch(`http://172.17.28.19:5000/posts/${props.idUpdate}`, {
+        fetch(`http://localhost:5000/posts/${props.idUpdate}`, {
           method: "put",
           headers: {
             "Content-Type": "application/json",
