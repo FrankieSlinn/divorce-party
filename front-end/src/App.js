@@ -23,6 +23,8 @@ const [author, setAuthor]=useState("")
 const [title, setTitle]=useState("")
 const [id, setId]=useState("")
 const [content, setContent]=useState("")
+//separate update parameters to prevent usage of the id across forms
+const [idUpdate, setIdUpdate]=useState("")
 
 
   useEffect(() => {
@@ -54,7 +56,20 @@ const [content, setContent]=useState("")
         <Route path='/users/create' element={<NewUserForm setUsers={setUsers}/>}></Route>
         <Route path='/users/login' element={<UserLogin setUsers={setUsers}/>}></Route>
 
-        <Route path='/posts' element={<h1>Coming soon...</h1>}></Route>
+        <Route path='/posts' element={<Posts
+          posts={posts}
+          setPosts={setPosts}
+          author={author}
+          setAuthor={setAuthor}
+          title={title}
+          setTitle={setTitle}
+          content={content}
+          setContent={setContent}
+          id={id}
+          setId={setId}
+          idUpdate={idUpdate}
+          setIdUpdate={setIdUpdate}
+        />}></Route>
         <Route path='/post/:id' element={<h1>Coming soon...</h1>}></Route>
 
         <Route path='*' element={<PageNotFound />}></Route>
