@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router-dom';
 
-import { HashRouter as Router } from "react-router-dom";
-
-
 import Homepage from './Components/Homepage/Homepage';
 import PageNotFound from './Components/PageNotFound/PageNotFound';
 import Users from './Components/Users/Users';
