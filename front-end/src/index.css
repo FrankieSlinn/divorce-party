@@ -2,12 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-  background-color: white;
+body {
   display: flex;
   text-align: center;
-  margin: 0;
   align-items: center;
   justify-content: center;
-
+  height: 100%;
+  width: 100%;
 }
