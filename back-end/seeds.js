@@ -9,7 +9,6 @@ mongoose.connect(mongoURI)
  .then(() => console.log("MongoDB Connected..."))
 
 
-
 // Create Guest Book Posts
 const hariFirstPost = new Post({
     author: "Hari Ramanathan",
