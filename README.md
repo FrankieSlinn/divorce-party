@@ -4,7 +4,7 @@
 
 
 ## DEPLOYMENT LINK
-- You can access the Guest Book here: [The Divorce Party Guest Book](https://hpramanathan.github.io/project3-mernstack-app/)
+- You can access the Guest Book here: [The Divorce Party Guest Book](https://hpramanathan.github.io/project3-mernstack-app/).
 
 
 ## GETTING STARTED/CODE INSTALLATION
@@ -18,15 +18,41 @@
   - Katie Loesch
 
 ## TECHNOLOGIES USED
-- CODE VERSIONING/CONTROL
+- ### CODE VERSIONING/CONTROL
   - Git
   - GitHub
 
-- DEVELOPER TOOLS
+- ### DEVELOPER TOOLS
   - Google Chrome and Google Chrome Developer Tools
   - Mozilla Firefox and Mozilla Firefox Developer Tools
   - Visual Studio Code
   - Windows Subsystem for Linux 
 
-- FLOW CHART, USER STORIES AND WIREFRAME
+- ### FLOW CHART, USER STORIES AND WIREFRAME
   - Excalidraw
+
+
+## PLANNING
+- Blah blah
+
+
+## BUILD/CODE PROCESS
+- Blah blah
+
+## CHALLENGES
+- Seeding
+- Authentication
+
+
+## WINS
+- Blah Blah
+
+## KEY LEARNING/TAKEAWAYS
+- Ba Ba Black Sheep
+
+## BUGS
+- Not insects
+
+
+## FUTURE IMPROVEMENTS
+- Where to begin...
