@@ -3,7 +3,7 @@ const User = require("./models/user");
 const Post = require("./models/post");
 const currentDB = require("./config/db");
 
-const mongoURI = "mongodb://localhost:27017/divorce";
+// const mongoURI = "mongodb://localhost:27017/divorce";
 const mongoURI = currentDB;
 
 mongoose.connect(mongoURI)
