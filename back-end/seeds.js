@@ -3,11 +3,46 @@ const User = require("./models/user");
 const Post = require("./models/post");
 const currentDB = require("./config/db");
 
-// const mongoURI = "mongodb://localhost:27017/divorce";
 const mongoURI = currentDB;
 
 mongoose.connect(mongoURI)
  .then(() => console.log("MongoDB Connected..."))
+
+
+
+// Create Guest Book Posts
+const hariFirstPost = new Post({
+    author: "Hari Ramanathan",
+    title: "Hari's First Post",
+    content: "Blah blah blah"
+})
+
+const hariSecondPost = new Post({
+  author: "Hari Ramanathan",
+  title: "Hari's Second Post",
+  content: "Yadda yadda yadda"
+})
+
+const benFirstPost = new Post({
+  author: "Ben Khoury",
+  title: "Ben's Post",
+  content: "Bhooyakasha. It was the best of times. It was the worst of times."
+})
+
+
+hariFirstPost.save()
+    .then(() => console.log('hari first post saved'))
+    .catch(() => console.log('hari first post not saved'))
+
+hariSecondPost.save()
+    .then(() => console.log('hari second post saved'))
+    .catch(() => console.log('hari second post not saved'))
+
+benFirstPost.save()
+    .then(() => console.log('ben first post saved'))
+    .catch(() => console.log('ben first post not saved'))
+
+
 
 // Creating Four Users
 const hari = new User({
@@ -38,6 +73,12 @@ const fran = new User({
     posts: []
 })
 
+
+// Push Post into Posts Array
+hari.posts.push(hariFirstPost)
+hari.posts.push(hariSecondPost)
+ben.posts.push(benFirstPost)
+
 // Saving Four Users
 hari.save()
   .then(() => console.log("user hari saved."))
@@ -55,34 +96,5 @@ fran.save()
   .then(() => console.log("user fran saved."))
   .catch(() => console.log("user fran NOT saved."))
 
-
-// Create Guest Book Posts
-const hariFirstPost = new Post({
-    author: "Hari Ramanathan",
-    title: "Hari's First Post",
-    content: "Blah blah blah"
-}, { timestamps: Date.now })
-
-const hariSecondPost = new Post({
-  author: "Hari Ramanathan",
-  title: "Hari's Second Post",
-  content: "Yadda yadda yadda"
-}, { timestamps: Date.now })
-
-const benFirstPost = new Post({
-  author: "Ben Khoury",
-  title: "Ben's Post",
-  content: "Bhooyakasha. It was the best of times. It was the worst of times."
-}, { timestamps: Date.now })
-
-// Push Post into Posts Array
-hari.posts.push(hariFirstPost)
-hari.posts.push(hariSecondPost)
-ben.posts.push(benFirstPost)
-
-// Save Posts Array
-hari.save()
- .then(() => console.log('hari post saved!'))
- .catch(() => console.log('hari post NOT saved.'))
 
 module.exports = { User, Post }
