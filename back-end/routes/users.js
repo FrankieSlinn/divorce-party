@@ -1,5 +1,8 @@
 //Require necessary NPM packages
 const express = require('express')
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+
 
 //Instantiate a Router
 const router = express.Router()
@@ -33,17 +36,23 @@ router.get('/users', (req, res) => {
  * Description: Create a new User
  */
 
-router.post('/users', (req, res) => {
+router.post('/users', async (req, res) => {
 
-    //PASSWORD HASHING BEFORE ADDING TO DB
-    
-    User.create(req.body).then(function(newUser) {
-        res.status(201).json(newUser)
-    })
+    try {
+        // const salt = await bcrypt.genSalt()
+        // const hashedPassword = await bcrypt.hash(req.body.password, salt)
+        // console.log(salt)
+        // console.log(hashedPassword)
 
-    .catch((error) => {
-        res.status(500).json({error: error})
-    })
+        User.create(req.body).then(function(newUser) {
+            res.status(201).json(newUser)
+        })
+
+
+    } catch {
+        res.status(500).json({error: 'Internal Server Error'})    }    
+
+
 })
 
 
@@ -231,15 +240,27 @@ router.delete('/users/:id/posts/:postId', async (req, res) => {
  * Description: Login User and find user data in db
  */
 
-router.post('/users/login', (req, res) => {
+router.post('/users/login', async (req, res) => {
+
+    try {
+
+        const user = await User.find({username: req.body.username})
+        if (user == null) {
+            return res.status(400).send('Cannot find user')
+    
+        }  res.status(201).json(user)
 
 
-    const user = User.find({username: req.body.username}).then(function(user) {
-        res.status(201).json(user)
-    })
-    .catch((error) => {
-        res.status(500).json({error: error})
-    })
+
+    
+    } catch {
+        res.status(500).json({error: 'username or ID did not match!'})
+
+    }
+
+
+
+    
 })
 
 
