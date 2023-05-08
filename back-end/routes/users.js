@@ -34,6 +34,9 @@ router.get('/users', (req, res) => {
  */
 
 router.post('/users', (req, res) => {
+
+    //PASSWORD HASHING BEFORE ADDING TO DB
+    
     User.create(req.body).then(function(newUser) {
         res.status(201).json(newUser)
     })
