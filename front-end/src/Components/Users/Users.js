@@ -22,7 +22,7 @@ export default function Users(props) {
 
   return (
     <div>
-        <h1 className='font-bold text-2xl pb-4'>Users</h1>
+        <h1 className='font-bold text-2xl pb-4 '>Users</h1>
         {allUsers}
       
     </div>

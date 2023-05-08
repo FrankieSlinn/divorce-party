@@ -12,8 +12,6 @@ const Post =require('./models/post');
 const app = express()
 
 //Middleware
-
-
 //Set CORS headers on response from this API use the 'cors' NPM package
 app.use(cors({
     origin:'http://localhost:3000'

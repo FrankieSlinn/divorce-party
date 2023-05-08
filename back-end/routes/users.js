@@ -43,6 +43,9 @@ router.post('/users', (req, res) => {
     })
 })
 
+
+
+
 /**
  * Action:      SHOW
  * Method:      GET
@@ -217,6 +220,23 @@ router.delete('/users/:id/posts/:postId', async (req, res) => {
     } catch {
         res.status(500).json({error: 'Internal Server Error'})
     }
+})
+
+/**
+ * Method:      POST
+ * URI:         /users/login
+ * Description: Login User and find user data in db
+ */
+
+router.post('/users/login', (req, res) => {
+
+
+    const user = User.find({username: req.body.username}).then(function(user) {
+        res.status(201).json(user)
+    })
+    .catch((error) => {
+        res.status(500).json({error: error})
+    })
 })
 
 

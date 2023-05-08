@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { getOneUser } from './api'
 
-
-export default function ShowUser() {
+export default function ShowUserPosts() {
     const params = useParams()
     const [user, setUser] = useState({})
 
@@ -15,7 +14,6 @@ export default function ShowUser() {
             // console.log(data.posts)
             setUser(data)})
     }, [params.id])
-
 
     let display;
    
@@ -30,16 +28,11 @@ export default function ShowUser() {
     } else {
       display = <p>Loading...</p>
     }
-    
-
+  
   return (
-    <div className='px-10 pb-5 pt-4 h-100'>
-        <h2 className='text-2xl font-bold'>{user.name}</h2>
-        <h2 className='text-xl pb-5'>{user.username}</h2>
-        <div>
-            <Link to={`/users/${params.id}/posts`} className='text-2xl font-bold'>Posts:</Link>
-            {display}
-        </div>
+    <div>
+        <Link className='text-2xl font-bold'>Posts:</Link>
+        {display}
     </div>
   )
 }
