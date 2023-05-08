@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
-import { getOneUser, getOneUserPost } from './api'
+import { useParams } from 'react-router-dom'
+import { getOneUserPost } from './api'
 
 export default function ShowUserPost() {
     const params = useParams()
