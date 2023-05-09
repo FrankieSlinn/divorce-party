@@ -298,7 +298,7 @@ router.post('/users/login', async (req, res) => {
             if (await bcrypt.compare(req.body.password, user[0].password)) {
                 res.status(201).json(user)
               } else {
-                res.send({error: 'login credentials could not be verified'})
+                res.send({error: 'Invalid username or password''})
               }
     
         } catch {

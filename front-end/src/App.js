@@ -17,6 +17,7 @@ import ShowUserPost from './Components/Users/ShowUserPost';
 
 function App() {
 const [users, setUsers] = useState([])
+const [userLoggedIn, setUserLoggedIn] = useState(false)
 const [darkMode, setDarkMode] = useState(false)
 
 const [posts, setPosts] = useState([])
