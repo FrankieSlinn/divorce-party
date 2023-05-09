@@ -17,6 +17,7 @@ import ShowUserPost from './Components/Users/ShowUserPost';
 
 function App() {
 const [users, setUsers] = useState([])
+const [userLoggedIn, setUserLoggedIn] = useState(false)
 const [darkMode, setDarkMode] = useState(false)
 
 const [posts, setPosts] = useState([])
@@ -54,8 +55,8 @@ const [idUpdate, setIdUpdate]=useState("")
         <Route path='/users/:id/posts' element={<ShowUserPosts/>}></Route>
         <Route path='/users/:id/posts/:postId' element={<ShowUserPost/>}></Route>
 
-        <Route path='/users/create' element={<NewUserForm setUsers={setUsers}/>}></Route>
-        <Route path='/users/login' element={<UserLogin setUsers={setUsers}/>}></Route>
+        <Route path='/users/create' element={<NewUserForm setUsers={setUsers} setUserLoggedIn={setUserLoggedIn}/>}></Route>
+        <Route path='/users/login' element={<UserLogin setUsers={setUsers} setUserLoggedIn={setUserLoggedIn}/>}></Route>
 
         <Route path='/posts' element={<Posts
           posts={posts}

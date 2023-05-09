@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import { findOnLogIn } from './api';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function UserLogin(props) {
   const navigate = useNavigate();
@@ -25,10 +25,8 @@ function handleCancel() {
 async function handleFormSubmit(e) {
   e.preventDefault()
   const user = await findOnLogIn(formData)
-
-  
   if (user.error) {
-    alert("Wrong username or password, couldn't log in!")
+    alert("Invalid username or password, couldn't log in!")
   } else {
     const id = user[0]._id
     setFormData(template)
@@ -45,11 +43,13 @@ async function handleFormSubmit(e) {
             <h1 className='text-2xl font-bold pb-8'>Log In</h1>
             <ul className='flex flex-col'>
                 <li className='py-1'><label>Username:</label></li>
-                <li className='py-2'><input className='px-2 py-1' name='username' onChange={handleFormChange}></input></li>
+                <li className='py-2'><input className='px-2 py-1' name='username' required onChange={handleFormChange}></input></li>
                 <li className='py-1'><label>Password:</label></li>
-                <li className='py-2'><input className='px-2 py-1' name='password' type='password' onChange={handleFormChange}></input></li>
+                <li className='py-2'><input className='px-2 py-1' name='password' required type='password' onChange={handleFormChange}></input></li>
                 <li className='py-2'><button type="submit">Submit</button></li>
                 <li className='py-2'> <button type="button" onClick={handleCancel}>Cancel</button></li>
+                <li>Don't have an account? <Link to='/users/create'> Sign Up </Link> </li>
+                
             </ul> 
         </form>
     </div>
