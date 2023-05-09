@@ -1,13 +1,17 @@
+
+
 //Require necessary NPM packages
 const express = require('express')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+
 
 const strategy = require('../lib/passportStrategy')
 const jwtOptions = require('../lib/passportOptions')
 
 const passport = require('passport')
 passport.use(strategy)
+
 
 
 //Instantiate a Router
@@ -306,33 +310,41 @@ router.post('/users/login', async (req, res) => {
         }
     }
 })
-router.post('/testlogin', async (req, res) => {
 
-    const user = await User.find({username: req.body.username})   
+
+//Authentication login draft: when user tried to log into account
+router.post('/testlogin', async (req, res) => {
+    
+    //retrieve user document from db
+    const user = await User.find({username: req.body.username}).populate('posts') 
    
-    if (user.length == 0) {
-        res.send({error: 'user does not exist in database'})
-    } else {
+    if (user.length == 0) { // no record found in database
+        res.status(400).json({error: 'user does not exist in database'})
+
+    } else { // user exists in db
 
         try {
 
             if (await bcrypt.compare(req.body.password, user[0].password)) {
-                
+                //password user entered matches password in db
+
                 const payload = {
                     id: user[0]._id,
                     username: user[0].username
                 }
-                
-                const token = jwt.sign(payload, jwtOptions.secretOrKey, {expiresIn: 259200}) // 3 days -> 259200
 
+                //Build JWT
+                const token = jwt.sign(payload, jwtOptions.secretOrKey, {expiresIn: 259200}) // 3 days -> 259200s
                
+                //Send JWT back to user
                 res.status(201).json({
                     success: true,
                     token: token,
                     user: user
                 })
-              } else {
-                res.send({error: 'Invalid username or password'})
+
+              } else { // password user entered does not match password in db
+                res.status(401).json({error: 'Invalid username or password'})
               }
     
         } catch(error) {
@@ -347,10 +359,9 @@ router.post('/testlogin', async (req, res) => {
 router.get('/protected', passport.authenticate('jwt', {session: false}), (req, res) => {
     
     res.json({message: 'You can only see this message with the JSON Web Token',
-    user: req.user
+    user: req.user._doc
     })
 })
-
 
 
 
