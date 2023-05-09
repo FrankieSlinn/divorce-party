@@ -36,16 +36,47 @@ router.get('/users', (req, res) => {
  * Description: Create a new User
  */
 
+
 router.post('/users', async (req, res) => {
 
-    try {
-        // const salt = await bcrypt.genSalt()
-        // const hashedPassword = await bcrypt.hash(req.body.password, salt)
-        // console.log(salt)
-        // console.log(hashedPassword)
+    const usernameExists = await User.find({username: req.body.username})
+    console.log(usernameExists.length)
+   
+    if (usernameExists.length > 0) {
+        res.send({error: "username already exists"})
+    } else {
 
         User.create(req.body).then(function(newUser) {
             res.status(201).json(newUser)
+        })
+    
+        .catch((error) => {
+            res.status(500).json({error: error})
+        })
+
+    }
+
+   
+})
+
+
+/** hashing pw before storing it in db
+ * 
+ * router.post('/users', async (req, res) => {
+
+    try {
+        const salt = await bcrypt.genSalt()
+        const hashedPassword = await bcrypt.hash(req.body.password, salt)
+
+        const newUser = {
+            username: req.body.username,
+            password: hashedPassword,
+            name: req.body.name,
+            posts: []
+        }
+
+        User.create(newUser).then(function(user) {
+            res.status(201).json(user)
         })
 
 
@@ -54,6 +85,9 @@ router.post('/users', async (req, res) => {
 
 
 })
+ */
+
+
 
 
 
@@ -242,25 +276,47 @@ router.delete('/users/:id/posts/:postId', async (req, res) => {
 
 router.post('/users/login', async (req, res) => {
 
-    try {
 
-        const user = await User.find({username: req.body.username})
-        if (user == null) {
-            return res.status(400).send('Cannot find user')
+
+    const user = User.find({username: req.body.username}).then(function(user) {
+        res.status(201).json(user)
+    })
+    .catch((error) => {
+        res.status(500).json({error: error})
+    })
+
+    /** 
+     ***  comparing hashed password to db record ***
+
+    const user = await User.find({username: req.body.username})
+    console.log(user.length == 0)
     
-        }  res.status(201).json(user)
+    if (user.length == 0) {
+        res.send({error: 'user does not exist in database'})
+    } else {
 
+        try {
 
-
+            if (await bcrypt.compare(req.body.password, user[0].password)) {
+                res.status(201).json(user)
+              } else {
+                res.send({error: 'login credentials could not be verified'})
+              }
     
-    } catch {
-        res.status(500).json({error: 'username or ID did not match!'})
+        } catch {
+            res.status(500).json({error: 'login failed'})
+    
+        }
 
     }
+     */
 
 
 
-    
+
+
+
+
 })
 
 
