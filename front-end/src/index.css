@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Allura&family=Great+Vibes&family=Nunito+Sans:ital@1&display=swap');
+
+
 body {
   display: flex;
   text-align: center;

@@ -25,7 +25,12 @@ module.exports = {
       white: '#F1EAE0',
       darkpurple: '#252330'
     },
-    extend: {},
+    fontFamily: {
+      'font-sans': ['Nunito'],
+      'allura': ['Allura'],
+      'serif':['Cambria']
+    },
+      extend: {},
   },
   plugins: [],
 }
