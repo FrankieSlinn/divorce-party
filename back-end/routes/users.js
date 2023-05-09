@@ -45,7 +45,9 @@ router.get('/users', (req, res) => {
 //first draft
 // router.post('/users', async (req, res) => {
 
-//     const usernameExists = await User.find({username: req.body.username})   
+//     const usernameExists = await User.find({username: req.body.username})
+//     console.log(usernameExists.length)
+   
 //     if (usernameExists.length > 0) {
 //         res.send({error: "username already exists"})
 //     } else {
@@ -64,10 +66,8 @@ router.get('/users', (req, res) => {
 // })
 
 
-// incl: hashing pw before storing it in db
-  
- router.post('/users', async (req, res) => {
-
+// Hash (including hashing pw before storing it in db)
+router.post('/users', async (req, res) => {  
     try {
         const salt = await bcrypt.genSalt()
         const hashedPassword = await bcrypt.hash(req.body.password, salt)
@@ -89,10 +89,6 @@ router.get('/users', (req, res) => {
 
 
 })
- 
-
-
-
 
 
 
@@ -289,7 +285,7 @@ router.post('/users/login', async (req, res) => {
     //     res.status(500).json({error: error})
     // })
 
-    // incl: comparing hashed password to db record
+   // incl: comparing hashed password to db record
 
     const user = await User.find({username: req.body.username})   
     if (user.length == 0) {
@@ -305,12 +301,9 @@ router.post('/users/login', async (req, res) => {
               }
     
         } catch {
-            res.status(500).json({error: 'login failed'})
-    
+            res.status(500).json({error: 'login failed'})    
         }
-
     }
-
 })
 
 
