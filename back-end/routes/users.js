@@ -304,8 +304,8 @@ router.post('/users/login', async (req, res) => {
                 res.send({error: 'Invalid username or password'})
               }
     
-        } catch {
-            res.status(500).json({error: 'login failed'})
+        } catch(error) {
+            res.status(500).json({error: error})
     
         }
 
