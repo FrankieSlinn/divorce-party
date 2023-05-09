@@ -43,10 +43,11 @@ const [idUpdate, setIdUpdate]=useState("")
   }
   
   return (
-  <div className={darkMode ? "dark" : ""} >
-    <Header />
-      <div className=' w-screen h-screen pt-40 text-black dark:bg-gray-900 dark:text-white'>
-     
+  <div className={darkMode ? "dark" : "bg-white text-darkpurple font-merriweather"} >
+    <Header  />
+<br />
+<br />
+      <div className='w-screen h-screen pt-40 text-black dark:lightpurple dark:text-white text-center'>
       <Routes>
         <Route path='/' element={<Homepage />}></Route>
 
@@ -76,6 +77,7 @@ const [idUpdate, setIdUpdate]=useState("")
 
         <Route path='*' element={<PageNotFound />}></Route>
       </Routes>
+      
   <Footer handleDarkMode={handleDarkMode}/>
 
 

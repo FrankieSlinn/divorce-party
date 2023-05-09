@@ -22,7 +22,7 @@ export default function Posts(props) {
 
   //Displayed if no posts
 
-  let allPosts = <h3>No Posts</h3>;
+  let allPosts = <h3>Loading...</h3>;
 
   //List of posts displayed in Post Element if posts are present
 
@@ -32,6 +32,8 @@ export default function Posts(props) {
     if (props.posts.posts.length > 0) {
       allPosts = props.posts.posts.map((post, index) => {
         return (
+          <>
+          
           <Post
             id={post._id}
             idUpdate={post._id}
@@ -42,6 +44,7 @@ export default function Posts(props) {
             setPosts={props.setPosts}
             key={props.index}
           />
+          </>
         );
       });
     }
@@ -49,8 +52,10 @@ export default function Posts(props) {
 
   return (
     <div>
-      <h1>POSTS</h1>
+     <h1 className="font-bold text-2xl pb-4 ">Posts</h1>
       {allPosts}
+      <br />
+      <br />
       <CreatePostForm
         id={props.id}
         setId={props.setID}

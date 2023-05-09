@@ -25,7 +25,12 @@ module.exports = {
       white: '#F1EAE0',
       darkpurple: '#252330'
     },
-    extend: {},
+    fontFamily: {
+      'merriweather': ['Merriweather Sans'],
+      'allura': ['Allura'],
+      'cambria':['Cambria']
+    },
+      extend: {},
   },
   plugins: [],
 }

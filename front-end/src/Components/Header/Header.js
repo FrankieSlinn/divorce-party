@@ -20,14 +20,13 @@ export default function Header() {
     }
 
   return (
-    <div className='fixed top-0 inset-x-0 bg-white text-[black]content-center  text-black dark:bg-gray-900 dark:text-white '>
-        <h1 className='text-center text-3xl font-bold pt-5'>Divorce Party Guest Book</h1>
+    <div className='mb-5 fixed top-0 inset-x-0 bg-lightpurple text-[black]content-center  text-black dark:bg-gray-900 dark:text-white '>
+        <h1 className='font-allura  text-darkpurple text-center text-8xl font-bold pt-5  '>Divorce Party Guest Book</h1>
         <NavBar />
         <div className='flex justify-center mt-5 cursor-pointer md:hidden'> 
             {icons.hamburger}
         </div>
         <NavBarSmallScreen showMenu={showMenu} hamburger={hamburger} close={icons.close}/>
-
     </div>
   )
 }
