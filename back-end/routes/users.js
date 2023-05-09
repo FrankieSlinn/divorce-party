@@ -3,6 +3,12 @@ const express = require('express')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
+// const strategy = require('../lib/passportStrategy')
+const jwtOptions = require('../lib/passportOptions')
+
+const passport = require('passport')
+// passport.use(strategy)
+
 
 //Instantiate a Router
 const router = express.Router()
@@ -36,34 +42,32 @@ router.get('/users', (req, res) => {
  * Description: Create a new User
  */
 
+//first draft
+// router.post('/users', async (req, res) => {
 
-router.post('/users', async (req, res) => {
-
-    const usernameExists = await User.find({username: req.body.username})
-    console.log(usernameExists.length)
+//     const usernameExists = await User.find({username: req.body.username})
+//     console.log(usernameExists.length)
    
-    if (usernameExists.length > 0) {
-        res.send({error: "username already exists"})
-    } else {
+//     if (usernameExists.length > 0) {
+//         res.send({error: "username already exists"})
+//     } else {
 
-        User.create(req.body).then(function(newUser) {
-            res.status(201).json(newUser)
-        })
+//         User.create(req.body).then(function(newUser) {
+//             res.status(201).json(newUser)
+//         })
     
-        .catch((error) => {
-            res.status(500).json({error: error})
-        })
+//         .catch((error) => {
+//             res.status(500).json({error: error})
+//         })
 
-    }
+//     }
 
    
-})
+// })
 
 
-/** hashing pw before storing it in db
- * 
- * router.post('/users', async (req, res) => {
-
+// Hash (including hashing pw before storing it in db)
+router.post('/users', async (req, res) => {  
     try {
         const salt = await bcrypt.genSalt()
         const hashedPassword = await bcrypt.hash(req.body.password, salt)
@@ -85,10 +89,6 @@ router.post('/users', async (req, res) => {
 
 
 })
- */
-
-
-
 
 
 
@@ -277,20 +277,17 @@ router.delete('/users/:id/posts/:postId', async (req, res) => {
 router.post('/users/login', async (req, res) => {
 
 
+    //First draft
+    // const user = User.find({username: req.body.username}).then(function(user) {
+    //     res.status(201).json(user)
+    // })
+    // .catch((error) => {
+    //     res.status(500).json({error: error})
+    // })
 
-    const user = User.find({username: req.body.username}).then(function(user) {
-        res.status(201).json(user)
-    })
-    .catch((error) => {
-        res.status(500).json({error: error})
-    })
+   // incl: comparing hashed password to db record
 
-    /** 
-     ***  comparing hashed password to db record ***
-
-    const user = await User.find({username: req.body.username})
-    console.log(user.length == 0)
-    
+    const user = await User.find({username: req.body.username})   
     if (user.length == 0) {
         res.send({error: 'user does not exist in database'})
     } else {
@@ -300,23 +297,13 @@ router.post('/users/login', async (req, res) => {
             if (await bcrypt.compare(req.body.password, user[0].password)) {
                 res.status(201).json(user)
               } else {
-                res.send({error: 'login credentials could not be verified'})
+                res.send({error: 'Invalid username or password'})
               }
     
         } catch {
-            res.status(500).json({error: 'login failed'})
-    
+            res.status(500).json({error: 'login failed'})    
         }
-
     }
-     */
-
-
-
-
-
-
-
 })
 
 
