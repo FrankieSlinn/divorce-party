@@ -10,11 +10,7 @@ export default function CreatePostForm(props) {
   //Define API 
 
   const postAPI = function () {
-<<<<<<< HEAD
-    fetch("http://172.17.28.19:5003/posts", {
-=======
     fetch("http://localhost:5000/posts", {
->>>>>>> dev
       method: "post",
       headers: {
         "Content-Type": "application/json",

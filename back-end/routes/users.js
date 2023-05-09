@@ -37,32 +37,31 @@ router.get('/users', (req, res) => {
  */
 
 
-router.post('/users', async (req, res) => {
+// router.post('/users', async (req, res) => {
 
-    const usernameExists = await User.find({username: req.body.username})
-    console.log(usernameExists.length)
+//     const usernameExists = await User.find({username: req.body.username})
+//     console.log(usernameExists.length)
    
-    if (usernameExists.length > 0) {
-        res.send({error: "username already exists"})
-    } else {
+//     if (usernameExists.length > 0) {
+//         res.send({error: "username already exists"})
+//     } else {
 
-        User.create(req.body).then(function(newUser) {
-            res.status(201).json(newUser)
-        })
+//         User.create(req.body).then(function(newUser) {
+//             res.status(201).json(newUser)
+//         })
     
-        .catch((error) => {
-            res.status(500).json({error: error})
-        })
+//         .catch((error) => {
+//             res.status(500).json({error: error})
+//         })
 
-    }
+//     }
 
    
-})
+// })
 
 
-/** hashing pw before storing it in db
- * 
- * router.post('/users', async (req, res) => {
+// Hash 
+router.post('/users', async (req, res) => {
 
     try {
         const salt = await bcrypt.genSalt()
@@ -85,7 +84,7 @@ router.post('/users', async (req, res) => {
 
 
 })
- */
+
 
 
 
@@ -278,15 +277,14 @@ router.post('/users/login', async (req, res) => {
 
 
 
-    const user = User.find({username: req.body.username}).then(function(user) {
-        res.status(201).json(user)
-    })
-    .catch((error) => {
-        res.status(500).json({error: error})
-    })
+//     const user = User.find({username: req.body.username}).then(function(user) {
+//         res.status(201).json(user)
+//     })
+//     .catch((error) => {
+//         res.status(500).json({error: error})
+//     })
 
-    /** 
-     ***  comparing hashed password to db record ***
+
 
     const user = await User.find({username: req.body.username})
     console.log(user.length == 0)
@@ -309,7 +307,7 @@ router.post('/users/login', async (req, res) => {
         }
 
     }
-     */
+     
 
 
 
