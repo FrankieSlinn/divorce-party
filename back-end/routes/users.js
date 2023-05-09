@@ -3,11 +3,11 @@ const express = require('express')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
-// const strategy = require('../lib/passportStrategy')
+const strategy = require('../lib/passportStrategy')
 const jwtOptions = require('../lib/passportOptions')
 
 const passport = require('passport')
-// passport.use(strategy)
+passport.use(strategy)
 
 
 //Instantiate a Router
@@ -306,6 +306,51 @@ router.post('/users/login', async (req, res) => {
         }
     }
 })
+router.post('/testlogin', async (req, res) => {
+
+    const user = await User.find({username: req.body.username})   
+   
+    if (user.length == 0) {
+        res.send({error: 'user does not exist in database'})
+    } else {
+
+        try {
+
+            if (await bcrypt.compare(req.body.password, user[0].password)) {
+                
+                const payload = {
+                    id: user[0]._id,
+                    username: user[0].username
+                }
+                
+                const token = jwt.sign(payload, jwtOptions.secretOrKey, {expiresIn: 259200}) // 3 days -> 259200
+
+               
+                res.status(201).json({
+                    success: true,
+                    token: token,
+                    user: user
+                })
+              } else {
+                res.send({error: 'Invalid username or password'})
+              }
+    
+        } catch(error) {
+            res.status(500).json({error: error})
+    
+        }
+    }
+})
+
+
+
+router.get('/protected', passport.authenticate('jwt', {session: false}), (req, res) => {
+    
+    res.json({message: 'You can only see this message with the JSON Web Token',
+    user: req.user
+    })
+})
+
 
 
 
