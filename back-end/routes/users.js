@@ -39,9 +39,7 @@ router.get('/users', (req, res) => {
 
 router.post('/users', async (req, res) => {
 
-    const usernameExists = await User.find({username: req.body.username})
-    console.log(usernameExists.length)
-   
+    const usernameExists = await User.find({username: req.body.username})   
     if (usernameExists.length > 0) {
         res.send({error: "username already exists"})
     } else {
