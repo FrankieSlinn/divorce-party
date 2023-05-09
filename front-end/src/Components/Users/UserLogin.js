@@ -24,18 +24,18 @@ function handleCancel() {
 
 async function handleFormSubmit(e) {
   e.preventDefault()
-//   console.log(formData)
+  const user = await findOnLogIn(formData)
 
+  
+  if (user.error) {
+    alert("Wrong username or password, couldn't log in!")
+  } else {
+    const id = user[0]._id
+    setFormData(template)
+    navigate(`/users/${id}`)
 
-/** 
-        *** USER AUTHENTICATION GOES HERE ***
- */
+  }
 
-  const user = await findOnLogIn(formData)  
-  const id = user[0]._id
-
-  setFormData(template)
-  navigate(`/users/${id}`)
 }
 
 
