@@ -26,9 +26,9 @@ module.exports = {
       darkpurple: '#252330'
     },
     fontFamily: {
-      'font-sans': ['Nunito'],
+      'merriweather': ['Merriweather Sans'],
       'allura': ['Allura'],
-      'serif':['Cambria']
+      'cambria':['Cambria']
     },
       extend: {},
   },

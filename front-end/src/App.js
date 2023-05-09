@@ -43,11 +43,11 @@ const [idUpdate, setIdUpdate]=useState("")
   }
   
   return (
-  <div className={darkMode ? "dark" : "bg-white text-darkpurple"} >
+  <div className={darkMode ? "dark" : "bg-white text-darkpurple font-merriweather"} >
     <Header  />
 <br />
 <br />
-      <div className=' w-screen h-screen pt-40 text-black dark:lightpurple dark:text-white text-center'>
+      <div className='w-screen h-screen pt-40 text-black dark:lightpurple dark:text-white text-center'>
       <Routes>
         <Route path='/' element={<Homepage />}></Route>
 
