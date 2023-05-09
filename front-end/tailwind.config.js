@@ -19,6 +19,12 @@ module.exports = {
       '2xl': '1536px',
       // => @media (min-width: 1536px) { ... }
     },
+    colors: {
+      lightpurple: '#8E87B3',
+      pink: '#A92239',
+      white: '#F1EAE0',
+      darkpurple: '#252330'
+    },
     extend: {},
   },
   plugins: [],

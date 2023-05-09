@@ -10,7 +10,7 @@ export default function DeletePostForm(props){
 
     //Define API 
 
-   const deleteAPI= function(){fetch(`localhost:5000/posts/${props.id}`, {
+   const deleteAPI= function(){fetch(`http://localhost:5000/posts/${props.id}`, {
     method: "delete",
     headers: {
       "Content-Type": "application/json",
@@ -67,7 +67,7 @@ function handleFormSubmit(e) {
         <h4>Delete Post</h4>
         <label for="id">ID</label>
         {/* Here the user can type or paste the ID in the form that will reference the post to be deleted */}
-        <input id="id" value={props.id} onChange={changeId}></input>
+        <input id="id" value={props.id} onChange={changeId} required></input>
         <br />
         <br />
       

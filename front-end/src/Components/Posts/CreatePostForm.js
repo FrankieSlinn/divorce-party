@@ -82,7 +82,7 @@ export default function CreatePostForm(props) {
         onSubmit={handleFormSubmit}
       >
         <label for="author">Author</label>
-        <input id="author" value={props.author} onChange={changeAuthor}></input>
+        <input id="author" value={props.author} onChange={changeAuthor} required></input>
         <br />
         <br />
         <label for="title">Title</label>
@@ -94,6 +94,7 @@ export default function CreatePostForm(props) {
           id="content"
           value={props.content}
           onChange={changeContent}
+          required
         ></input>
         <br />
         <br />
