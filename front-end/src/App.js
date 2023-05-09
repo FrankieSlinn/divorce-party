@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router-dom';
 
-import { HashRouter as Router } from "react-router-dom";
-
-
 import Homepage from './Components/Homepage/Homepage';
 import PageNotFound from './Components/PageNotFound/PageNotFound';
 import Users from './Components/Users/Users';
@@ -78,18 +75,6 @@ const [idUpdate, setIdUpdate]=useState("")
 
         <Route path='*' element={<PageNotFound />}></Route>
       </Routes>
-      <Posts 
-    posts={posts}
-    setPosts={setPosts}
-    author={author}
-    setAuthor={setAuthor}
-    title={title}
-    setTitle={setTitle}
-    id={id}
-    setId={setId}
-    content={content}
-    setContent={setContent}
-  />
   <Footer handleDarkMode={handleDarkMode}/>
 
 

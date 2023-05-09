@@ -27,17 +27,25 @@ function handleCancel() {
 
 async function handleFormSubmit(e) {
   e.preventDefault()
-  console.log(formData)
+  // console.log(formData)
   const newUser = await createNewUser(formData)
-  const id = newUser._id
 
-  await getAllUsers()
-  .then(results => results.json())
-  .then(data => {
-      props.setUsers(data)})
+  if (newUser.error == "username already exists") {
+    alert("The username you entered already exists, please choose a different username!")
+  } else {
+    const id = newUser._id
 
-  setFormData(template)
-  navigate(`/users/${id}`)
+    await getAllUsers()
+    .then(results => results.json())
+    .then(data => {
+        props.setUsers(data)})
+  
+    setFormData(template)
+    navigate(`/users/${id}`)
+
+  }
+
+
 }
 
 
