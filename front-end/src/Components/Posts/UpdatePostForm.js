@@ -96,13 +96,13 @@ function handleFormSubmit(e) {
         <h4>Edit a Post</h4>
           <label for="idUpdate">ID</label>
                {/* Here the user can type or paste the ID in the form that will reference the post to be edited*/}
-          <input id="idUpdate" value={props.updateId} onChange={changeUpdateId}></input>
+          <input id="idUpdate" value={props.updateId} onChange={changeUpdateId} required></input>
           <label for="author">Author</label>
-          <input id="author" value={props.author} onChange={changeAuthor}></input>
+          <input id="author" value={props.author} onChange={changeAuthor} required></input>
           <label for="updateTitle">Title</label>
           <input id="updateTitle" value={props.title} onChange={changeTitle}></input>
           <label for="updateContent">Content</label>
-          <input id="updateContent" value={props.content} onChange={changeContent}></input>
+          <input id="updateContent" value={props.content} onChange={changeContent} required></input>
           <br />
           <br />
             {/* The API runs after the button has been clicked */}
@@ -110,6 +110,8 @@ function handleFormSubmit(e) {
             Edit Post
           </button>
         </form>
+        <br />
+        <br />
         <br />
         <br />
         </>
