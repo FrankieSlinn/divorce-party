@@ -1,5 +1,3 @@
-
-
 //Require necessary NPM packages
 const express = require('express')
 const bcrypt = require('bcrypt')
@@ -46,52 +44,35 @@ router.get('/users', (req, res) => {
  * Description: Create a new User
  */
 
-//first draft
-// router.post('/users', async (req, res) => {
-
-//     const usernameExists = await User.find({username: req.body.username})
-//     console.log(usernameExists.length)
-   
-//     if (usernameExists.length > 0) {
-//         res.send({error: "username already exists"})
-//     } else {
-
-//         User.create(req.body).then(function(newUser) {
-//             res.status(201).json(newUser)
-//         })
-    
-//         .catch((error) => {
-//             res.status(500).json({error: error})
-//         })
-
-//     }
-
-   
-// })
-
-
-// Hash (including hashing pw before storing it in db)
-router.post('/users', async (req, res) => {  
+router.post('/users', async (req, res) => {
+ 
     try {
-        const salt = await bcrypt.genSalt()
-        const hashedPassword = await bcrypt.hash(req.body.password, salt)
+        //Check if username already exists in db
+        //If it does, send error
+        const usernameExists = await User.find({username: req.body.username})
+       
+        if (usernameExists.length > 0) {
+            res.send({error: "username already exists"})
 
-        const newUser = {
-            username: req.body.username,
-            password: hashedPassword,
-            name: req.body.name,
-            posts: []
+        } else {
+            //salt + hash password entered by user
+            const salt = await bcrypt.genSalt()
+            const hashedPassword = await bcrypt.hash(req.body.password, salt)
+    
+            const newUser = {
+                username: req.body.username,
+                password: hashedPassword,
+                name: req.body.name,
+                posts: []
+            }
+            
+            //create new User document
+            User.create(newUser).then(function(user) {
+                res.status(201).json(user)
+            })
         }
-
-        User.create(newUser).then(function(user) {
-            res.status(201).json(user)
-        })
-
-
     } catch {
         res.status(500).json({error: 'Internal Server Error'})    }    
-
-
 })
 
 
@@ -182,6 +163,20 @@ router.delete('/users/:id', (req, res) => {
         console.log(error)
         res.status(500).json({error: error})
     })
+})
+
+router.get('/users/:id/account', passport.authenticate('jwt', {session: false}), (req, res) => {
+    try {
+        res.json({
+            status: 200,
+            message: 'login sucessful',
+            user: req.user._doc
+        })
+    } catch(error) {
+        res.json({error: error})
+        console.log(error)
+    }
+
 })
 
 /**
@@ -356,7 +351,19 @@ router.post('/users/login', async (req, res) => {
 })
 
 router.get('/users/:id/account/delete', passport.authenticate('jwt', {session: false}), (req, res) => {
-    console.log('something')
+    try {
+        res.json({
+            status: 200,
+            message: 'login sucessful',
+            user: req.user._doc
+        })
+    } catch(error) {
+        res.json({error: error})
+        console.log(error)
+    }
+
+})
+router.get('/users/:id/account/update', passport.authenticate('jwt', {session: false}), (req, res) => {
     try {
         res.json({
             status: 200,
@@ -370,24 +377,19 @@ router.get('/users/:id/account/delete', passport.authenticate('jwt', {session: f
 
 })
 
+router.get('/users/:id/account/update/password', passport.authenticate('jwt', {session: false}), (req, res) => {
+    try {
+        res.json({
+            status: 200,
+            message: 'login sucessful',
+            user: req.user._doc
+        })
+    } catch(error) {
+        res.json({error: error})
+        console.log(error)
+    }
 
-
-router.get('/protected', passport.authenticate('jwt', {session: false}), (req, res) => {
-    
-    res.json({message: 'You can only see this message with the JSON Web Token',
-    user: req.user._doc
-    })
 })
-
-router.get('/users/:id/account', passport.authenticate('jwt', {session: false}), (req, res) => {
-    
-    res.json({
-        status: 200,
-        message: 'login sucessful',
-        user: req.user._doc
-    })
-})
-
 
 //Authentication login draft: when user tried to log into account
 router.post('/testlogin', async (req, res) => {
@@ -432,13 +434,6 @@ router.post('/testlogin', async (req, res) => {
 })
 
 
-
-router.get('/protected', passport.authenticate('jwt', {session: false}), (req, res) => {
-    
-    res.json({message: 'You can only see this message with the JSON Web Token',
-    user: req.user._doc
-    })
-})
 
 
 

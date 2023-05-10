@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import { findOnLogIn, logIntoAccount } from './api';
+import { findOnLogIn } from './api';
 import { Link, useNavigate } from "react-router-dom";
 
 export default function UserLogin(props) {
