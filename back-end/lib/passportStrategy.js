@@ -20,7 +20,7 @@ const strategy = new JwtStrategy(jwtOptions, async (jwtPayload, next) => {
     console.log('Token Expires On: ', jwtPayload.exp)
 
     const data = await User.findOne({_id: jwtPayload.id})
-    
+
     const user = {...data}
     console.log('***data')
     console.log(data)
@@ -36,6 +36,7 @@ const strategy = new JwtStrategy(jwtOptions, async (jwtPayload, next) => {
     // console.log(jwtPayload.id)
 
     if (user._id && user._id === jwtPayload.id) {
+
         // If ID is in the db:
             // then user is legitimiate -> run the route requested by user
             // null: no errors
