@@ -1,10 +1,11 @@
 import React from 'react'
 import { useState } from 'react';
-import { createNewUser, getAllUsers } from './api';
+import { createNewUser, findOnLogIn, getAllUsers, getOneUser } from './api';
 import { Link, useNavigate } from "react-router-dom";
 
 export default function NewUserForm(props) {
   const navigate = useNavigate();
+  const [user, setUser] = useState({})
 
   const template = {
 
@@ -33,20 +34,32 @@ async function handleFormSubmit(e) {
   if (newUser.error == "username already exists") {
     alert("The username you entered already exists, please choose a different username!")
   } else {
-    const id = newUser._id
-
     await getAllUsers()
     .then(results => results.json())
     .then(data => {
         props.setUsers(data)})
   
+  const userData = await findOnLogIn(formData)
+  const token = {token: userData.token}
+  localStorage.setItem("divorceJWT", JSON.stringify(token))
+
+  const user = userData.user
+
+  if (userData.error) {
+    alert("Invalid username or password, couldn't log in!")
+  } else {
+    const id = user[0]._id
+    setFormData(template)
+    navigate(`/users/${id}/account`)
+
+
     setFormData(template)
     
 
   }
 
 
-}
+}}
 
 
   return (

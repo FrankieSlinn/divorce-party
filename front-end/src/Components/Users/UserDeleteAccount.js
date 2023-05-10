@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import React from 'react'
 import { deleteOneUser, getAllUsers, getToAccountPage } from './api';
 

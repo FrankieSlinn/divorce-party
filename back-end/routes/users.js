@@ -44,52 +44,35 @@ router.get('/users', (req, res) => {
  * Description: Create a new User
  */
 
-//first draft
-// router.post('/users', async (req, res) => {
-
-//     const usernameExists = await User.find({username: req.body.username})
-//     console.log(usernameExists.length)
-   
-//     if (usernameExists.length > 0) {
-//         res.send({error: "username already exists"})
-//     } else {
-
-//         User.create(req.body).then(function(newUser) {
-//             res.status(201).json(newUser)
-//         })
-    
-//         .catch((error) => {
-//             res.status(500).json({error: error})
-//         })
-
-//     }
-
-   
-// })
-
-
-// Hash (including hashing pw before storing it in db)
-router.post('/users', async (req, res) => {  
+router.post('/users', async (req, res) => {
+ 
     try {
-        const salt = await bcrypt.genSalt()
-        const hashedPassword = await bcrypt.hash(req.body.password, salt)
+        //Check if username already exists in db
+        //If it does, send error
+        const usernameExists = await User.find({username: req.body.username})
+       
+        if (usernameExists.length > 0) {
+            res.send({error: "username already exists"})
 
-        const newUser = {
-            username: req.body.username,
-            password: hashedPassword,
-            name: req.body.name,
-            posts: []
+        } else {
+            //salt + hash password entered by user
+            const salt = await bcrypt.genSalt()
+            const hashedPassword = await bcrypt.hash(req.body.password, salt)
+    
+            const newUser = {
+                username: req.body.username,
+                password: hashedPassword,
+                name: req.body.name,
+                posts: []
+            }
+            
+            //create new User document
+            User.create(newUser).then(function(user) {
+                res.status(201).json(user)
+            })
         }
-
-        User.create(newUser).then(function(user) {
-            res.status(201).json(user)
-        })
-
-
     } catch {
         res.status(500).json({error: 'Internal Server Error'})    }    
-
-
 })
 
 
