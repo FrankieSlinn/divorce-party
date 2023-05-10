@@ -20,14 +20,14 @@ const strategy = new JwtStrategy(jwtOptions, async (jwtPayload, next) => {
     console.log('Token Expires On: ', jwtPayload.exp)
 
     const data = await User.findOne({_id: jwtPayload.id})
-
+    
     const user = {...data}
     user._id = data._id.valueOf()
-
+  
     //extract id from token so we can retrieve user document from db
     console.log('user ID')
     console.log(user._id)
-    
+  
     console.log('jwt id')
     console.log(jwtPayload.id)
 
