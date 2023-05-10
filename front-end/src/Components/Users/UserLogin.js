@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import { findOnLogIn } from './api';
+import { findOnLogIn, logIntoAccount } from './api';
 import { Link, useNavigate } from "react-router-dom";
 
 export default function UserLogin(props) {
@@ -24,13 +24,21 @@ function handleCancel() {
 
 async function handleFormSubmit(e) {
   e.preventDefault()
-  const user = await findOnLogIn(formData)
-  if (user.error) {
+  // const user = await findOnLogIn(formData)
+  
+
+  const userData = await findOnLogIn(formData)
+  const token = {token: userData.token}
+  localStorage.setItem("divorceJWT", JSON.stringify(token))
+
+  const user = userData.user
+
+  if (userData.error) {
     alert("Invalid username or password, couldn't log in!")
   } else {
     const id = user[0]._id
     setFormData(template)
-    navigate(`/users/${id}`)
+    navigate(`/users/${id}/account`)
 
   }
 

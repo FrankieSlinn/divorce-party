@@ -13,6 +13,9 @@ import Header from './Components/Header/Header';
 import UserLogin from './Components/Users/UserLogin';
 import ShowUserPosts from './Components/Users/ShowUserPosts';
 import ShowUserPost from './Components/Users/ShowUserPost';
+import UserAccount from './Components/Users/UserAccount';
+import UserDeleteAccount from './Components/Users/UserDeleteAccount';
+import UserUpdateAccount from './Components/Users/UserUpdateAccount';
 
 
 function App() {
@@ -58,6 +61,10 @@ const [idUpdate, setIdUpdate]=useState("")
 
         <Route path='/users/create' element={<NewUserForm setUsers={setUsers} setUserLoggedIn={setUserLoggedIn}/>}></Route>
         <Route path='/users/login' element={<UserLogin setUsers={setUsers} setUserLoggedIn={setUserLoggedIn}/>}></Route>
+        <Route path='/users/:id/account' element={<UserAccount setUsers={setUsers} setUserLoggedIn={setUserLoggedIn}/>}></Route>
+        <Route path='/users/:id/account/delete' element={<UserDeleteAccount setUsers={setUsers} setUserLoggedIn={setUserLoggedIn}/>}></Route>
+        <Route path='/users/:id/account/update' element={<UserUpdateAccount setUsers={setUsers} setUserLoggedIn={setUserLoggedIn}/>}></Route>
+
 
         <Route path='/posts' element={<Posts
           posts={posts}
