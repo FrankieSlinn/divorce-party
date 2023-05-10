@@ -1,6 +1,6 @@
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import React from 'react'
-import { deleteOneUser, getAllUsers } from './api';
+import { deleteOneUser, getAllUsers, getToAccountPage } from './api';
 
 export default function UserDeleteAccount(props) {
     const params = useParams()
@@ -23,9 +23,20 @@ export default function UserDeleteAccount(props) {
 
         }}
 
-    function handleCancel() {
-        navigate(`/users/${params.id}`);
-    }
+        async function handleCancel() {
+
+            let token = JSON.parse(localStorage.getItem('divorceJWT'))       
+            let response = await getToAccountPage(params.id, token)
+            console.log(response)
+    
+            if (response.status === 401) {
+                navigate('/users/login')
+            }
+            if (response.status === 200) {
+                navigate(`/users/${params.id}/account`)
+            }}
+
+        
 
   return (
     <div>

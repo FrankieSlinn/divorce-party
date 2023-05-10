@@ -41,7 +41,7 @@ async function handleFormSubmit(e) {
         props.setUsers(data)})
   
     setFormData(template)
-    navigate(`/users/${id}`)
+    
 
   }
 

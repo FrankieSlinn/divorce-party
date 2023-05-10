@@ -1,5 +1,3 @@
-
-
 //Require necessary NPM packages
 const express = require('express')
 const bcrypt = require('bcrypt')
@@ -184,6 +182,20 @@ router.delete('/users/:id', (req, res) => {
     })
 })
 
+router.get('/users/:id/account', passport.authenticate('jwt', {session: false}), (req, res) => {
+    try {
+        res.json({
+            status: 200,
+            message: 'login sucessful',
+            user: req.user._doc
+        })
+    } catch(error) {
+        res.json({error: error})
+        console.log(error)
+    }
+
+})
+
 /**
  * Action:      INDEX
  * Method:      GET
@@ -356,7 +368,19 @@ router.post('/users/login', async (req, res) => {
 })
 
 router.get('/users/:id/account/delete', passport.authenticate('jwt', {session: false}), (req, res) => {
-    console.log('something')
+    try {
+        res.json({
+            status: 200,
+            message: 'login sucessful',
+            user: req.user._doc
+        })
+    } catch(error) {
+        res.json({error: error})
+        console.log(error)
+    }
+
+})
+router.get('/users/:id/account/update', passport.authenticate('jwt', {session: false}), (req, res) => {
     try {
         res.json({
             status: 200,
@@ -370,24 +394,19 @@ router.get('/users/:id/account/delete', passport.authenticate('jwt', {session: f
 
 })
 
+router.get('/users/:id/account/update/password', passport.authenticate('jwt', {session: false}), (req, res) => {
+    try {
+        res.json({
+            status: 200,
+            message: 'login sucessful',
+            user: req.user._doc
+        })
+    } catch(error) {
+        res.json({error: error})
+        console.log(error)
+    }
 
-
-router.get('/protected', passport.authenticate('jwt', {session: false}), (req, res) => {
-    
-    res.json({message: 'You can only see this message with the JSON Web Token',
-    user: req.user._doc
-    })
 })
-
-router.get('/users/:id/account', passport.authenticate('jwt', {session: false}), (req, res) => {
-    
-    res.json({
-        status: 200,
-        message: 'login sucessful',
-        user: req.user._doc
-    })
-})
-
 
 //Authentication login draft: when user tried to log into account
 router.post('/testlogin', async (req, res) => {
@@ -432,13 +451,6 @@ router.post('/testlogin', async (req, res) => {
 })
 
 
-
-router.get('/protected', passport.authenticate('jwt', {session: false}), (req, res) => {
-    
-    res.json({message: 'You can only see this message with the JSON Web Token',
-    user: req.user._doc
-    })
-})
 
 
 
