@@ -7,12 +7,12 @@ export default function Post(props) {
   return (
     <div>
         <div className ="post">
-            <h3>Title: {props.title}</h3>
+            <h3 className="font-bold mb-3">{props.title}</h3>
 
-            <p>
-                Entry: {props.content}
+            <p className="mb-3">
+               {props.content}
             </p>
-            <p>Author: {props.author}</p>
+            <p className="mb-3">Author: {props.author}</p>
             <p>
               Entry ID: {props.id}
             </p>
