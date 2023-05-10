@@ -2,6 +2,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const User = require('./models/user')
+const passport = require('passport')
 const logRoutes = require('./routes/posts')
 const userRoutes = require('./routes/users')
 const authRoute = require('./routes/auth')
@@ -32,7 +34,7 @@ const db = mongoose.connection
 const dbConfig = require('./config/db')
 
 
-const port = process.env.PORT|| 5000;
+const port = process.env.PORT|| 5001;
 
 //Connect Mongoose
 
@@ -44,7 +46,21 @@ db.on('disconnected', () => console.log('MongoDB Disconnected'))
 
 app.use('/api', authRoute)
 
+app.get('api2/login', (req, res) => {
 
+    console.log(res.body.username)
+    // console.log(req.body)
+    // // const user = await User.findOne({username: req.body.username})
+    // // console.log(user)
+    // res.json({message: 'hello'})
+    
+})
+
+app.get('/api/protected', passport.authenticate('jwt', {session: false}), (req, res) => {
+    res.json({
+        message: "User authenticated!"
+    })
+})
 
 app.listen(port, () => console.log(`Server started on port ${port}`))
 
