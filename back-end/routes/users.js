@@ -278,7 +278,7 @@ router.delete('/users/:id/posts/:postId', async (req, res) => {
  * Description: Login User and find user data in db
  */
 
-router.post('/users/login', async (req, res) => {
+// router.post('/users/login', async (req, res) => {
 
 
     //First draft
@@ -291,32 +291,33 @@ router.post('/users/login', async (req, res) => {
 
    // incl: comparing hashed password to db record
 
-    const user = await User.find({username: req.body.username})   
-    if (user.length == 0) {
-        res.send({error: 'user does not exist in database'})
-    } else {
+//     const user = await User.find({username: req.body.username})   
+//     if (user.length == 0) {
+//         res.send({error: 'user does not exist in database'})
+//     } else {
 
-        try {
+//         try {
 
-            if (await bcrypt.compare(req.body.password, user[0].password)) {
-                res.status(201).json(user)
-              } else {
-                res.send({error: 'Invalid username or password'})
-              }
+//             if (await bcrypt.compare(req.body.password, user[0].password)) {
+//                 res.status(201).json(user)
+//               } else {
+//                 res.send({error: 'Invalid username or password'})
+//               }
     
-        } catch(error) {
-            res.status(500).json({error: error})
+//         } catch(error) {
+//             res.status(500).json({error: error})
     
-        }
-    }
-})
+//         }
+//     }
+// })
 
 
 //Authentication login draft: when user tried to log into account
-router.post('/testlogin', async (req, res) => {
+router.post('/users/login', async (req, res) => {
     
     //retrieve user document from db
-    const user = await User.find({username: req.body.username}).populate('posts') 
+    const user = await User.find({username: req.body.username})
+    // .poplulate(posts)
    
     if (user.length == 0) { // no record found in database
         res.status(400).json({error: 'user does not exist in database'})
@@ -354,12 +355,36 @@ router.post('/testlogin', async (req, res) => {
     }
 })
 
+router.get('/users/:id/account/delete', passport.authenticate('jwt', {session: false}), (req, res) => {
+    console.log('something')
+    try {
+        res.json({
+            status: 200,
+            message: 'login sucessful',
+            user: req.user._doc
+        })
+    } catch(error) {
+        res.json({error: error})
+        console.log(error)
+    }
+
+})
+
 
 
 router.get('/protected', passport.authenticate('jwt', {session: false}), (req, res) => {
     
     res.json({message: 'You can only see this message with the JSON Web Token',
     user: req.user._doc
+    })
+})
+
+router.get('/users/:id/account', passport.authenticate('jwt', {session: false}), (req, res) => {
+    
+    res.json({
+        status: 200,
+        message: 'login sucessful',
+        user: req.user._doc
     })
 })
 
