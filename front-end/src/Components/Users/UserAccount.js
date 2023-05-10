@@ -51,12 +51,12 @@ export default function UserAccount() {
     
 
   return (
-    <div className='px-10 pb-5 pt-4 h-100'>
+    <div className='flex flex-col px-10 pb-5 pt-4 h-100'>
         <h2 className='text-2xl font-bold'>{user.name}</h2>
         <h2 className='text-xl pb-5'>{user.username}</h2>
-        <button onClick={handleDeleteAccount}>delete account</button>
-        <button>update account</button>
-        <button>Add new post</button>
+        <button className='pb-5' onClick={handleDeleteAccount}>delete account</button>
+        <button className='pb-5'>update account</button>
+        <button className='pb-5'>Add new post</button>
         <div>
             <Link to={`/users/${params.id}/posts`} className='text-2xl font-bold'>Posts:</Link>
             {display}
