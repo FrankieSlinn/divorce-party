@@ -1,11 +1,10 @@
 import React from 'react'
 import { useState } from 'react';
-import { createNewUser, findOnLogIn, getAllUsers, getOneUser } from './api';
+import { createNewUser, findOnLogIn, getAllUsers } from './api';
 import { Link, useNavigate } from "react-router-dom";
 
 export default function NewUserForm(props) {
   const navigate = useNavigate();
-  const [user, setUser] = useState({})
 
   const template = {
 
@@ -39,16 +38,18 @@ async function handleFormSubmit(e) {
     .then(data => {
         props.setUsers(data)})
   
-  const userData = await findOnLogIn(formData)
-  const token = {token: userData.token}
-  localStorage.setItem("divorceJWT", JSON.stringify(token))
-
+  const userData = await findOnLogIn(formData)  
   const user = userData.user
+  const id = user[0]._id
+  const token = {
+    token: userData.token,
+    id: id
+  }
+  localStorage.setItem("divorceJWT", JSON.stringify(token))
 
   if (userData.error) {
     alert("Invalid username or password, couldn't log in!")
   } else {
-    const id = user[0]._id
     setFormData(template)
     navigate(`/users/${id}/account`)
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import NavBar from '../NavBar/NavBar'
 import NavBarSmallScreen from '../NavBar/NavBarSmallScreen'
 
-export default function Header() {
+export default function Header(props) {
 
     const [hamburger, setHamburger] = useState(false)
 
@@ -22,11 +22,11 @@ export default function Header() {
   return (
     <div className='mb-5 fixed top-0 inset-x-0 bg-lightpurple text-[black]content-center  text-black dark:bg-gray-900 dark:text-white '>
         <h1 className='font-allura  text-darkpurple text-center text-8xl font-bold pt-5  '>Divorce Party Guest Book</h1>
-        <NavBar />
+        <NavBar userLoggedIn={props.userLoggedIn}/>
         <div className='flex justify-center mt-5 cursor-pointer md:hidden'> 
             {icons.hamburger}
         </div>
-        <NavBarSmallScreen showMenu={showMenu} hamburger={hamburger} close={icons.close}/>
+        <NavBarSmallScreen userLoggedIn={props.userLoggedIn} showMenu={showMenu} hamburger={hamburger} close={icons.close}/>
     </div>
   )
 }
