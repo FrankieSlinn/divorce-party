@@ -20,6 +20,7 @@ import DeleteSuccessful from './Components/Users/DeleteSuccessful';
 import UserUpdatePassword from './Components/Users/UserUpdatePassword';
 import UserPasswordUpdated from './Components/Users/UserPasswordUpdated';
 import LogOut from './Components/Users/LogOut';
+import UserAddNewPost from './Components/Users/UserAddNewPost';
 
 
 function App() {
@@ -76,7 +77,7 @@ const [idUpdate, setIdUpdate]=useState("")
 
          {/*** USER ROUTES ***/}
             {/* USER: SHOW ROUTES */}
-            <Route path='/users' element={<Users users={users} setUsers={setUsers}/>}></Route>
+            <Route path='/users' element={<Users users={users} setUsers={setUsers} tokenInLocalStorage={tokenInLocalStorage}/>}></Route>
             <Route path='/users/:id' element={<ShowUser setUsers={setUsers}/>}></Route>
             <Route path='/users/:id/posts' element={<ShowUserPosts/>}></Route>
             <Route path='/users/:id/posts/:postId' element={<ShowUserPost/>}></Route>
@@ -87,7 +88,6 @@ const [idUpdate, setIdUpdate]=useState("")
             <Route path='/users/:id/account' element={<UserAccount setUsers={setUsers}/>}></Route>
             <Route path='/users/logout' element={<LogOut/>}></Route>
 
-
             {/* USER: DELETE ACCOUNT */}
             <Route path='/users/:id/account/delete' element={<UserDeleteAccount setUsers={setUsers}/>}></Route>
             <Route path='/users/deletesuccessful' element={<DeleteSuccessful setUsers={setUsers}/>}></Route>
@@ -96,6 +96,10 @@ const [idUpdate, setIdUpdate]=useState("")
             <Route path='/users/:id/account/update' element={<UserUpdateAccount setUsers={setUsers}/>}></Route>
             <Route path='/users/:id/account/update/password' element={<UserUpdatePassword setUsers={setUsers}/>}></Route>
             <Route path='/users/:id/account/update/password/success' element={<UserPasswordUpdated setUsers={setUsers}/>}></Route>
+            
+            {/* USER: CREATING POSTS */}
+            <Route path='/users/:id/posts/create' element={<UserAddNewPost setUsers={setUsers}/>}></Route>
+
 
         {/*** POST ROUTES ***/}
         <Route path='/posts' element={<Posts

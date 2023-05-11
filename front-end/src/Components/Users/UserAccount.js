@@ -7,6 +7,10 @@ export default function UserAccount() {
     const navigate = useNavigate();
     const params = useParams()
     const [user, setUser] = useState({})
+    const [showForm, setShowForm] = useState(false)
+    
+
+
 
     useEffect(() => {
         getOneUser(params.id)
@@ -52,6 +56,27 @@ export default function UserAccount() {
         } 
     }
 
+    const template = {
+        title: '',
+        content: '',
+    }
+    const [formData, setFormData] = useState(template)
+
+
+    function handleFormChange(e) {
+        const newInput = {...formData, [e.target.name]: e.target.value}
+        console.log(newInput)
+        setFormData(newInput)
+    }
+
+    function handleFormSubmit() {}
+    function createPost(e) {
+        e.preventDefault()
+        formData.author = user.name
+        console.log(formData)
+    }
+
+
     let display;
    
     if (user.posts) {
@@ -76,11 +101,33 @@ export default function UserAccount() {
         <button className='pb-5' onClick={handleDeleteAccount}>delete account</button>
         <button className='pb-5' onClick={handleUpdateAccount}>update username / display name</button>
         <button className='pb-5' onClick={handleUpdatePassword}>update password</button>
-        <button className='pb-5'>Add new post</button>
+        <button className='pb-5' onClick={() => (setShowForm(!showForm))}>Add new post</button>
+        {showForm && <div className='mb-10 mt-5'>
+                   {    <form onSubmit={handleFormSubmit} className='flex flex-col gap-5'>
+                            <label>Title:
+                                <input name="title" onChange={handleFormChange}></input>
+                            </label>
+                            
+                       
+                            <label>Content:
+                                <textarea
+                                name="content"
+                                onChange={handleFormChange}
+                                required
+                                ></textarea>
+                            </label>
+                     
+                  
+                            <button type="submit" onClick={createPost}>
+                                Submit New Post
+                            </button>
+                        </form>}
+                    </div>}
         <div>
             <Link to={`/users/${params.id}/posts`} className='text-2xl font-bold'>Posts:</Link>
             {display}
         </div>
+        
     </div>
   )
 }
