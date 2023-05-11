@@ -124,6 +124,10 @@ will want to celebrate with lots of friends and family. What better way to comme
 
 -The Tailwind Framework was used for the layout with the selected colour scheme customised within Tailwind. 
 
+-Image of the Layout
+
+![Layout](./documentation/Layout.png "Layout")
+
 
 - ### FLOW CHART, USER STORIES AND WIREFRAME
 
@@ -151,7 +155,13 @@ This was captured within a Team Expectations Document stored on the team's share
 
 The project utilised the MERN Stack. As a first step a connection with the Mongo Database was established. A seed file was then produced to populate initial data into the database. 
 
-Models were then established for the Users and Posts. Once the models were completed backend routes were coded. The routes were tested in Postman API Platform. 
+Models were then established for the Users and Posts. 
+
+![User Model](./documentation/UserModel.png)
+
+Once the models were completed backend routes were coded. The routes were tested in Postman API Platform. 
+
+![Backend Routes](./documentation/ExampleBackendRoute.png)
 
 After the backend routes were successfully tested the frontend routes were implemented.
 
