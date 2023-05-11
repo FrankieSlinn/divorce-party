@@ -50,7 +50,7 @@ const [idUpdate, setIdUpdate]=useState("")
   
   return (
   <div className={darkMode ? "dark" : "bg-white text-darkpurple font-merriweather"} >
-    <Header  />
+    <Header  userLoggedIn={userLoggedIn}/>
 <br />
 <br />
       <div className='w-screen h-screen pt-40 text-black dark:lightpurple dark:text-white text-center'>
@@ -67,18 +67,18 @@ const [idUpdate, setIdUpdate]=useState("")
             <Route path='/users/:id/posts/:postId' element={<ShowUserPost/>}></Route>
 
             {/* USER: SIGN UP/LOGIN */}
-            <Route path='/users/create' element={<NewUserForm setUsers={setUsers} setUserLoggedIn={setUserLoggedIn}/>}></Route>
-            <Route path='/users/login' element={<UserLogin setUsers={setUsers} setUserLoggedIn={setUserLoggedIn}/>}></Route>
-            <Route path='/users/:id/account' element={<UserAccount setUsers={setUsers} setUserLoggedIn={setUserLoggedIn}/>}></Route>
+            <Route path='/users/create' element={<NewUserForm setUsers={setUsers}/>}></Route>
+            <Route path='/users/login' element={<UserLogin setUsers={setUsers}/>}></Route>
+            <Route path='/users/:id/account' element={<UserAccount setUsers={setUsers}/>}></Route>
 
             {/* USER: DELETE ACCOUNT */}
-            <Route path='/users/:id/account/delete' element={<UserDeleteAccount setUsers={setUsers} setUserLoggedIn={setUserLoggedIn}/>}></Route>
-            <Route path='/users/deletesuccessful' element={<DeleteSuccessful setUsers={setUsers} setUserLoggedIn={setUserLoggedIn}/>}></Route>
+            <Route path='/users/:id/account/delete' element={<UserDeleteAccount setUsers={setUsers}/>}></Route>
+            <Route path='/users/deletesuccessful' element={<DeleteSuccessful setUsers={setUsers}/>}></Route>
 
             {/* USER: UPDATE ACCOUNT */}
-            <Route path='/users/:id/account/update' element={<UserUpdateAccount setUsers={setUsers} setUserLoggedIn={setUserLoggedIn}/>}></Route>
-            <Route path='/users/:id/account/update/password' element={<UserUpdatePassword setUsers={setUsers} setUserLoggedIn={setUserLoggedIn}/>}></Route>
-            <Route path='/users/:id/account/update/password/success' element={<UserPasswordUpdated setUsers={setUsers} setUserLoggedIn={setUserLoggedIn}/>}></Route>
+            <Route path='/users/:id/account/update' element={<UserUpdateAccount setUsers={setUsers}/>}></Route>
+            <Route path='/users/:id/account/update/password' element={<UserUpdatePassword setUsers={setUsers}/>}></Route>
+            <Route path='/users/:id/account/update/password/success' element={<UserPasswordUpdated setUsers={setUsers}/>}></Route>
 
         {/*** POST ROUTES ***/}
         <Route path='/posts' element={<Posts
