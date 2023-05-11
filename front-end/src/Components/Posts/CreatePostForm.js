@@ -82,7 +82,7 @@ export default function CreatePostForm(props) {
         style={{ display: showCreatePost ? "inline-block" : "none" }}
         onSubmit={handleFormSubmit}
       >
-        <h2 className="font-bold text-xl pb-4 ">Add a Post</h2>
+        <h2 className="font-bold text-xl pb-4">Add a Post</h2>
         <br/>
         <label for="author">Author</label>
         <input id="author" value={props.author} onChange={changeAuthor} required></input>

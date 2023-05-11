@@ -93,7 +93,7 @@ function handleFormSubmit(e) {
     >Edit a Post</button>
       {/* Run handleFormSubmit Function, Ensure Edit Form is displayed if the user clicks on the button */}
         <form class="editform" onSubmit={handleFormSubmit} style={{ display: showEditPost ? "inline-block" : "none" }}>
-        <h4>Edit a Post</h4>
+        <h4 className="">Edit a Post</h4>
           <label for="idUpdate">ID</label>
                {/* Here the user can type or paste the ID in the form that will reference the post to be edited*/}
           <input id="idUpdate" value={props.updateId} onChange={changeUpdateId} required></input>
