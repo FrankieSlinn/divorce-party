@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { createNewUserPost, getOneUser, getToDeleteAccountPage, getToUpdateAccountPage, getToUpdatePasswordPage } from './api'
+import { createNewUserPost, deleteOneUserPost, getOneUser, getToDeleteAccountPage, getToUpdateAccountPage, getToUpdatePasswordPage } from './api'
 
 
 export default function UserAccount() {
@@ -87,6 +87,20 @@ export default function UserAccount() {
         setShowForm(false)
 
     }
+
+    async function handleDeletePost (e, postId) {
+        
+        await deleteOneUserPost(params.id, postId)
+      
+        
+        getOneUser(params.id)
+        .then(results => results.json())
+        .then(data => {
+            setUser(data)
+        
+        })
+    }
+  
    
 
 
@@ -101,7 +115,7 @@ export default function UserAccount() {
                         <p className='text-justify'>{post.content}</p>
                         <p>Entry ID: {post._id}</p>
                     </Link>
-                        <button>Delete Post</button>
+                        <button onClick={(e) => (handleDeletePost(e, post._id))}>Delete Post</button>
                         <button>Update Post</button>
                 </div>
     })

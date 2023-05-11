@@ -62,6 +62,24 @@ export const deleteOneUser = async (id) => {
 
     return response.json();
 }
+export const deleteOneUserPost = async (userId, postId) => {
+    const fetchOptions = {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        }};
+
+    const url = `http://localhost:5000/users/${userId}/posts/${postId}`
+    const response = await fetch(url, fetchOptions);
+
+    if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(errorMessage);
+    }
+
+    return response.json();
+}
 
 
 export const updateOneUser = async (update, id) => {
