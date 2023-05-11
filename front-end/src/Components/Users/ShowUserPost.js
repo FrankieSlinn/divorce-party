@@ -19,6 +19,7 @@ export default function ShowUserPost() {
         display = <div className='flex flex-col py-5 px-10 text-center items-center'>
                         <h2 className='block font-bold text-lg'>{post.title}</h2>
                         <p className='text-justify'>{post.content}</p>
+                        <p>Entry ID: {post._id}</p>
                     </div>
 
     } else {

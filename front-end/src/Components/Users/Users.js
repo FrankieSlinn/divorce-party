@@ -16,7 +16,9 @@ export default function Users(props) {
                             posts={user.posts}
                             id={user._id}
                             key={user._id}
-                            setUsers={props.setUsers}/>
+                            setUsers={props.setUsers}
+                            tokenInLocalStorage={props.tokenInLocalStorage}
+                            />
         })
     }
 
