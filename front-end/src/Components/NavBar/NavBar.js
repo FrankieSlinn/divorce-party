@@ -6,18 +6,22 @@ export default function NavBar(props) {
   const navigate = useNavigate();
 
   async function gotToAccount() {
-    let token = JSON.parse(localStorage.getItem('divorceJWT')) 
-    
-    if (token) {
-        const id = token.id  
-        let response = await getToAccountPage(id, token)
-     
-    if (response.status === 200) {
-      navigate(`/users/${id}/account`)
-        
-    } } else {
+    if (props.tokenInLocalStorage) {
+
+      let token = JSON.parse(localStorage.getItem('divorceJWT')) 
+      let response = await getToAccountPage(token.id, token)
+       
+      if (response.status === 200) {
+        navigate(`/users/${token.id}/account`)
+          
+      } else {
+        navigate('/users/login')
+      }
+
+    } else {
       navigate('/users/login')
     }
+
   }
 
   function logUserOut() {

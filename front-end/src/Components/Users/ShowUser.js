@@ -22,6 +22,7 @@ export default function ShowUser() {
         return <Link to={`/users/${user._id}/posts/${post._id}`} className='flex flex-col py-5 px-10 text-center items-center' key={post._id}>
                     <h2 className='block font-bold text-lg'>{post.title}</h2>
                     <p className='text-justify'>{post.content}</p>
+                    <p>Entry ID: {post._id}</p>
                 </Link>
     })
 

@@ -2,15 +2,10 @@
 const express = require('express')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-
-
 const strategy = require('../lib/passportStrategy')
 const jwtOptions = require('../lib/passportOptions')
-
 const passport = require('passport')
 passport.use(strategy)
-
-
 
 //Instantiate a Router
 const router = express.Router()
@@ -23,9 +18,8 @@ const User = require('../models/user')
  * Action:      INDEX
  * Method:      GET
  * URI:         /users
- * Description: Get All Users
+ * Description: Get All User documents from db
  */
-
 
 router.get('/users', (req, res) => {
     User.find().populate('posts')
@@ -41,7 +35,7 @@ router.get('/users', (req, res) => {
  * Action:      CREATE
  * Method:      POST
  * URI:         /users
- * Description: Create a new User
+ * Description: Create a new User document
  */
 
 router.post('/users', async (req, res) => {
@@ -75,13 +69,56 @@ router.post('/users', async (req, res) => {
         res.status(500).json({error: 'Internal Server Error'})    }    
 })
 
+/**
+ * Method:      POST
+ * URI:         /users/login
+ * Description: Login User and retrieve User data from db
+ */
 
+//LOGIN when user tried to log into account with username + password
+router.post('/users/login', async (req, res) => {
+    
+    //retrieve user document from db by username (usernames are unique)
+    const user = await User.find({username: req.body.username})
+   
+    if (user.length == 0) { // no record found in database
+        res.status(400).json({error: 'user does not exist in database'})
+
+    } else { // user exists in db
+
+        try {   //check if password user entered matches password in db
+            if (await bcrypt.compare(req.body.password, user[0].password)) {
+
+                const payload = {
+                    id: user[0]._id,
+                    username: user[0].username
+                }
+
+                //Build JWT
+                const token = jwt.sign(payload, jwtOptions.secretOrKey, {expiresIn: 432000}) // 5 days -> 432000s
+               
+                //Send JWT back to user
+                res.status(201).json({
+                    success: true,
+                    token: token,
+                    user: user
+                })
+
+              } else { // password user entered does not match password in db
+                res.status(401).json({error: 'Invalid username or password'})
+              }
+        } catch(error) {
+            res.status(500).json({error: error})
+    
+        }
+    }
+})
 
 /**
  * Action:      SHOW
  * Method:      GET
  * URI:         /users/644ef2f60bf76b599d86f44d
- * Description: Get a User by User ID
+ * Description: Get a User document by User ID
  */
 
 router.get('/users/:id', (req, res) => {
@@ -107,8 +144,30 @@ router.get('/users/:id', (req, res) => {
 })
 
 /**
+ * Action:      SHOW
+ * Method:      GET
+ * URI:         /users/644ef2f60bf76b599d86f44d/account
+ * Description: access protected data from a User document by User ID
+ */
+
+//valid JWT token required to acces this route
+router.get('/users/:id/account', passport.authenticate('jwt', {session: false}), (req, res) => {
+    try {
+        res.json({
+            status: 200,
+            message: 'login sucessful',
+            user: req.user._doc
+        })
+    } catch(error) {
+        res.json({error: error})
+        console.log(error)
+    }
+
+})
+
+/**
  * Action:      UPDATE
- * Method:      PUT/PATCH
+ * Method:      PUT
  * URI:         /users/644ef2f60bf76b599d86f44d
  * Description: Update a User by User ID
  */
@@ -133,6 +192,48 @@ router.put('/users/:id', (req, res) => {
         console.log(error)
         res.status(500).json({error: error})
     })
+})
+
+/**
+ * Method:      GET
+ * URI:         /users/644ef2f60bf76b599d86f44d/account/update/password
+ * Description: access protected route where user can change password in User document
+ */
+
+//valid JWT token required to acces this route
+router.get('/users/:id/account/update/password', passport.authenticate('jwt', {session: false}), (req, res) => {
+    try {
+        res.json({
+            status: 200,
+            message: 'login sucessful',
+            user: req.user._doc
+        })
+    } catch(error) {
+        res.json({error: error})
+        console.log(error)
+    }
+
+})
+
+/**
+ * Method:      GET
+ * URI:         /users/644ef2f60bf76b599d86f44d/account/update
+ * Description: access protected route where user can change username / name in User document
+ */
+
+//valid JWT token required to acces this route
+router.get('/users/:id/account/update', passport.authenticate('jwt', {session: false}), (req, res) => {
+    try {
+        res.json({
+            status: 200,
+            message: 'login sucessful',
+            user: req.user._doc
+        })
+    } catch(error) {
+        res.json({error: error})
+        console.log(error)
+    }
+
 })
 
 
@@ -165,7 +266,15 @@ router.delete('/users/:id', (req, res) => {
     })
 })
 
-router.get('/users/:id/account', passport.authenticate('jwt', {session: false}), (req, res) => {
+
+/**
+ * Method:      GET
+ * URI:         /users/644ef2f60bf76b599d86f44d/account/update
+ * Description: access protected route where user can change delete User document
+ */
+
+//valid JWT token required to acces this route
+router.get('/users/:id/account/delete', passport.authenticate('jwt', {session: false}), (req, res) => {
     try {
         res.json({
             status: 200,
@@ -178,6 +287,9 @@ router.get('/users/:id/account', passport.authenticate('jwt', {session: false}),
     }
 
 })
+
+
+
 
 /**
  * Action:      INDEX
@@ -204,7 +316,6 @@ router.get('/users/:id/posts', async (req, res) => {
 
 router.post('/users/:id/posts', async (req, res) => {
     try {
-        console.log(req.body)
         const newPost = await Post.create(req.body)
         const data = await User.findByIdAndUpdate(req.params.id, {$push: {posts: newPost}}, {new: true}).populate('posts')
         res.json(data)
@@ -241,8 +352,8 @@ router.get('/users/:id/posts/:postId', async (req, res) => {
 router.put('/users/:id/posts/:postId', async (req, res) => {
     try {
         const data = await Post.findByIdAndUpdate(req.params.postId, {...req.body}, {new: true})
+    
         res.json(data)
-
     } catch {
         res.status(500).json({error: 'Internal Server Error'})
     }
@@ -266,175 +377,6 @@ router.delete('/users/:id/posts/:postId', async (req, res) => {
         res.status(500).json({error: 'Internal Server Error'})
     }
 })
-
-/**
- * Method:      POST
- * URI:         /users/login
- * Description: Login User and find user data in db
- */
-
-// router.post('/users/login', async (req, res) => {
-
-
-    //First draft
-    // const user = User.find({username: req.body.username}).then(function(user) {
-    //     res.status(201).json(user)
-    // })
-    // .catch((error) => {
-    //     res.status(500).json({error: error})
-    // })
-
-   // incl: comparing hashed password to db record
-
-//     const user = await User.find({username: req.body.username})   
-//     if (user.length == 0) {
-//         res.send({error: 'user does not exist in database'})
-//     } else {
-
-//         try {
-
-//             if (await bcrypt.compare(req.body.password, user[0].password)) {
-//                 res.status(201).json(user)
-//               } else {
-//                 res.send({error: 'Invalid username or password'})
-//               }
-    
-//         } catch(error) {
-//             res.status(500).json({error: error})
-    
-//         }
-//     }
-// })
-
-
-//Authentication login draft: when user tried to log into account
-router.post('/users/login', async (req, res) => {
-    
-    //retrieve user document from db
-    const user = await User.find({username: req.body.username})
-    // .poplulate(posts)
-   
-    if (user.length == 0) { // no record found in database
-        res.status(400).json({error: 'user does not exist in database'})
-
-    } else { // user exists in db
-
-        try {
-
-            if (await bcrypt.compare(req.body.password, user[0].password)) {
-                //password user entered matches password in db
-
-                const payload = {
-                    id: user[0]._id,
-                    username: user[0].username
-                }
-
-                //Build JWT
-                const token = jwt.sign(payload, jwtOptions.secretOrKey, {expiresIn: 259200}) // 3 days -> 259200s
-               
-                //Send JWT back to user
-                res.status(201).json({
-                    success: true,
-                    token: token,
-                    user: user
-                })
-
-              } else { // password user entered does not match password in db
-                res.status(401).json({error: 'Invalid username or password'})
-              }
-    
-        } catch(error) {
-            res.status(500).json({error: error})
-    
-        }
-    }
-})
-
-router.get('/users/:id/account/delete', passport.authenticate('jwt', {session: false}), (req, res) => {
-    try {
-        res.json({
-            status: 200,
-            message: 'login sucessful',
-            user: req.user._doc
-        })
-    } catch(error) {
-        res.json({error: error})
-        console.log(error)
-    }
-
-})
-router.get('/users/:id/account/update', passport.authenticate('jwt', {session: false}), (req, res) => {
-    try {
-        res.json({
-            status: 200,
-            message: 'login sucessful',
-            user: req.user._doc
-        })
-    } catch(error) {
-        res.json({error: error})
-        console.log(error)
-    }
-
-})
-
-router.get('/users/:id/account/update/password', passport.authenticate('jwt', {session: false}), (req, res) => {
-    try {
-        res.json({
-            status: 200,
-            message: 'login sucessful',
-            user: req.user._doc
-        })
-    } catch(error) {
-        res.json({error: error})
-        console.log(error)
-    }
-
-})
-
-//Authentication login draft: when user tried to log into account
-router.post('/testlogin', async (req, res) => {
-    
-    //retrieve user document from db
-    const user = await User.find({username: req.body.username}).populate('posts') 
-   
-    if (user.length == 0) { // no record found in database
-        res.status(400).json({error: 'user does not exist in database'})
-
-    } else { // user exists in db
-
-        try {
-
-            if (await bcrypt.compare(req.body.password, user[0].password)) {
-                //password user entered matches password in db
-
-                const payload = {
-                    id: user[0]._id,
-                    username: user[0].username
-                }
-
-                //Build JWT
-                const token = jwt.sign(payload, jwtOptions.secretOrKey, {expiresIn: 259200}) // 3 days -> 259200s
-               
-                //Send JWT back to user
-                res.status(201).json({
-                    success: true,
-                    token: token,
-                    user: user
-                })
-
-              } else { // password user entered does not match password in db
-                res.status(401).json({error: 'Invalid username or password'})
-              }
-    
-        } catch(error) {
-            res.status(500).json({error: error})
-    
-        }
-    }
-})
-
-
-
 
 
 module.exports = router

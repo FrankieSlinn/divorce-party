@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 export default function CreatePostForm(props) {
-  console.log("props in create", props)
+
+  //CREATE A POST
 
   //Set up use state to display the form as needed
   
   const [showCreatePost, setShowCreatePost] = useState(false);
-
-
-  //Create a Post
 
   //Define API 
 
@@ -33,18 +31,14 @@ export default function CreatePostForm(props) {
   function handleCreateFormSubmit(e) {
     e.preventDefault();
     setShowCreatePost(false);
-    props.setTitle("")
+    props.setShowDelete(true);
+    props.setShowEdit(true);
+    createPost();
+    props.setTitle("");
     props.setAuthor("");
     props.setContent("");
-
   }
 
-  // function handleCancel(e){
-  //   console.log("handle cancel running")
-  //   e.preventDefault();
-  //   setShowCreatePost(false)
-
-  // }
 
   //Run API if required fields present
 
@@ -84,6 +78,9 @@ export default function CreatePostForm(props) {
         className="px-1 border-2 border-lightpurple rounded-md"
         onClick={() => {
           setShowCreatePost(true);
+          //Ensures Other Buttons / Sections Not displayed when the Create Form is Open
+          props.setShowDelete(false);
+          props.setShowEdit(false);
         }}
         style={{ display: showCreatePost ? "none" : "inline-block" }}
       >
@@ -91,21 +88,22 @@ export default function CreatePostForm(props) {
       </button>
 
       <form
-        class="postform"
         style={{ display: showCreatePost ? "inline-block" : "none" }}
         onSubmit={handleCreateFormSubmit}
       >
         <h2 className="font-bold text-xl pb-4">Add a Post</h2>
         <br/>
-        <label for="author">Author</label>
-        <input id="author" value={props.author} onChange={changeAuthor} required></input>
+        <label className = "font-bold" for="author">Author</label>
+        &nbsp; &nbsp; <input id="author" value={props.author} onChange={changeAuthor} required></input>
         <br />
         <br />
-        <label for="title">Title</label>
+        <label className="font-bold" for="title">Title</label>
+        &nbsp; &nbsp; 
         <input id="title" value={props.title} onChange={changeTitle}></input>
         <br />
         <br />
-        <label for="content">Content</label>
+        <label className="font-bold" for="content">Content</label>
+        &nbsp; &nbsp;
         <input
           id="content"
           value={props.content}
@@ -113,10 +111,6 @@ export default function CreatePostForm(props) {
           required
         ></input>
         <br />
-        <br />
-        <button type="submit" onClick={createPost}>
-          Submit New Post
-        </button>
         <br />
         <button type="submit" onClick={handleCreateFormSubmit}>
           Cancel

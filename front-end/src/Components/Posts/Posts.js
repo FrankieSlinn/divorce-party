@@ -8,9 +8,12 @@ import DeletePostForm from "./DeletePostForm";
 import UpdatePostForm from "./UpdatePostForm";
 
 export default function Posts(props) {
+  const [showDelete, setShowDelete] = useState(true);
+  const [showAdd, setShowAdd] = useState(true);
+  const [showEdit, setShowEdit] = useState(true);
   const navigate = useNavigate();
-  console.log("props in Posts", props)
-  // Display Posts
+
+  // API to Display Posts
 
   useEffect(() => {
     getAllPosts()
@@ -33,17 +36,16 @@ export default function Posts(props) {
       allPosts = props.posts.posts.map((post, index) => {
         return (
           <>
-          
-          <Post
-            id={post._id}
-            idUpdate={post._id}
-            author={post.author}
-            title={post.title}
-            content={post.content}
-            posts={props.posts}
-            setPosts={props.setPosts}
-            key={props.index}
-          />
+            <Post
+              id={post._id}
+              idUpdate={post._id}
+              author={post.author}
+              title={post.title}
+              content={post.content}
+              posts={props.posts}
+              setPosts={props.setPosts}
+              key={props.index}
+            />
           </>
         );
       });
@@ -51,6 +53,7 @@ export default function Posts(props) {
   }
 
   return (
+
     <div className="flex justify-around">
       <div className="main w-2/3">
      <h1 className="font-bold text-2xl pb-4 ">Posts</h1>

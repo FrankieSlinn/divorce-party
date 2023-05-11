@@ -2,7 +2,6 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { getToAccountPage } from '../Users/api';
 
-
 export default function NavBarSmallScreen(props) {
   const navigate = useNavigate();
 
@@ -14,7 +13,6 @@ export default function NavBarSmallScreen(props) {
   }
 
   async function gotToAccount() {
-   
     let token = JSON.parse(localStorage.getItem('divorceJWT')) 
 
     if (token) {
@@ -29,15 +27,8 @@ export default function NavBarSmallScreen(props) {
     navigate('/users/login')
     props.showMenu()
   }
-
-
-    
-   
-    
-
   }
-  
-    
+ 
   return (
     <ul className={props.hamburger ? 'flex-col flex fixed inset-0 top-1/4  bg-black/60 backdrop-blur-lg text-white text-xl dark:bg-slate-600/50 md:hidden' : 'hidden'}>
         <li className='p-4 mt-20 flex justify-center items-center cursor-pointer text-pink'>{props.close}</li>

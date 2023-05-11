@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router-dom';
-
 import Homepage from './Components/Homepage/Homepage';
 import PageNotFound from './Components/PageNotFound/PageNotFound';
 import Users from './Components/Users/Users';
@@ -21,17 +20,10 @@ import UserUpdatePassword from './Components/Users/UserUpdatePassword';
 import UserPasswordUpdated from './Components/Users/UserPasswordUpdated';
 import LogOut from './Components/Users/LogOut';
 
-
 function App() {
 const [users, setUsers] = useState([])
 const [tokenInLocalStorage, setTokenInLocalStorage] = useState(false)
 const [darkMode, setDarkMode] = useState(false)
-
-
-
-
-
-
 
 const [posts, setPosts] = useState([])
 const [author, setAuthor]=useState("")
@@ -46,7 +38,6 @@ const [idUpdate, setIdUpdate]=useState("")
       getAllUsers()
       .then(results => results.json())
       .then(data => {
-          console.log(data)
           setUsers(data)})
   
 
@@ -76,7 +67,7 @@ const [idUpdate, setIdUpdate]=useState("")
 
          {/*** USER ROUTES ***/}
             {/* USER: SHOW ROUTES */}
-            <Route path='/users' element={<Users users={users} setUsers={setUsers}/>}></Route>
+            <Route path='/users' element={<Users users={users} setUsers={setUsers} tokenInLocalStorage={tokenInLocalStorage}/>}></Route>
             <Route path='/users/:id' element={<ShowUser setUsers={setUsers}/>}></Route>
             <Route path='/users/:id/posts' element={<ShowUserPosts/>}></Route>
             <Route path='/users/:id/posts/:postId' element={<ShowUserPost/>}></Route>
@@ -87,15 +78,15 @@ const [idUpdate, setIdUpdate]=useState("")
             <Route path='/users/:id/account' element={<UserAccount setUsers={setUsers}/>}></Route>
             <Route path='/users/logout' element={<LogOut/>}></Route>
 
-
             {/* USER: DELETE ACCOUNT */}
-            <Route path='/users/:id/account/delete' element={<UserDeleteAccount setUsers={setUsers}/>}></Route>
-            <Route path='/users/deletesuccessful' element={<DeleteSuccessful setUsers={setUsers}/>}></Route>
+            <Route path='/users/:id/account/delete' element={<UserDeleteAccount setUsers={setUsers} setTokenInLocalStorage={setTokenInLocalStorage}/>}></Route>
+            <Route path='/users/deletesuccessful' element={<DeleteSuccessful setUsers={setUsers} />}></Route>
 
             {/* USER: UPDATE ACCOUNT */}
             <Route path='/users/:id/account/update' element={<UserUpdateAccount setUsers={setUsers}/>}></Route>
             <Route path='/users/:id/account/update/password' element={<UserUpdatePassword setUsers={setUsers}/>}></Route>
             <Route path='/users/:id/account/update/password/success' element={<UserPasswordUpdated setUsers={setUsers}/>}></Route>
+          
 
         {/*** POST ROUTES ***/}
         <Route path='/posts' element={<Posts
@@ -117,14 +108,11 @@ const [idUpdate, setIdUpdate]=useState("")
         <Route path='*' element={<PageNotFound />}></Route>
       </Routes>
       
-  <Footer handleDarkMode={handleDarkMode}/>
-
-
+    <Footer handleDarkMode={handleDarkMode}/>
 
     </div>
   </div>
   );
 }
-
 
 export default App
