@@ -10,8 +10,6 @@ export default function ShowUserPosts() {
         getOneUser(params.id)
         .then(results => results.json())
         .then(data => {
-            // console.log('**DATA')
-            // console.log(data.posts)
             setUser(data)})
     }, [params.id])
 

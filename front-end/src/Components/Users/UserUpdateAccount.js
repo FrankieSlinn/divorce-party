@@ -2,13 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from "react-router-dom";
 import { getAllUsers, getOneUser, getToAccountPage, updateOneUser } from './api';
 
-
 export default function UserUpdateAccount(props) {
   const navigate = useNavigate();
   const params = useParams()
   const [formData, setFormData] = useState({})
 
-  
   useEffect(() => {
       getOneUser(params.id)
       .then(results => results.json())
@@ -20,14 +18,12 @@ export default function UserUpdateAccount(props) {
         })
   }, [params.id])
 
-
   function handleFormChange(e) {
       const newInput = {...formData, [e.target.name]: e.target.value}
       setFormData(newInput)
   }
   
   async function handleCancel() {
-
     let token = JSON.parse(localStorage.getItem('divorceJWT'))       
     let response = await getToAccountPage(params.id, token)
 
@@ -40,16 +36,17 @@ export default function UserUpdateAccount(props) {
   
   async function handleFormSubmit(e) {
     e.preventDefault()
-  
     const updatedUser = await updateOneUser(formData, params.id)
   
     if (updatedUser.error) {
       alert("Server Error, account could not be updated!")
     } else {
+
       await getAllUsers()
       .then(results => results.json())
       .then(data => {
           props.setUsers(data)})
+
     let token = JSON.parse(localStorage.getItem('divorceJWT'))       
     let response = await getToAccountPage(params.id, token)
       if (response.status === 401) {
@@ -59,11 +56,7 @@ export default function UserUpdateAccount(props) {
             navigate(`/users/${params.id}/account`)
       }
     }
-  
-  
   }
-  
-  
     return (
       <div className='h-100'>
           <form onSubmit={handleFormSubmit}>

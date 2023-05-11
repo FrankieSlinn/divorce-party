@@ -7,7 +7,6 @@ export default function NewUserForm(props) {
   const navigate = useNavigate();
 
   const template = {
-
     username: '',
     name: '',
     password: '',
@@ -15,9 +14,9 @@ export default function NewUserForm(props) {
   }
 
 const [formData, setFormData] = useState(template)
+
 function handleFormChange(e) {
     const newInput = {...formData, [e.target.name]: e.target.value}
-    console.log(newInput)
     setFormData(newInput)
 }
 
@@ -27,7 +26,6 @@ function handleCancel() {
 
 async function handleFormSubmit(e) {
   e.preventDefault()
-  // console.log(formData)
   const newUser = await createNewUser(formData)
 
   if (newUser.error == "username already exists") {
@@ -45,25 +43,19 @@ async function handleFormSubmit(e) {
     token: userData.token,
     id: id
   }
+
   localStorage.setItem("divorceJWT", JSON.stringify(token))
   props.setTokenInLocalStorage(true)
 
-
   if (userData.error) {
-    alert("Invalid username or password, couldn't log in!")
+    alert("Server error, couldn't log in!")
   } else {
     setFormData(template)
     navigate(`/users/${id}/account`)
-
-
     setFormData(template)
-    
-
+    }
   }
-
-
-}}
-
+}
 
   return (
     <div className='h-100'>
@@ -76,9 +68,9 @@ async function handleFormSubmit(e) {
                 <li className='py-2'><input className='px-2 py-1' name='name' required placeholder='Jane D.' onChange={handleFormChange}></input></li>
                 <li className='py-1'><label>Password:</label></li>
                 <li className='py-2'><input className='px-2 py-1' name='password' required type='password' placeholder='enter password' onChange={handleFormChange}></input></li>
-                <li className='py-2'><button type="submit">Submit</button></li>
-                <li className='py-2'> <button type="button" onClick={handleCancel}>Cancel</button></li>
-                <li>Already have an account? <Link to='/users/login'> Log In </Link> </li>
+                <li className='py-2'><button type="submit" className='text-lightpurple'>Submit</button></li>
+                <li className='py-2'> <button type="button" onClick={handleCancel} className='text-lightpurple'>Cancel</button></li>
+                <li className='flex justify-center gap-4'><span>Already have an account?</span><Link to='/users/login' className='text-lightpurple'> Log In </Link> </li>
             </ul> 
         </form>
     </div>
