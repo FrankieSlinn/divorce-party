@@ -38,8 +38,8 @@ export default function UserDeleteAccount(props) {
     <div>
         <ul>
             <li className='py-2'>  <h1> Are you sure you want to delete your account??</h1></li>
-            <li className='py-2'> <button type="button" onClick={handleDelete} className='text-lightpurple'>Yes, delete my account</button></li>
-            <li className='py-2'> <button type="button" onClick={handleCancel} className='text-lightpurple'>Cancel</button></li>
+            <li className='py-2'> <button type="button" onClick={handleDelete} className='text-lightpurple hover:text-pink'>Yes, delete my account</button></li>
+            <li className='py-2'> <button type="button" onClick={handleCancel} className='text-lightpurple hover:text-pink'>Cancel</button></li>
         </ul> 
     </div>
   )
