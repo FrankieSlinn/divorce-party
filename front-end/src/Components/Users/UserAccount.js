@@ -2,16 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { createNewUserPost, deleteOneUserPost, getOneUser, getToDeleteAccountPage, getToUpdateAccountPage, getToUpdatePasswordPage, updateOneUserPost } from './api'
 
-
 export default function UserAccount() {
     const navigate = useNavigate();
     const params = useParams()
+
     const [user, setUser] = useState({})
     const [showForm, setShowForm] = useState(false)
     const [showUpdateForm, setShowUpdateForm] = useState(false)
     const [updatePost, setUpdatePost] = useState('')
-
-
 
     useEffect(() => {
         getOneUser(params.id)
@@ -22,7 +20,6 @@ export default function UserAccount() {
     }, [params.id])
 
     async function handleDeleteAccount() {
-        
         let token = JSON.parse(localStorage.getItem('divorceJWT'))       
         let response = await getToDeleteAccountPage(params.id, token)
      
@@ -63,12 +60,8 @@ export default function UserAccount() {
         author: ''
     }
 
-
-  
-
     const [formData, setFormData] = useState(template)
     const [updateFormData, setUpdateFormData] = useState({title: '', content: ''})
-
 
     function handleFormChange(e) {
         const newInput = {...formData, [e.target.name]: e.target.value}
@@ -94,7 +87,6 @@ export default function UserAccount() {
         setFormData({title: '',
         content: '', author: ''})
         setShowForm(false)
-
     }
 
     async function handleDeletePost (e, postId) {        
@@ -103,7 +95,6 @@ export default function UserAccount() {
         .then(results => results.json())
         .then(data => {
             setUser(data)
-        
         })
     }
 
@@ -112,7 +103,6 @@ export default function UserAccount() {
         setShowUpdateForm(true)
         setUpdateFormData({title: post.title, content: post.content, author: post.author})
     }
-    //(userId, postId, update)
 
     async function handleUpdatePost (e) {
         e.preventDefault()
@@ -128,10 +118,6 @@ export default function UserAccount() {
 
         setShowUpdateForm(false)
     }
-  
-   
-
-
 
     let display;
    
@@ -152,7 +138,6 @@ export default function UserAccount() {
       display = <p>Loading...</p>
     }
     
-
   return (
     <div className='flex flex-col px-10 pb-5 pt-4 h-100'>
         <h2 className='text-2xl font-bold'>{user.name}</h2>

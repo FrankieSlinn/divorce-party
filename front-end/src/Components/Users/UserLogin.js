@@ -14,7 +14,6 @@ export default function UserLogin(props) {
 const [formData, setFormData] = useState(template)
 function handleFormChange(e) {
     const newInput = {...formData, [e.target.name]: e.target.value}
-    console.log(newInput)
     setFormData(newInput)
 }
 
@@ -24,29 +23,24 @@ function handleCancel() {
 
 async function handleFormSubmit(e) {
   e.preventDefault()
-  // const user = await findOnLogIn(formData)
-  
 
   const userData = await findOnLogIn(formData)
-  const user = userData.user
-  const id = user[0]._id
-  const token = {
-    token: userData.token,
-    id: id
-  }
-  
-  localStorage.setItem("divorceJWT", JSON.stringify(token))
-  props.setTokenInLocalStorage(true)
-
 
   if (userData.error) {
     alert("Invalid username or password, couldn't log in!")
   } else {
+    const user = userData.user
+    const id = user[0]._id
+    const token = {
+      token: userData.token,
+      id: id
+    }
+
+    localStorage.setItem("divorceJWT", JSON.stringify(token))
+    props.setTokenInLocalStorage(true)
     setFormData(template)
     navigate(`/users/${id}/account`)
-
   }
-
 }
 
 
@@ -59,9 +53,9 @@ async function handleFormSubmit(e) {
                 <li className='py-2'><input className='px-2 py-1' name='username' required onChange={handleFormChange}></input></li>
                 <li className='py-1'><label>Password:</label></li>
                 <li className='py-2'><input className='px-2 py-1' name='password' required type='password' onChange={handleFormChange}></input></li>
-                <li className='py-2'><button type="submit">Log In</button></li>
-                <li className='py-2'> <button type="button" onClick={handleCancel}>Cancel</button></li>
-                <li>Don't have an account? <Link to='/users/create'> Sign Up </Link> </li>
+                <li className='py-2'><button type="submit" className='text-lightpurple'>Log In</button></li>
+                <li className='py-2'> <button type="button" onClick={handleCancel} className='text-lightpurple'>Cancel</button></li>
+                <li className='flex justify-center gap-4'><span>Don't have an account? </span><Link to='/users/create' className='text-lightpurple'> Sign Up </Link> </li>
                 
             </ul> 
         </form>
