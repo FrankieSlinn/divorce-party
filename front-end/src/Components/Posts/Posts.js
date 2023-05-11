@@ -8,12 +8,12 @@ import DeletePostForm from "./DeletePostForm";
 import UpdatePostForm from "./UpdatePostForm";
 
 export default function Posts(props) {
-  const[showDelete, setShowDelete] = useState(true);
-  const[showAdd, setShowAdd] = useState(true);
-  const[showEdit, setShowEdit] = useState(true);
+  const [showDelete, setShowDelete] = useState(true);
+  const [showAdd, setShowAdd] = useState(true);
+  const [showEdit, setShowEdit] = useState(true);
   const navigate = useNavigate();
 
-  // Display Posts
+  // API to Display Posts
 
   useEffect(() => {
     getAllPosts()
@@ -36,17 +36,16 @@ export default function Posts(props) {
       allPosts = props.posts.posts.map((post, index) => {
         return (
           <>
-          
-          <Post
-            id={post._id}
-            idUpdate={post._id}
-            author={post.author}
-            title={post.title}
-            content={post.content}
-            posts={props.posts}
-            setPosts={props.setPosts}
-            key={props.index}
-          />
+            <Post
+              id={post._id}
+              idUpdate={post._id}
+              author={post.author}
+              title={post.title}
+              content={post.content}
+              posts={props.posts}
+              setPosts={props.setPosts}
+              key={props.index}
+            />
           </>
         );
       });
@@ -55,47 +54,54 @@ export default function Posts(props) {
 
   return (
     <div>
-     <h1 className="font-bold text-2xl pb-4 ">Posts</h1>
-      {showAdd?<CreatePostForm
-        id={props.id}
-        setId={props.setID}
-        author={props.author}
-        setAuthor={props.setAuthor}
-        title={props.title}
-        setTitle={props.setTitle}
-        content={props.content}
-        setContent={props.setContent}
-        showDelete={showDelete}
-        setShowDelete={setShowDelete}
-        showEdit={showEdit}
-        setShowEdit={setShowEdit}
-      />:null}
+      <h1 className="font-bold text-2xl pb-4 ">Posts</h1>
+      {showAdd ? (
+        <CreatePostForm
+          id={props.id}
+          setId={props.setID}
+          author={props.author}
+          setAuthor={props.setAuthor}
+          title={props.title}
+          setTitle={props.setTitle}
+          content={props.content}
+          setContent={props.setContent}
+          showDelete={showDelete}
+          setShowDelete={setShowDelete}
+          showEdit={showEdit}
+          setShowEdit={setShowEdit}
+        />
+      ) : null}
       <br />
       <br />
-      {showDelete?<DeletePostForm 
-      id={props.id} 
-      setId={props.setId} 
-      showAdd={showAdd} 
-      setShowAdd={setShowAdd}
-      showEdit={showEdit}
-      setShowEdit={setShowEdit}
-      />:null}
-      {showEdit?<UpdatePostForm
-        idUpdate={props.idUpdate}
-        setIdUpdate={props.setIdUpdate}
-        author={props.author}
-        setAuthor={props.setAuthor}
-        title={props.title}
-        setTitle={props.setTitle}
-        content={props.content}
-        setContent={props.setContent}
-        showDelete={showDelete}
-        setShowDelete={setShowDelete}
-        showAdd={showAdd}
-        setShowAdd={setShowAdd}
-      />
-      :null}
+      {showDelete ? (
+        <DeletePostForm
+          id={props.id}
+          setId={props.setId}
+          showAdd={showAdd}
+          setShowAdd={setShowAdd}
+          showEdit={showEdit}
+          setShowEdit={setShowEdit}
+        />
+      ) : null}
+      {showEdit ? (
+        <UpdatePostForm
+          idUpdate={props.idUpdate}
+          setIdUpdate={props.setIdUpdate}
+          author={props.author}
+          setAuthor={props.setAuthor}
+          title={props.title}
+          setTitle={props.setTitle}
+          content={props.content}
+          setContent={props.setContent}
+          showDelete={showDelete}
+          setShowDelete={setShowDelete}
+          showAdd={showAdd}
+          setShowAdd={setShowAdd}
+        />
+      ) : null}
       {allPosts}
+      <br />
+      <br />
     </div>
   );
 }

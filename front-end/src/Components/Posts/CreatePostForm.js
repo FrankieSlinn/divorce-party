@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 export default function CreatePostForm(props) {
-  console.log("props in create", props)
+
+  //CREATE A POST
 
   //Set up use state to display the form as needed
   
   const [showCreatePost, setShowCreatePost] = useState(false);
-
-
-  //Create a Post
 
   //Define API 
 
@@ -80,6 +78,7 @@ export default function CreatePostForm(props) {
         className="font-bold"
         onClick={() => {
           setShowCreatePost(true);
+          //Ensures Other Buttons / Sections Not displayed when the Create Form is Open
           props.setShowDelete(false);
           props.setShowEdit(false);
         }}

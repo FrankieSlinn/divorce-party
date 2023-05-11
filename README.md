@@ -3,7 +3,11 @@
 # By Chewing the CRUD
 
 ## DESCRIPTION
-- A MERN Full-Stack Website that allows users to sign-up and post comments in a Divorce Party Guest Book.  
+- A MERN Full-Stack Website that allows users to sign-up and read, post, edit and delete comments in a Divorce Party Guest Book.  
+
+## WHY A DIVORCE Party GUESTBOOK? 
+-Lots of people will experience their divorce as one of the best things that ever happened to them. Of course they
+will want to celebrate. What better way to commemorate the celebration than with a Divorce Party Guestbook? 
 
 
 ## DEPLOYMENT LINK
