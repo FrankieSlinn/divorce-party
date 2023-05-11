@@ -144,39 +144,49 @@ A set of requirements were provided to the project team for the front-end, back-
     - All icons used are Scalable Vector Graphics from iconify
       - https://iconify.design/
 
-- ### LAYOUT
-
-Franziska took the lead with researching a number of colour schemes online and as a team we agreed upon the first colour scheme below:
-
-![Colour Schemes](./documentation/ColourSchemes.png "Colour Schemes")
-
-Franziska did the same with potential images to be used for the website. Again, as a team we went with the first one. (**WARNING**: One of the images contains a swear word.)
-
-![Divorce Pary Images](./documentation/DivorcePartyImages.png "Divorce Party Images")
-
-We used the **Tailwind CSS** framework for our layout and styling. We added the chosen colour scheme above to our Tailwind *config* file.
-
-
-- ### FLOW CHART, USER STORIES AND WIREFRAME
-
-The design was done in a meeting with all the members of the team. 
-User stories, wireframes, a schema containing the models and a flowchart were produced during this session. These were consolidated into a README document. 
-
-[README](https://docs.google.com/document/d/1cIHDD5IY5U9jJfRezuFAYF1JMcIhAnN69uqpn7qwLw8/edit)
-
-This was  were provided to the tutors who reviewed these and approved the project. 
-
 
 ## PLANNING
 
-The team met for half a day to align on the project concept, a schedule and coding approach. 
+The team brainstormed for half of Day 1 to develop the project concept, design, coding approach and working schedule.
 
-Decisions were made around the team name "Chewing the Crud" and on what type of app would be built, the Divorce Party Comments Book. 
+We decided on the team name and website theme almost immediately. We discussed each team members' strengths and weaknesses and our team values. You can view this here: [Team Expectations Setting Document](https://docs.google.com/document/d/1QG9nAynGNKvsSN4Jzfesn4T-DbXv5GxTEtXh-bZMAAM/edit).
 
-Areas like the team members' strengths and weaknesses and values were discussed. 
-This was captured within a Team Expectations Document stored on the team's shared drive. It was later shared with the course tutors. 
+- ### FLOW CHART, USER STORIES AND WIREFRAME
 
-[Team Expectations Setting Document](https://docs.google.com/document/d/1QG9nAynGNKvsSN4Jzfesn4T-DbXv5GxTEtXh-bZMAAM/edit)
+  As a team we devised the user stories, wireframes, schema and flowchart containing the database models to be used in our project. 
+
+  **User Stories**
+  - As a user I should be able to access the website from different devices/browsers.
+  - As a user I should be able to register with a username and password.
+  - As a user I should be able to login with my username and password.
+  - As a user I should be able to view all posts.
+  - As a user I should be able to view my posts.
+  - As a user I should be able to write new posts.
+  - As a user I should be able to delete my posts.
+  - As a user I should be able to edit my posts.
+  - As a user I should be able to log off from the website.
+
+  **Wireframe**
+  ![Wireframe](.documentation/Wireframe.png "Wireframe")
+
+  **Schema**
+  ![Schema](.documentation/Wireframe.png "Schema")
+
+  **Database Models Flowchart**
+  ![Database Models Flowchart](.documentation/Wireframe.png "Database Models Flowchart")
+
+- ### LAYOUT
+
+  Franziska took the lead with researching a number of colour schemes online and as a team we agreed upon the first colour scheme below:
+  ![Colour Schemes](./documentation/ColourSchemes.png "Colour Schemes")
+
+  Franziska did the same with potential images to be used for the website. Again, as a team we went with the first one. (**WARNING**: One of the images contains a swear word.)
+  ![Divorce Party Images](./documentation/DivorcePartyImages.png "Divorce Party Images")
+
+  We used the **Tailwind CSS** framework for our layout and styling. We added the chosen colour scheme above to our Tailwind *config* file.
+
+  This is what our final homepage layout looked like:
+  ![Layout](./documentation/Layout.png "Layout")
 
 
 ## BUILD/CODE PROCESS
@@ -192,32 +202,30 @@ The user authentication was developed using bcrypt for password hashing and Pass
 Github provided version control. To minimise merge conflicts commits and pulls were done frequently. 
 
 
-
-
 ## CHALLENGES
 
-- Seeding
-- Authentication
+- Seeding: The team faced challenges while implementing the seed file to populate initial data into the database. It required careful handling and synchronization to ensure the data was properly seeded.
+- Authentication: Developing user authentication posed challenges. The team utilized bcrypt for password hashing and Passport JWT for user authentication. Integrating authentication into the routes required careful implementation and testing.
 
 
 ## WINS
 
-- Authentication
-- Tailwind CSS
-- Git conflicts
+- Authentication: Successfully implementing user authentication using bcrypt for password hashing and Passport JWT for user authentication was a significant win for the team. It ensured secure access and protected user data.
+- Tailwind CSS: Utilizing the Tailwind CSS framework for layout and styling proved to be a success. The chosen color scheme and styling enhanced the overall design of the website.
+- Git conflicts: The team effectively managed Git conflicts by frequently committing and pulling changes from the repository. This approach minimized conflicts and facilitated smooth collaboration.
 
 
 ## KEY LEARNING/TAKEAWAYS
 
-- Ba Ba Black Sheep
+- In the immortal words of Big Chris, *It's been emotional*.
 
 
 ## BUGS
 
-- Not insects 😂😂
+- One notable challenge encountered at the end of the project was the issue with the Front-End deployment prep and its relation to the (back-end) Heroku server. This connectivity issue caused a disruption in the expected flow of data and functionality, hindering the full operation of the website. The team worked diligently to troubleshoot and resolve this bug, but were unable to do so. Hence the website is only accessible via a *localhost*.
 
 
 ## FUTURE IMPROVEMENTS
 
-- Create a file upload facility for user profile pictures and party pictures within a post. 
-- Get quotes about divorce via an external API. 
+- Create a file upload facility for user profile pictures and party pictures within a post: Enhancing the website by adding a file upload feature would allow users to upload profile pictures and images related to their divorce party posts, further enriching the user experience.
+- Get quotes about divorce via an external API: Integrating an external API that provides quotes specifically related to divorce would add interesting and relevant content to the website. It could enhance the overall user engagement and provide additional value to the users. 
