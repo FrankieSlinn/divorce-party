@@ -80,6 +80,29 @@ export const deleteOneUserPost = async (userId, postId) => {
 
     return response.json();
 }
+export const updateOneUserPost = async (userId, postId, update) => {
+    console.log('***update')
+    console.log(update)
+    const fetchOptions = {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify(update)
+    }
+    const url = `http://localhost:5000/users/${userId}/posts/${postId}`
+    
+    const response = await fetch(url, fetchOptions);
+    if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(errorMessage);
+    }
+
+    return response.json();
+
+
+}
 
 
 export const updateOneUser = async (update, id) => {

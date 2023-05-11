@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { createNewUserPost, deleteOneUserPost, getOneUser, getToDeleteAccountPage, getToUpdateAccountPage, getToUpdatePasswordPage } from './api'
+import { createNewUserPost, deleteOneUserPost, getOneUser, getToDeleteAccountPage, getToUpdateAccountPage, getToUpdatePasswordPage, updateOneUserPost } from './api'
 
 
 export default function UserAccount() {
@@ -8,7 +8,8 @@ export default function UserAccount() {
     const params = useParams()
     const [user, setUser] = useState({})
     const [showForm, setShowForm] = useState(false)
-    
+    const [showUpdateForm, setShowUpdateForm] = useState(false)
+    const [updatePost, setUpdatePost] = useState('')
 
 
 
@@ -24,7 +25,6 @@ export default function UserAccount() {
         
         let token = JSON.parse(localStorage.getItem('divorceJWT'))       
         let response = await getToDeleteAccountPage(params.id, token)
-        console.log(response)
      
         if (response.status === 401) {
             navigate('/users/login')
@@ -60,20 +60,29 @@ export default function UserAccount() {
     const template = {
         title: '',
         content: '',
+        author: ''
     }
+
+
+  
+
     const [formData, setFormData] = useState(template)
+    const [updateFormData, setUpdateFormData] = useState({title: '', content: ''})
 
 
     function handleFormChange(e) {
         const newInput = {...formData, [e.target.name]: e.target.value}
-        console.log(newInput)
         setFormData(newInput)
+    }
+
+    function handleUpdateFormChange(e) {
+        const newInput = {...updateFormData, [e.target.name]: e.target.value}
+        setUpdateFormData(newInput)
     }
 
     async function handleFormSubmit(e) {
         e.preventDefault()
         formData.author = user.name
-        console.log(formData)
         await createNewUserPost(params.id, formData)
 
         getOneUser(params.id)
@@ -83,22 +92,41 @@ export default function UserAccount() {
         
         })
         setFormData({title: '',
-        content: ''})
+        content: '', author: ''})
         setShowForm(false)
 
     }
 
-    async function handleDeletePost (e, postId) {
-        
+    async function handleDeletePost (e, postId) {        
         await deleteOneUserPost(params.id, postId)
-      
-        
         getOneUser(params.id)
         .then(results => results.json())
         .then(data => {
             setUser(data)
         
         })
+    }
+
+    function handleShowUpdateForm(e, post) {
+        setUpdatePost(post)
+        setShowUpdateForm(true)
+        setUpdateFormData({title: post.title, content: post.content, author: post.author})
+    }
+    //(userId, postId, update)
+
+    async function handleUpdatePost (e) {
+        e.preventDefault()
+        const resp = await updateOneUserPost(params.id, updatePost._id, updateFormData)
+        getOneUser(params.id)
+        .then(results => results.json())
+        .then(data => {
+            setUser(data)
+        
+        })
+        setUpdateFormData({title: '',
+        content: ''})
+
+        setShowUpdateForm(false)
     }
   
    
@@ -116,7 +144,7 @@ export default function UserAccount() {
                         <p>Entry ID: {post._id}</p>
                     </Link>
                         <button onClick={(e) => (handleDeletePost(e, post._id))}>Delete Post</button>
-                        <button>Update Post</button>
+                        <button onClick={(e) => (handleShowUpdateForm(e, post))}>Edit Post</button>
                 </div>
     })
 
@@ -140,7 +168,6 @@ export default function UserAccount() {
                                 <input name="title" onChange={handleFormChange}></input>
                             </label></li>
                             
-                       
                             <li><label>Content:
                                 <textarea
                                 name="content"
@@ -151,6 +178,31 @@ export default function UserAccount() {
                      
                             <li className='py-2'> <button type="button" onClick={() => (setShowForm(!showForm))}>Cancel</button></li>
                             <li className='py-2'><button type="submit">Submit New Post</button></li>
+                            </ul>
+                        </form>}
+                    </div>}
+                    {showUpdateForm && <div className='mb-10 mt-5'>
+                        {<form onSubmit={(e) => handleUpdatePost(e)} className='flex flex-col gap-5'>
+                        <ul>
+                            <li><label>Title:
+                                <input
+                                    name="title"
+                                    onChange={handleUpdateFormChange}
+                                    value={updateFormData.title}
+                                ></input>
+                            </label></li>
+                            
+                            <li><label>Content:
+                                <textarea
+                                name="content"
+                                onChange={handleUpdateFormChange}
+                                value={updateFormData.content}
+                                required
+                                ></textarea>
+                            </label></li>
+                     
+                            <li className='py-2'> <button type="button" onClick={() => (setShowUpdateForm(false))}>Cancel</button></li>
+                            <li className='py-2'><button type="submit">Save Changes</button></li>
                             </ul>
                         </form>}
                     </div>}

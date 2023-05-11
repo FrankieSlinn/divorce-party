@@ -239,8 +239,12 @@ router.get('/users/:id/posts/:postId', async (req, res) => {
  */
 
 router.put('/users/:id/posts/:postId', async (req, res) => {
+    console.log('req')
+    console.log(req.body)
     try {
         const data = await Post.findByIdAndUpdate(req.params.postId, {...req.body}, {new: true})
+        console.log('------------------data')
+        console.log(data)
         res.json(data)
 
     } catch {
