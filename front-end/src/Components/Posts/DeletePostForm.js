@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 export default function DeletePostForm(props){
+  console.log("props in delete", props)
 
       //Set up use state to display the form as needed
 
@@ -22,9 +23,10 @@ export default function DeletePostForm(props){
 
   //Ensure form not displayed after submit.
 
-function handleFormSubmit(e) {
+function handleDeleteFormSubmit(e) {
     e.preventDefault();
     setShowDeletePost(false);
+    props.setId("")
   }
 
 //Run API if required fields present
@@ -63,7 +65,7 @@ function handleFormSubmit(e) {
         style={{ display: showDeletePost ? "none" : "inline-block" }}
         >Delete a Post</button>
      {/* Run handleFormSubmit Function, Ensure Delete Form is displayed if the user clicks on the button */}
-      <form class="deleteform" onSubmit={handleFormSubmit}  style={{ display: showDeletePost ? "inline-block" : "none" }}>
+      <form class="deleteform" onSubmit={handleDeleteFormSubmit}  style={{ display: showDeletePost ? "inline-block" : "none" }}>
         <h4>Delete Post</h4>
         <label for="id">ID</label>
         {/* Here the user can type or paste the ID in the form that will reference the post to be deleted */}
@@ -74,6 +76,11 @@ function handleFormSubmit(e) {
         <button type="submit" onClick={deletePost}>
           Delete Post
         </button>
+        <br />
+      
+      <button type="submit" onClick={handleDeleteFormSubmit}>
+       Cancel
+      </button>
       </form>
       <br />
       <br />
