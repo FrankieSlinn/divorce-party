@@ -1,18 +1,19 @@
 # PROJECT 3
-
 # THE DIVORCE PARTY GUEST BOOK
-
 # By Chewing the CRUD
 
 ## DESCRIPTION
+- A MERN Full-Stack Website that allows users to sign-up and post comments in a Divorce Party Guest Book.  
+
 
 ## DEPLOYMENT LINK
 
-- You can access the Guest Book here: [The Divorce Party Guest Book](https://hpramanathan.github.io/project3-mernstack-app/).
+- [The Divorce Party Guest Book](https://hpramanathan.github.io/project3-mernstack-app/).
+- GitHub Repository: https://github.com/hpramanathan/project3-mernstack-app
 
-- github repository: https://github.com/hpramanathan/project3-mernstack-app
 
 ## GETTING STARTED/CODE INSTALLATION
+
 
 ## TIMEFRAME & WORKING TEAM
 
@@ -22,8 +23,8 @@
   - Hari Ramanathan
   - Katie Loesch
 
-## TECHNOLOGIES USED
 
+## TECHNOLOGIES USED
 - ### CODE VERSIONING/CONTROL
 
   - Git / GitHub
@@ -45,6 +46,8 @@
 
 - ### FRONT END
 
+  - Netlify
+    - https://www.netlify.com/
   - React Router
     - https://reactrouter.com/en/main
   - Tailwind CSS React
@@ -54,6 +57,10 @@
 
 - ### BACK END
 
+  - Heroku
+    - https://www.heroku.com/
+  - MongoDB Atlas
+    - https://www.mongodb.com/cloud/atlas/register
   - bcrypt
     - https://www.npmjs.com/package/bcrypt
   - CORS
@@ -75,40 +82,53 @@
   - passport-jwt
     - https://www.npmjs.com/package/passport-jwt
 
-- ### EXTERNAL WEB RESURCES
+
+
+- ### EXTERNAL WEB RESOURCES
 
   - icons
     - all icons used are Scalable Vector Graphics from iconify
     - https://iconify.design/
 
+
 - ### FLOW CHART, USER STORIES AND WIREFRAME
 
   - Excalidraw
+  - Lucid??
+
 
 ## PLANNING
 
 - Blah blah
 
+
 ## BUILD/CODE PROCESS
 
 - Blah blah
+
 
 ## CHALLENGES
 
 - Seeding
 - Authentication
 
+
 ## WINS
 
-- Blah Blah
+- Authentication
+- Tailwind CSS
+- Git conflicts
+
 
 ## KEY LEARNING/TAKEAWAYS
 
 - Ba Ba Black Sheep
 
+
 ## BUGS
 
-- Not insects
+- Not insects 😂😂
+
 
 ## FUTURE IMPROVEMENTS
 
