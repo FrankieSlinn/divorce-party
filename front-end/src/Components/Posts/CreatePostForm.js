@@ -33,9 +33,11 @@ export default function CreatePostForm(props) {
   function handleCreateFormSubmit(e) {
     e.preventDefault();
     setShowCreatePost(false);
-    props.setTitle("")
+    createPost();
+    props.setTitle("");
     props.setAuthor("");
     props.setContent("");
+    
 
   }
 
@@ -88,7 +90,6 @@ export default function CreatePostForm(props) {
       </button>
 
       <form
-        class="postform"
         style={{ display: showCreatePost ? "inline-block" : "none" }}
         onSubmit={handleCreateFormSubmit}
       >
@@ -112,13 +113,6 @@ export default function CreatePostForm(props) {
           required
         ></input>
         <br />
-        <br />
-        <label for="fileP1" class="uploadP1 upload"></label>
-                    ...or click HERE to choose a picture file(png, gif or jpeg)
-                <input onChange={handleImage} type="file" id="fileP1" name="filename" accept="image/png, image/gif, image/jpeg" multiple="false"></input>
-        <button type="submit" onClick={createPost}>
-          Submit New Post
-        </button>
         <br />
         <button type="submit" onClick={handleCreateFormSubmit}>
           Cancel
