@@ -81,7 +81,7 @@ export default function CreatePostForm(props) {
   return (
     <>
       <button 
-        className="text-bold"
+        className="px-1 border-2 border-lightpurple rounded-md"
         onClick={() => {
           setShowCreatePost(true);
         }}

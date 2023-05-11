@@ -55,7 +55,7 @@ function handleDeleteFormSubmit(e) {
 
     return(
         <>
-        <button className="bg-gray-500"
+        <button className="px-1 border-2 border-lightpurple rounded-md"
 
     //Ensure Delete Form is displayed if the user clicks on the button
         onClick={() => {
@@ -67,9 +67,9 @@ function handleDeleteFormSubmit(e) {
      {/* Run handleFormSubmit Function, Ensure Delete Form is displayed if the user clicks on the button */}
       <form class="deleteform" onSubmit={handleDeleteFormSubmit}  style={{ display: showDeletePost ? "inline-block" : "none" }}>
         <h4>Delete Post</h4>
-        <label for="id">ID</label>
+        <label className="mr-2" for="id">ID:</label>
         {/* Here the user can type or paste the ID in the form that will reference the post to be deleted */}
-        <input id="id" value={props.id} onChange={changeId} required></input>
+        <input className="mt-1 border-2 border-lightpurple rounded-md" id="id" value={props.id} onChange={changeId} required></input>
         <br />
         <br />
       

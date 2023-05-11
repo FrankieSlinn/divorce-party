@@ -87,7 +87,7 @@ function handleEditFormSubmit(e) {
     return (
         <>        
 
-        <button className="font-bold"
+        <button className="px-1 border-2 border-lightpurple rounded-md"
     //Ensure Edit Form is displayed if the user clicks on the button
     onClick={() => {
     setShowEditPost(true);

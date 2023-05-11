@@ -34,7 +34,7 @@ const db = mongoose.connection
 const dbConfig = require('./config/db')
 
 
-const port = process.env.PORT|| 5000;
+const port = process.env.PORT|| 5001;
 
 //Connect Mongoose
 

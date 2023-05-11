@@ -1,9 +1,9 @@
 export const getAllUsers = async () => {
-    return fetch('http://localhost:5000/users')
+    return fetch('http://localhost:5001/users')
 }
 
 export const getOneUser = async (id) => {
-    return fetch(`http://localhost:5000/users/${id}`)
+    return fetch(`http://localhost:5001/users/${id}`)
 }
 
 export const findOnLogIn = async (loginData) => {
@@ -16,7 +16,7 @@ export const findOnLogIn = async (loginData) => {
         body: JSON.stringify(loginData)
     };
 
-    const url = 'http://localhost:5000/users/login'
+    const url = 'http://localhost:5001/users/login'
     const response = await fetch(url, fetchOptions);
     return response.json();
 }
@@ -32,7 +32,7 @@ export const createNewUser = async (newUser) => {
         body: JSON.stringify(newUser)
     };
 
-    const url = 'http://localhost:5000/users'
+    const url = 'http://localhost:5001/users'
     const response = await fetch(url, fetchOptions);
 
     if (!response.ok) {
@@ -52,7 +52,7 @@ export const deleteOneUser = async (id) => {
             "Accept": "application/json"
         }};
 
-    const url = `http://localhost:5000/users/${id}`
+    const url = `http://localhost:5001/users/${id}`
     const response = await fetch(url, fetchOptions);
 
     if (!response.ok) {
@@ -73,7 +73,7 @@ export const updateOneUser = async (update, id) => {
         },
         body: JSON.stringify(update)
     };
-    const url = `http://localhost:5000/users/${id}`
+    const url = `http://localhost:5001/users/${id}`
     const response = await fetch(url, fetchOptions);
 
     if (!response.ok) {
@@ -84,15 +84,15 @@ export const updateOneUser = async (update, id) => {
 }
 
 export const getUserPosts = (id) => {
-    return fetch(`http://localhost:5000/users/${id}/posts`)
+    return fetch(`http://localhost:5001/users/${id}/posts`)
 }
 
 export const getOneUserPost = (id, postId) => {
-    return fetch(`http://localhost:5000/users/${id}/posts/${postId}`)
+    return fetch(`http://localhost:5001/users/${id}/posts/${postId}`)
 }
 
 export const getToDeleteAccountPage = async (id, token) => {
-    const url = `http://localhost:5000/users/${id}/account/delete`
+    const url = `http://localhost:5001/users/${id}/account/delete`
     const fetchOptions = {
         method: 'GET',
         headers: {
@@ -111,7 +111,7 @@ export const getToDeleteAccountPage = async (id, token) => {
 
 
 export const getToUpdateAccountPage = async (id, token) => {
-    const url = `http://localhost:5000/users/${id}/account/update`
+    const url = `http://localhost:5001/users/${id}/account/update`
     const fetchOptions = {
         method: 'GET',
         headers: {
@@ -130,7 +130,7 @@ export const getToUpdateAccountPage = async (id, token) => {
 
     export const getToUpdatePasswordPage = async (id, token) => {
         console.log(token.token)
-        const url = `http://localhost:5000/users/${id}/account/update/password`
+        const url = `http://localhost:5001/users/${id}/account/update/password`
         const fetchOptions = {
             method: 'GET',
             headers: {
@@ -149,7 +149,7 @@ export const getToUpdateAccountPage = async (id, token) => {
 
 export const getToAccountPage = async (id, token) => {
     console.log(token.token)
-    const url = `http://localhost:5000/users/${id}/account`
+    const url = `http://localhost:5001/users/${id}/account`
     const fetchOptions = {
         method: 'GET',
         headers: {

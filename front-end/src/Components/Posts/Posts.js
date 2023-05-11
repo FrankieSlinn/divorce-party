@@ -51,11 +51,14 @@ export default function Posts(props) {
   }
 
   return (
-    <div>
+    <div className="flex justify-around">
+      <div className="main w-2/3">
      <h1 className="font-bold text-2xl pb-4 ">Posts</h1>
       {allPosts}
+      </div>
       <br />
       <br />
+      <div className="menu w-1/3 sticky top-72 h-screen">
       <CreatePostForm
         id={props.id}
         setId={props.setID}
@@ -79,6 +82,7 @@ export default function Posts(props) {
         content={props.content}
         setContent={props.setContent}
       />
+      </div>
     </div>
   );
 }
