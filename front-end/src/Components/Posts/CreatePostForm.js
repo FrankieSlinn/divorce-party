@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 export default function CreatePostForm(props) {
+  console.log("props in create", props)
 
   //Set up use state to display the form as needed
   
   const [showCreatePost, setShowCreatePost] = useState(false);
+
 
   //Create a Post
 
@@ -28,10 +30,21 @@ export default function CreatePostForm(props) {
 
   //Ensure form not displayed after submit.
 
-  function handleFormSubmit(e) {
+  function handleCreateFormSubmit(e) {
     e.preventDefault();
     setShowCreatePost(false);
+    props.setTitle("")
+    props.setAuthor("");
+    props.setContent("");
+
   }
+
+  // function handleCancel(e){
+  //   console.log("handle cancel running")
+  //   e.preventDefault();
+  //   setShowCreatePost(false)
+
+  // }
 
   //Run API if required fields present
 
@@ -80,7 +93,7 @@ export default function CreatePostForm(props) {
       <form
         class="postform"
         style={{ display: showCreatePost ? "inline-block" : "none" }}
-        onSubmit={handleFormSubmit}
+        onSubmit={handleCreateFormSubmit}
       >
         <h2 className="font-bold text-xl pb-4 ">Add a Post</h2>
         <br/>
@@ -103,6 +116,10 @@ export default function CreatePostForm(props) {
         <br />
         <button type="submit" onClick={createPost}>
           Submit New Post
+        </button>
+        <br />
+        <button type="submit" onClick={handleCreateFormSubmit}>
+          Cancel
         </button>
       </form>
     </>

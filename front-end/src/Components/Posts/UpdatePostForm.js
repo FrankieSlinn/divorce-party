@@ -38,9 +38,13 @@ export default function UpdatePostForm(props){
 
     //Ensure form not displayed after submit.
 
-function handleFormSubmit(e) {
+function handleEditFormSubmit(e) {
     e.preventDefault();
     setShowEditPost(false);
+    props.setupdateId("");
+    props.setAuthor("");
+    props.setTitle("");
+    props.setContent("");
   }
 
   //Run API if required fields present
@@ -83,7 +87,7 @@ function handleFormSubmit(e) {
     return (
         <>        
 
-        <button
+        <button className="font-bold"
     //Ensure Edit Form is displayed if the user clicks on the button
     onClick={() => {
     setShowEditPost(true);
@@ -92,7 +96,7 @@ function handleFormSubmit(e) {
     style={{ display: showEditPost ? "none" : "inline-block" }}
     >Edit a Post</button>
       {/* Run handleFormSubmit Function, Ensure Edit Form is displayed if the user clicks on the button */}
-        <form class="editform" onSubmit={handleFormSubmit} style={{ display: showEditPost ? "inline-block" : "none" }}>
+        <form class="editform" onSubmit={handleEditFormSubmit} style={{ display: showEditPost ? "inline-block" : "none" }}>
         <h4>Edit a Post</h4>
           <label for="idUpdate">ID</label>
                {/* Here the user can type or paste the ID in the form that will reference the post to be edited*/}
@@ -109,6 +113,10 @@ function handleFormSubmit(e) {
           <button type="submit" onClick={editPost}>
             Edit Post
           </button>
+          <br/>
+          <button type="submit" onClick={handleEditFormSubmit}>
+          Cancel
+        </button>
         </form>
         <br />
         <br />
