@@ -64,43 +64,40 @@ export default function UpdatePostForm(props) {
     }
   }, []);
 
-  //Update the fields that will be used in the API based on what the user types in the input field.
 
-  function changeUpdateId(e) {
-    e.preventDefault();
-    props.setIdUpdate(e.target.value);
-  }
+    //Update the fields that will be used in the API based on what the user types in the input field. 
 
-  function changeAuthor(e) {
-    e.preventDefault();
-    props.setAuthor(e.target.value);
-  }
+    function changeUpdateId(e) {
+        e.preventDefault();
+        props.setIdUpdate(e.target.value);
+      }
 
-  function changeTitle(e) {
-    e.preventDefault();
-    props.setTitle(e.target.value);
-  }
-  function changeContent(e) {
-    e.preventDefault();
-    props.setContent(e.target.value);
-  }
+    function changeAuthor(e) {
+        e.preventDefault();
+        props.setAuthor(e.target.value);
+      }
+    
+      function changeTitle(e) {
+        e.preventDefault();
+        props.setTitle(e.target.value);
+      }
+      function changeContent(e) {
+        e.preventDefault();
+        props.setContent(e.target.value);
+      }
 
-  return (
-    <>
-      <button
-        className="font-bold"
-        //Ensure Edit Form is displayed if the user clicks on the button
-        //Ensure the Delete and Add Sections are not displayed when the user is editing
-        onClick={() => {
-          setShowEditPost(true);
-          props.setShowDelete(false);
-          props.setShowAdd(false);
-        }}
-        //Ensure Button not displayed when the Edit Form is shown
-        style={{ display: showEditPost ? "none" : "inline-block" }}
-      >
-        Edit a Post
-      </button>
+    return (
+        <>        
+
+        <button className="px-1 border-2 border-lightpurple rounded-md"
+    //Ensure Edit Form is displayed if the user clicks on the button
+    onClick={() => {
+    setShowEditPost(true);
+    }}
+    //Ensure Button not displayed when the Edit Form is shown
+    style={{ display: showEditPost ? "none" : "inline-block" }}
+    >Edit a Post</button>
+
       {/* Run handleFormSubmit Function, Ensure Edit Form is displayed if the user clicks on the button */}
       <form
         onSubmit={handleEditFormSubmit}

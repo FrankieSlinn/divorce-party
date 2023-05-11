@@ -53,55 +53,39 @@ export default function Posts(props) {
   }
 
   return (
-    <div>
-      <h1 className="font-bold text-2xl pb-4 ">Posts</h1>
-      {showAdd ? (
-        <CreatePostForm
-          id={props.id}
-          setId={props.setID}
-          author={props.author}
-          setAuthor={props.setAuthor}
-          title={props.title}
-          setTitle={props.setTitle}
-          content={props.content}
-          setContent={props.setContent}
-          showDelete={showDelete}
-          setShowDelete={setShowDelete}
-          showEdit={showEdit}
-          setShowEdit={setShowEdit}
-        />
-      ) : null}
-      <br />
-      <br />
-      {showDelete ? (
-        <DeletePostForm
-          id={props.id}
-          setId={props.setId}
-          showAdd={showAdd}
-          setShowAdd={setShowAdd}
-          showEdit={showEdit}
-          setShowEdit={setShowEdit}
-        />
-      ) : null}
-      {showEdit ? (
-        <UpdatePostForm
-          idUpdate={props.idUpdate}
-          setIdUpdate={props.setIdUpdate}
-          author={props.author}
-          setAuthor={props.setAuthor}
-          title={props.title}
-          setTitle={props.setTitle}
-          content={props.content}
-          setContent={props.setContent}
-          showDelete={showDelete}
-          setShowDelete={setShowDelete}
-          showAdd={showAdd}
-          setShowAdd={setShowAdd}
-        />
-      ) : null}
+
+    <div className="flex justify-around">
+      <div className="main w-2/3">
+     <h1 className="font-bold text-2xl pb-4 ">Posts</h1>
       {allPosts}
+      </div>
       <br />
       <br />
+      <div className="menu w-1/3 sticky top-72 h-screen">
+      <CreatePostForm
+        id={props.id}
+        setId={props.setID}
+        author={props.author}
+        setAuthor={props.setAuthor}
+        title={props.title}
+        setTitle={props.setTitle}
+        content={props.content}
+        setContent={props.setContent}
+      />
+      <br />
+      <br />
+      <DeletePostForm id={props.id} setId={props.setId} />
+      <UpdatePostForm
+        idUpdate={props.idUpdate}
+        setIdUpdate={props.setIdUpdate}
+        author={props.author}
+        setAuthor={props.setAuthor}
+        title={props.title}
+        setTitle={props.setTitle}
+        content={props.content}
+        setContent={props.setContent}
+      />
+      </div>
     </div>
   );
 }

@@ -75,7 +75,7 @@ export default function CreatePostForm(props) {
   return (
     <>
       <button 
-        className="font-bold"
+        className="px-1 border-2 border-lightpurple rounded-md"
         onClick={() => {
           setShowCreatePost(true);
           //Ensures Other Buttons / Sections Not displayed when the Create Form is Open
