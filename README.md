@@ -160,7 +160,6 @@ The user authentication was developed using bcrypt for password hashing and Pass
 Github provided version control. To minimise merge conflicts commits and pulls were done frequently. 
 
 
-
 ## CHALLENGES
 
 - Authentication was one of the biggest challenges given its complexity. To solve the challenge extensive research was done by multiple team members. The authentication took a few days to implement. 
