@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Post from "./Post";
 import { getAllPosts } from "./Postapi";
@@ -11,7 +10,6 @@ export default function Posts(props) {
   const [showDelete, setShowDelete] = useState(true);
   const [showAdd, setShowAdd] = useState(true);
   const [showEdit, setShowEdit] = useState(true);
-  const navigate = useNavigate();
 
   // API to Display Posts
 
