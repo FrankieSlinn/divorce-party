@@ -89,8 +89,8 @@ export default function UserUpdatePassword(props) {
                   <li className='py-2'><input type='password' className='px-2 py-1' value={formData.new1} name='new1' required onChange={handleFormChange}></input></li>
                   <li className='py-1'><label>Confirm New Password:</label></li>
                   <li className='py-2'><input type='password' className='px-2 py-1' value={formData.new2} name='new2' required onChange={handleFormChange}></input></li>
-                  <li className='py-2'><button type="submit">Submit</button></li>
-                  <li className='py-2'> <button type="button" onClick={handleCancel}>Cancel</button></li>
+                  <li className='py-2'><button className='hover:text-pink' type="submit">Save New Password</button></li>
+                  <li className='py-2'> <button className='hover:text-pink' type="button" onClick={handleCancel}>Cancel</button></li>
               </ul> 
           </form>
       </div>

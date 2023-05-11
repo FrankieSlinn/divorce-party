@@ -113,25 +113,24 @@ export default function UserAccount() {
     <div className='flex flex-col px-10 pb-5 pt-4 h-100'>
         <h2 className='text-2xl font-bold'>{user.name}</h2>
         <h2 className='text-xl pb-5'>{user.username}</h2>
-        <button className='pb-5' onClick={handleDeleteAccount}>delete account</button>
-        <button className='pb-5' onClick={handleUpdateAccount}>update username / display name</button>
-        <button className='pb-5' onClick={handleUpdatePassword}>update password</button>
-        {!showForm && <button className='pb-5' onClick={() => (setShowForm(!showForm))}>Add new post</button>}
-        {showForm && <div className='mb-10 mt-5'>
+        <button className='pb-5 hover:text-pink' onClick={handleDeleteAccount}>delete account</button>
+        <button className='pb-5 hover:text-pink' onClick={handleUpdateAccount}>update username / display name</button>
+        <button className='pb-5 hover:text-pink' onClick={handleUpdatePassword}>update password</button>
+        {!showForm && <button className='pb-5 hover:text-pink' onClick={() => (setShowForm(!showForm))}>Add new post</button>}
+        {showForm && <div className='mb-10 mt-2'>
                         <form onSubmit={handleFormSubmit} className='flex flex-col gap-5'>
                             <ul>
-                                <li key='title'><label>Title:
-                                    <input name="title" onChange={handleFormChange}></input>
-                                </label></li>
-                                <li key='content'><label>Content:
-                                    <textarea
+                                <li key='title' className='mb-1'><label>Title: </label></li>
+                                <li className='mb-5'> <input name="title" onChange={handleFormChange} style={{ width: "25vw" }}></input></li>
+                                <li key='content'  className='mb-1'><label>Content: </label></li>
+                                <li><textarea
                                     name="content"
                                     onChange={handleFormChange}
                                     required
-                                    ></textarea>
-                                </label></li>
-                                <li className='py-2' key='cancel-btn'> <button type="button" onClick={() => (setShowForm(!showForm))}>Cancel</button></li>
-                                <li className='py-2' key='submit-btn'><button type="submit">Submit New Post</button></li>
+                                    style={{ width: "25vw", height: "10vh"}}
+                                ></textarea></li>
+                                <li className='py-2 hover:text-pink' key='cancel-btn'> <button type="button" onClick={() => (setShowForm(!showForm))}>Cancel</button></li>
+                                <li className='py-2 hover:text-pink' key='submit-btn'><button type="submit">Submit New Post</button></li>
                             </ul>
                         </form>
                     </div>}
