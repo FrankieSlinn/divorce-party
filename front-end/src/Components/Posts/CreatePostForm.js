@@ -39,12 +39,6 @@ export default function CreatePostForm(props) {
 
   }
 
-  // function handleCancel(e){
-  //   console.log("handle cancel running")
-  //   e.preventDefault();
-  //   setShowCreatePost(false)
-
-  // }
 
   //Run API if required fields present
 
@@ -77,11 +71,14 @@ export default function CreatePostForm(props) {
     e.preventDefault();
     props.setContent(e.target.value);
   }
+  function handleImage(e){
+    e.preventDefault();
+  }
 
   return (
     <>
       <button 
-        className="text-bold"
+        className="font-bold"
         onClick={() => {
           setShowCreatePost(true);
         }}
@@ -97,15 +94,17 @@ export default function CreatePostForm(props) {
       >
         <h2 className="font-bold text-xl pb-4 ">Add a Post</h2>
         <br/>
-        <label for="author">Author</label>
-        <input id="author" value={props.author} onChange={changeAuthor} required></input>
+        <label className = "font-bold" for="author">Author</label>
+        &nbsp; &nbsp; <input id="author" value={props.author} onChange={changeAuthor} required></input>
         <br />
         <br />
-        <label for="title">Title</label>
+        <label className="font-bold" for="title">Title</label>
+        &nbsp; &nbsp; 
         <input id="title" value={props.title} onChange={changeTitle}></input>
         <br />
         <br />
-        <label for="content">Content</label>
+        <label className="font-bold" for="content">Content</label>
+        &nbsp; &nbsp;
         <input
           id="content"
           value={props.content}
@@ -114,6 +113,9 @@ export default function CreatePostForm(props) {
         ></input>
         <br />
         <br />
+        <label for="fileP1" class="uploadP1 upload"></label>
+                    ...or click HERE to choose a picture file(png, gif or jpeg)
+                <input onChange={handleImage} type="file" id="fileP1" name="filename" accept="image/png, image/gif, image/jpeg" multiple="false"></input>
         <button type="submit" onClick={createPost}>
           Submit New Post
         </button>

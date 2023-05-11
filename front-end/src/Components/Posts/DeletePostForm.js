@@ -56,6 +56,7 @@ function handleDeleteFormSubmit(e) {
     return(
         <>
         <button
+         className="font-bold"
 
     //Ensure Delete Form is displayed if the user clicks on the button
         onClick={() => {
