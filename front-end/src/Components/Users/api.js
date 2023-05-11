@@ -91,6 +91,44 @@ export const getOneUserPost = (id, postId) => {
     return fetch(`http://localhost:5000/users/${id}/posts/${postId}`)
 }
 
+export const createNewUserPost = async (userId, newPost) => {
+    const fetchOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify(newPost)
+    };
+
+    const url = `http://localhost:5000/users/${userId}/posts`
+    const response = await fetch(url, fetchOptions);
+    if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(errorMessage);
+    }
+
+    return response.json();
+
+
+}
+
+/**
+ * export const createNewUser = async (newUser) => {
+
+
+    const url = 'http://localhost:5000/users'
+    const response = await fetch(url, fetchOptions);
+
+    if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(errorMessage);
+    }
+
+    return response.json();
+}
+ */
+
 export const getToDeleteAccountPage = async (id, token) => {
     const url = `http://localhost:5000/users/${id}/account/delete`
     const fetchOptions = {

@@ -307,7 +307,7 @@ router.delete('/users/:id/posts/:postId', async (req, res) => {
 // })
 
 
-//Authentication login draft: when user tried to log into account
+//LOGIN when user tried to log into account
 router.post('/users/login', async (req, res) => {
     
     //retrieve user document from db
@@ -392,46 +392,46 @@ router.get('/users/:id/account/update/password', passport.authenticate('jwt', {s
 })
 
 //Authentication login draft: when user tried to log into account
-router.post('/testlogin', async (req, res) => {
+// router.post('/testlogin', async (req, res) => {
     
     //retrieve user document from db
-    const user = await User.find({username: req.body.username}).populate('posts') 
+    // const user = await User.find({username: req.body.username}).populate('posts') 
    
-    if (user.length == 0) { // no record found in database
-        res.status(400).json({error: 'user does not exist in database'})
+    // if (user.length == 0) { // no record found in database
+    //     res.status(400).json({error: 'user does not exist in database'})
 
-    } else { // user exists in db
+    // } else { // user exists in db
 
-        try {
+    //     try {
 
-            if (await bcrypt.compare(req.body.password, user[0].password)) {
+    //         if (await bcrypt.compare(req.body.password, user[0].password)) {
                 //password user entered matches password in db
 
-                const payload = {
-                    id: user[0]._id,
-                    username: user[0].username
-                }
+                // const payload = {
+                //     id: user[0]._id,
+                //     username: user[0].username
+                // }
 
                 //Build JWT
-                const token = jwt.sign(payload, jwtOptions.secretOrKey, {expiresIn: 259200}) // 3 days -> 259200s
+                // const token = jwt.sign(payload, jwtOptions.secretOrKey, {expiresIn: 259200}) // 3 days -> 259200s
                
-                //Send JWT back to user
-                res.status(201).json({
-                    success: true,
-                    token: token,
-                    user: user
-                })
+                // //Send JWT back to user
+//                 res.status(201).json({
+//                     success: true,
+//                     token: token,
+//                     user: user
+//                 })
 
-              } else { // password user entered does not match password in db
-                res.status(401).json({error: 'Invalid username or password'})
-              }
+//               } else { // password user entered does not match password in db
+//                 res.status(401).json({error: 'Invalid username or password'})
+//               }
     
-        } catch(error) {
-            res.status(500).json({error: error})
+//         } catch(error) {
+//             res.status(500).json({error: error})
     
-        }
-    }
-})
+//         }
+//     }
+// })
 
 
 

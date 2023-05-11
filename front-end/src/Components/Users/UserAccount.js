@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { getOneUser, getToDeleteAccountPage, getToUpdateAccountPage, getToUpdatePasswordPage } from './api'
+import { createNewUserPost, getOneUser, getToDeleteAccountPage, getToUpdateAccountPage, getToUpdatePasswordPage } from './api'
 
 
 export default function UserAccount() {
@@ -16,7 +16,8 @@ export default function UserAccount() {
         getOneUser(params.id)
         .then(results => results.json())
         .then(data => {
-            setUser(data)})
+            setUser(data)
+        })
     }, [params.id])
 
     async function handleDeleteAccount() {
@@ -69,24 +70,40 @@ export default function UserAccount() {
         setFormData(newInput)
     }
 
-    function handleFormSubmit() {}
-    function createPost(e) {
+    async function handleFormSubmit(e) {
         e.preventDefault()
         formData.author = user.name
         console.log(formData)
+        await createNewUserPost(params.id, formData)
+
+        getOneUser(params.id)
+        .then(results => results.json())
+        .then(data => {
+            setUser(data)
+        
+        })
+        setFormData({title: '',
+        content: ''})
+        setShowForm(false)
+
     }
+   
+
 
 
     let display;
    
     if (user.posts) {
       display = user.posts.map((post) => {
-        return <Link to={`/users/${user._id}/posts/${post._id}`} className='flex flex-col py-5 px-10 text-center items-center' key={post._id}>
-                    <h2 className='block font-bold text-lg'>{post.title}</h2>
-                    <p className='text-justify'>{post.content}</p>
-                    <button>Delete Post</button>
-                    <button>Update Post</button>
-                </Link>
+        return <div>
+                    <Link to={`/users/${user._id}/posts/${post._id}`} className='flex flex-col py-5 px-10 text-center items-center' key={post._id}>
+                        <h2 className='block font-bold text-lg'>{post.title}</h2>
+                        <p className='text-justify'>{post.content}</p>
+                        <p>Entry ID: {post._id}</p>
+                    </Link>
+                        <button>Delete Post</button>
+                        <button>Update Post</button>
+                </div>
     })
 
     } else {
@@ -101,26 +118,26 @@ export default function UserAccount() {
         <button className='pb-5' onClick={handleDeleteAccount}>delete account</button>
         <button className='pb-5' onClick={handleUpdateAccount}>update username / display name</button>
         <button className='pb-5' onClick={handleUpdatePassword}>update password</button>
-        <button className='pb-5' onClick={() => (setShowForm(!showForm))}>Add new post</button>
+        {!showForm && <button className='pb-5' onClick={() => (setShowForm(!showForm))}>Add new post</button>}
         {showForm && <div className='mb-10 mt-5'>
                    {    <form onSubmit={handleFormSubmit} className='flex flex-col gap-5'>
-                            <label>Title:
+                        <ul>
+                            <li><label>Title:
                                 <input name="title" onChange={handleFormChange}></input>
-                            </label>
+                            </label></li>
                             
                        
-                            <label>Content:
+                            <li><label>Content:
                                 <textarea
                                 name="content"
                                 onChange={handleFormChange}
                                 required
                                 ></textarea>
-                            </label>
+                            </label></li>
                      
-                  
-                            <button type="submit" onClick={createPost}>
-                                Submit New Post
-                            </button>
+                            <li className='py-2'> <button type="button" onClick={() => (setShowForm(!showForm))}>Cancel</button></li>
+                            <li className='py-2'><button type="submit">Submit New Post</button></li>
+                            </ul>
                         </form>}
                     </div>}
         <div>

@@ -20,7 +20,6 @@ import DeleteSuccessful from './Components/Users/DeleteSuccessful';
 import UserUpdatePassword from './Components/Users/UserUpdatePassword';
 import UserPasswordUpdated from './Components/Users/UserPasswordUpdated';
 import LogOut from './Components/Users/LogOut';
-import UserAddNewPost from './Components/Users/UserAddNewPost';
 
 
 function App() {
@@ -96,10 +95,7 @@ const [idUpdate, setIdUpdate]=useState("")
             <Route path='/users/:id/account/update' element={<UserUpdateAccount setUsers={setUsers}/>}></Route>
             <Route path='/users/:id/account/update/password' element={<UserUpdatePassword setUsers={setUsers}/>}></Route>
             <Route path='/users/:id/account/update/password/success' element={<UserPasswordUpdated setUsers={setUsers}/>}></Route>
-            
-            {/* USER: CREATING POSTS */}
-            <Route path='/users/:id/posts/create' element={<UserAddNewPost setUsers={setUsers}/>}></Route>
-
+          
 
         {/*** POST ROUTES ***/}
         <Route path='/posts' element={<Posts
