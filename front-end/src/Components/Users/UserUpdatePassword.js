@@ -2,10 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from "react-router-dom";
 import { getAllUsers, getOneUser, getToAccountPage, updateOneUser } from './api';
 
-const bcrypt = require('bcryptjs');
-
-
 export default function UserUpdatePassword(props) {
+  const bcrypt = require('bcryptjs');
   const navigate = useNavigate();
   const params = useParams()
   const [user, setUser] = useState({})
@@ -15,15 +13,15 @@ export default function UserUpdatePassword(props) {
     new2: ''
   })
 
-  
   useEffect(() => {
+
       getOneUser(params.id)
       .then(results => results.json())
       .then(data => {
           setUser(data)
         })
-  }, [params.id])
 
+  }, [params.id])
 
   function handleFormChange(e) {
       const newInput = {...formData, [e.target.name]: e.target.value}
@@ -42,7 +40,6 @@ export default function UserUpdatePassword(props) {
         navigate(`/users/${params.id}/account`)
     }}
 
-  
   async function handleFormSubmit(e) {
     e.preventDefault()
 
@@ -56,17 +53,18 @@ export default function UserUpdatePassword(props) {
             let updatedUser = {...user}
             updatedUser.password = hashedNewPw
             const data = await updateOneUser(updatedUser, params.id)
-            console.log(data)
 
             if (updatedUser.error) {
                   alert("Server Error, password could not be updated!")
             } else {
+
                 await getAllUsers()
                 .then(results => results.json())
                 .then(data => {
                     props.setUsers(data)})
                     let token = JSON.parse(localStorage.getItem('divorceJWT'))       
                     let response = await getToAccountPage(params.id, token)
+
                 if (response.status === 401) {
                       navigate('/users/login')
                 } 
@@ -74,16 +72,12 @@ export default function UserUpdatePassword(props) {
                 if (response.status === 200) {
                       navigate('/users/:id/account/update/password/success')
                   }
-              }
-
-
+            }
         } else {
             alert("Old Password doesn't match record in database!")
         }
     }
   }
-  
-  
     return (
       <div className='h-100'>
           <form onSubmit={handleFormSubmit}>
@@ -95,8 +89,7 @@ export default function UserUpdatePassword(props) {
                   <li className='py-2'><input type='password' className='px-2 py-1' value={formData.new1} name='new1' required onChange={handleFormChange}></input></li>
                   <li className='py-1'><label>Confirm New Password:</label></li>
                   <li className='py-2'><input type='password' className='px-2 py-1' value={formData.new2} name='new2' required onChange={handleFormChange}></input></li>
-                 
-                         <li className='py-2'><button type="submit">Submit</button></li>
+                  <li className='py-2'><button type="submit">Submit</button></li>
                   <li className='py-2'> <button type="button" onClick={handleCancel}>Cancel</button></li>
               </ul> 
           </form>
