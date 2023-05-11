@@ -33,12 +33,12 @@ export default function CreatePostForm(props) {
   function handleCreateFormSubmit(e) {
     e.preventDefault();
     setShowCreatePost(false);
+    props.setShowDelete(true);
+    props.setShowEdit(true);
     createPost();
     props.setTitle("");
     props.setAuthor("");
     props.setContent("");
-    
-
   }
 
 
@@ -73,9 +73,6 @@ export default function CreatePostForm(props) {
     e.preventDefault();
     props.setContent(e.target.value);
   }
-  function handleImage(e){
-    e.preventDefault();
-  }
 
   return (
     <>
@@ -83,6 +80,8 @@ export default function CreatePostForm(props) {
         className="font-bold"
         onClick={() => {
           setShowCreatePost(true);
+          props.setShowDelete(false);
+          props.setShowEdit(false);
         }}
         style={{ display: showCreatePost ? "none" : "inline-block" }}
       >

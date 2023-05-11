@@ -26,6 +26,8 @@ export default function DeletePostForm(props){
 function handleDeleteFormSubmit(e) {
     e.preventDefault();
     setShowDeletePost(false);
+    props.setShowAdd(true);
+    props.setShowEdit(true);
     props.setId("")
   }
 
@@ -57,10 +59,11 @@ function handleDeleteFormSubmit(e) {
         <>
         <button
          className="font-bold"
-
     //Ensure Delete Form is displayed if the user clicks on the button
         onClick={() => {
         setShowDeletePost(true);
+        props.setShowAdd(false);
+        props.setShowEdit(false);
         }}
     //Ensure Button not displayed when the Delete Form is shown
         style={{ display: showDeletePost ? "none" : "inline-block" }}
@@ -75,8 +78,6 @@ function handleDeleteFormSubmit(e) {
         <input id="id" value={props.id} onChange={changeId} required></input>
         <br />
         <br />
-
-      
       <button type="submit" onClick={handleDeleteFormSubmit}>
        Cancel
       </button>

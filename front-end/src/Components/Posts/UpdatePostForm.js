@@ -41,6 +41,8 @@ export default function UpdatePostForm(props){
 function handleEditFormSubmit(e) {
     e.preventDefault();
     setShowEditPost(false);
+    props.setShowDelete(true);
+    props.setShowAdd(true);
     editPost();
     props.setIdUpdate("");
     props.setAuthor("");
@@ -92,6 +94,8 @@ function handleEditFormSubmit(e) {
     //Ensure Edit Form is displayed if the user clicks on the button
     onClick={() => {
     setShowEditPost(true);
+    props.setShowDelete(false);
+    props.setShowAdd(false);
     }}
     //Ensure Button not displayed when the Edit Form is shown
     style={{ display: showEditPost ? "none" : "inline-block" }}

@@ -8,8 +8,11 @@ import DeletePostForm from "./DeletePostForm";
 import UpdatePostForm from "./UpdatePostForm";
 
 export default function Posts(props) {
+  const[showDelete, setShowDelete] = useState(true);
+  const[showAdd, setShowAdd] = useState(true);
+  const[showEdit, setShowEdit] = useState(true);
   const navigate = useNavigate();
-  console.log("props in Posts", props)
+
   // Display Posts
 
   useEffect(() => {
@@ -53,7 +56,7 @@ export default function Posts(props) {
   return (
     <div>
      <h1 className="font-bold text-2xl pb-4 ">Posts</h1>
-      <CreatePostForm
+      {showAdd?<CreatePostForm
         id={props.id}
         setId={props.setID}
         author={props.author}
@@ -62,11 +65,22 @@ export default function Posts(props) {
         setTitle={props.setTitle}
         content={props.content}
         setContent={props.setContent}
-      />
+        showDelete={showDelete}
+        setShowDelete={setShowDelete}
+        showEdit={showEdit}
+        setShowEdit={setShowEdit}
+      />:null}
       <br />
       <br />
-      <DeletePostForm id={props.id} setId={props.setId} />
-      <UpdatePostForm
+      {showDelete?<DeletePostForm 
+      id={props.id} 
+      setId={props.setId} 
+      showAdd={showAdd} 
+      setShowAdd={setShowAdd}
+      showEdit={showEdit}
+      setShowEdit={setShowEdit}
+      />:null}
+      {showEdit?<UpdatePostForm
         idUpdate={props.idUpdate}
         setIdUpdate={props.setIdUpdate}
         author={props.author}
@@ -75,7 +89,12 @@ export default function Posts(props) {
         setTitle={props.setTitle}
         content={props.content}
         setContent={props.setContent}
+        showDelete={showDelete}
+        setShowDelete={setShowDelete}
+        showAdd={showAdd}
+        setShowAdd={setShowAdd}
       />
+      :null}
       {allPosts}
     </div>
   );
