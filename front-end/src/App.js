@@ -76,7 +76,7 @@ const [idUpdate, setIdUpdate]=useState("")
             {/* USER: SIGN UP/LOGIN/LOGOUT */}
             <Route path='/users/create' element={<NewUserForm setUsers={setUsers} setTokenInLocalStorage={setTokenInLocalStorage}/>}></Route>
             <Route path='/users/login' element={<UserLogin setUsers={setUsers} setTokenInLocalStorage={setTokenInLocalStorage}/>}></Route>
-            <Route path='/users/:id/account' element={<UserAccount setUsers={setUsers} setUpdatePost={setUpdatePost}/>}></Route>
+            <Route path='/users/:id/account' element={<UserAccount setUsers={setUsers}/>}></Route>
             <Route path='/users/logout' element={<LogOut/>}></Route>
 
             {/* USER: DELETE ACCOUNT */}
