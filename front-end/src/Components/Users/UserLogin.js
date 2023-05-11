@@ -59,7 +59,7 @@ async function handleFormSubmit(e) {
                 <li className='py-2'><input className='px-2 py-1' name='username' required onChange={handleFormChange}></input></li>
                 <li className='py-1'><label>Password:</label></li>
                 <li className='py-2'><input className='px-2 py-1' name='password' required type='password' onChange={handleFormChange}></input></li>
-                <li className='py-2'><button type="submit">Submit</button></li>
+                <li className='py-2'><button type="submit">Log In</button></li>
                 <li className='py-2'> <button type="button" onClick={handleCancel}>Cancel</button></li>
                 <li>Don't have an account? <Link to='/users/create'> Sign Up </Link> </li>
                 
