@@ -19,12 +19,19 @@ import UserUpdateAccount from './Components/Users/UserUpdateAccount';
 import DeleteSuccessful from './Components/Users/DeleteSuccessful';
 import UserUpdatePassword from './Components/Users/UserUpdatePassword';
 import UserPasswordUpdated from './Components/Users/UserPasswordUpdated';
+import LogOut from './Components/Users/LogOut';
 
 
 function App() {
 const [users, setUsers] = useState([])
-const [userLoggedIn, setUserLoggedIn] = useState(false)
+const [tokenInLocalStorage, setTokenInLocalStorage] = useState(false)
 const [darkMode, setDarkMode] = useState(false)
+
+
+
+
+
+
 
 const [posts, setPosts] = useState([])
 const [author, setAuthor]=useState("")
@@ -41,7 +48,15 @@ const [idUpdate, setIdUpdate]=useState("")
       .then(data => {
           console.log(data)
           setUsers(data)})
-      
+  
+
+    let token = JSON.parse(localStorage.getItem('divorceJWT')) 
+    if (token) {
+      setTokenInLocalStorage(true)
+    } else {
+      setTokenInLocalStorage(false)
+    }
+
   }, [])
 
   function handleDarkMode() {
@@ -50,7 +65,7 @@ const [idUpdate, setIdUpdate]=useState("")
   
   return (
   <div className={darkMode ? "dark" : "bg-white text-darkpurple font-merriweather"} >
-    <Header  userLoggedIn={userLoggedIn}/>
+    <Header tokenInLocalStorage={tokenInLocalStorage} setTokenInLocalStorage={setTokenInLocalStorage}/>
 <br />
 <br />
       <div className='w-screen h-screen pt-40 text-black dark:lightpurple dark:text-white text-center'>
@@ -66,10 +81,12 @@ const [idUpdate, setIdUpdate]=useState("")
             <Route path='/users/:id/posts' element={<ShowUserPosts/>}></Route>
             <Route path='/users/:id/posts/:postId' element={<ShowUserPost/>}></Route>
 
-            {/* USER: SIGN UP/LOGIN */}
-            <Route path='/users/create' element={<NewUserForm setUsers={setUsers}/>}></Route>
-            <Route path='/users/login' element={<UserLogin setUsers={setUsers}/>}></Route>
+            {/* USER: SIGN UP/LOGIN/LOGOUT */}
+            <Route path='/users/create' element={<NewUserForm setUsers={setUsers} setTokenInLocalStorage={setTokenInLocalStorage}/>}></Route>
+            <Route path='/users/login' element={<UserLogin setUsers={setUsers} setTokenInLocalStorage={setTokenInLocalStorage}/>}></Route>
             <Route path='/users/:id/account' element={<UserAccount setUsers={setUsers}/>}></Route>
+            <Route path='/users/logout' element={<LogOut/>}></Route>
+
 
             {/* USER: DELETE ACCOUNT */}
             <Route path='/users/:id/account/delete' element={<UserDeleteAccount setUsers={setUsers}/>}></Route>

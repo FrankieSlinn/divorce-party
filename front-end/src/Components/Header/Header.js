@@ -22,11 +22,11 @@ export default function Header(props) {
   return (
     <div className='mb-5 fixed top-0 inset-x-0 bg-lightpurple text-[black]content-center  text-black dark:bg-gray-900 dark:text-white '>
         <h1 className='font-allura  text-darkpurple text-center text-8xl font-bold pt-5  '>Divorce Party Guest Book</h1>
-        <NavBar userLoggedIn={props.userLoggedIn}/>
+        <NavBar tokenInLocalStorage={props.tokenInLocalStorage} setTokenInLocalStorage={props.setTokenInLocalStorage}/>
         <div className='flex justify-center mt-5 cursor-pointer md:hidden'> 
             {icons.hamburger}
         </div>
-        <NavBarSmallScreen userLoggedIn={props.userLoggedIn} showMenu={showMenu} hamburger={hamburger} close={icons.close}/>
+        <NavBarSmallScreen showMenu={showMenu} hamburger={hamburger} close={icons.close} tokenInLocalStorage={props.tokenInLocalStorage} setTokenInLocalStorage={props.setTokenInLocalStorage}/>
     </div>
   )
 }
