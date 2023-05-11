@@ -19,6 +19,7 @@ export default function ShowUserPosts() {
       display = user.posts.map((post) => {
         return <Link to={`/users/${user._id}/posts/${post._id}`} className='flex flex-col py-5 px-10 text-center items-center' key={post._id}>
                     <h2 className='block font-bold text-lg'>{post.title}</h2>
+                 <br/>
                     <p className='text-justify'>{post.content}</p>
                 </Link>
     })

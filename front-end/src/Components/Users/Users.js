@@ -7,7 +7,8 @@ export default function Users(props) {
 
   if (props.users.length > 0) {
     allUsers = props.users.map((user) => {
-      return <User username={user.username}
+      return <div className="font-bold leading-7"><User 
+      username={user.username}
                    name={user.name}
                    posts={user.posts}
                    id={user._id}
@@ -15,13 +16,17 @@ export default function Users(props) {
                    setUsers={props.setUsers}
                    tokenInLocalStorage={props.tokenInLocalStorage}
               />
+
+              </div>
         })
   }
 
   return (
     <div>
-        <h1 className='font-bold text-2xl pb-4 '>Users</h1>
+      <br />
+        <h1 className='font-bold text-2xl pb-4'>Users</h1>
         {allUsers}
+        <br />
     </div>
   )
 }
