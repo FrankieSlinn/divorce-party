@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 export default function CreatePostForm(props) {
-  console.log("props in create", props)
+
+  //CREATE A POST
 
   //Set up use state to display the form as needed
   
   const [showCreatePost, setShowCreatePost] = useState(false);
-
-
-  //Create a Post
 
   //Define API 
 
@@ -33,12 +31,12 @@ export default function CreatePostForm(props) {
   function handleCreateFormSubmit(e) {
     e.preventDefault();
     setShowCreatePost(false);
+    props.setShowDelete(true);
+    props.setShowEdit(true);
     createPost();
     props.setTitle("");
     props.setAuthor("");
     props.setContent("");
-    
-
   }
 
 
@@ -73,9 +71,6 @@ export default function CreatePostForm(props) {
     e.preventDefault();
     props.setContent(e.target.value);
   }
-  function handleImage(e){
-    e.preventDefault();
-  }
 
   return (
     <>
@@ -83,6 +78,9 @@ export default function CreatePostForm(props) {
         className="font-bold"
         onClick={() => {
           setShowCreatePost(true);
+          //Ensures Other Buttons / Sections Not displayed when the Create Form is Open
+          props.setShowDelete(false);
+          props.setShowEdit(false);
         }}
         style={{ display: showCreatePost ? "none" : "inline-block" }}
       >
