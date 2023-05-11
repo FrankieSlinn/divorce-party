@@ -4,12 +4,17 @@
 
 ## DESCRIPTION
 
+<<<<<<< HEAD
 - A MERN Full-Stack Website that allows users to sign-up and read, post, edit and delete comments in a Divorce Party Guest Book. This was implemented as a group project consisting of four General Assembly Students with the amusing team name "Chewing the CRUD". 
 
 ## WHY A DIVORCE PARTY GUESTBOOK? 
 
 -Lots of people will experience their divorce as one of the best things that ever happened to them. Of course they
 will want to celebrate with lots of friends and family. What better way to commemorate the celebration than with a Divorce Party Guestbook? The app was developed to help recent divorcees enjoy their divorce party to the fullest and will hopefully let users relive all the happy memories.
+=======
+## WHY A DIVORCE Party GUESTBOOK? 
+- Lots of people will experience their divorce as one of the best things that ever happened to them. Of course they will want to celebrate with lots of friends and family. What better way to commemorate the celebration than with a Divorce Party Guestbook? 
+>>>>>>> dev
 
 
 ## DEPLOYMENT LINK
