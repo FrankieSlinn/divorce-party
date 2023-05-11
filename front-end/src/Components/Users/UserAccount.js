@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { createNewUserPost, deleteOneUserPost, getOneUser, getToDeleteAccountPage, getToUpdateAccountPage, getToUpdatePasswordPage, updateOneUserPost } from './api'
+import { createNewUserPost, deleteOneUserPost, getOneUser, getToDeleteAccountPage, getToUpdateAccountPage, getToUpdatePasswordPage } from './api'
 
 export default function UserAccount() {
     const navigate = useNavigate();
@@ -8,8 +8,6 @@ export default function UserAccount() {
 
     const [user, setUser] = useState({})
     const [showForm, setShowForm] = useState(false)
-    const [showUpdateForm, setShowUpdateForm] = useState(false)
-    const [updatePost, setUpdatePost] = useState('')
 
     useEffect(() => {
         getOneUser(params.id)
@@ -61,16 +59,10 @@ export default function UserAccount() {
     }
 
     const [formData, setFormData] = useState(template)
-    const [updateFormData, setUpdateFormData] = useState({title: '', content: ''})
 
     function handleFormChange(e) {
         const newInput = {...formData, [e.target.name]: e.target.value}
         setFormData(newInput)
-    }
-
-    function handleUpdateFormChange(e) {
-        const newInput = {...updateFormData, [e.target.name]: e.target.value}
-        setUpdateFormData(newInput)
     }
 
     async function handleFormSubmit(e) {
@@ -98,39 +90,18 @@ export default function UserAccount() {
         })
     }
 
-    function handleShowUpdateForm(e, post) {
-        setUpdatePost(post)
-        setShowUpdateForm(true)
-        setUpdateFormData({title: post.title, content: post.content, author: post.author})
-    }
-
-    async function handleUpdatePost (e) {
-        e.preventDefault()
-        const resp = await updateOneUserPost(params.id, updatePost._id, updateFormData)
-        getOneUser(params.id)
-        .then(results => results.json())
-        .then(data => {
-            setUser(data)
-        
-        })
-        setUpdateFormData({title: '',
-        content: ''})
-
-        setShowUpdateForm(false)
-    }
-
     let display;
    
     if (user.posts) {
       display = user.posts.map((post) => {
-        return <div>
+        return <div key={post._id}>
                     <Link to={`/users/${user._id}/posts/${post._id}`} className='flex flex-col py-5 px-10 text-center items-center' key={post._id}>
                         <h2 className='block font-bold text-lg'>{post.title}</h2>
                         <p className='text-justify'>{post.content}</p>
                         <p>Entry ID: {post._id}</p>
                     </Link>
                         <button onClick={(e) => (handleDeletePost(e, post._id))}>Delete Post</button>
-                        <button onClick={(e) => (handleShowUpdateForm(e, post))}>Edit Post</button>
+                        <button onClick={(e) => navigate(`/users/${params.id}/posts/${post._id}/update`)}>Edit Post</button>
                 </div>
     })
 
@@ -147,49 +118,22 @@ export default function UserAccount() {
         <button className='pb-5' onClick={handleUpdatePassword}>update password</button>
         {!showForm && <button className='pb-5' onClick={() => (setShowForm(!showForm))}>Add new post</button>}
         {showForm && <div className='mb-10 mt-5'>
-                   {    <form onSubmit={handleFormSubmit} className='flex flex-col gap-5'>
-                        <ul>
-                            <li><label>Title:
-                                <input name="title" onChange={handleFormChange}></input>
-                            </label></li>
-                            
-                            <li><label>Content:
-                                <textarea
-                                name="content"
-                                onChange={handleFormChange}
-                                required
-                                ></textarea>
-                            </label></li>
-                     
-                            <li className='py-2'> <button type="button" onClick={() => (setShowForm(!showForm))}>Cancel</button></li>
-                            <li className='py-2'><button type="submit">Submit New Post</button></li>
+                        <form onSubmit={handleFormSubmit} className='flex flex-col gap-5'>
+                            <ul>
+                                <li key='title'><label>Title:
+                                    <input name="title" onChange={handleFormChange}></input>
+                                </label></li>
+                                <li key='content'><label>Content:
+                                    <textarea
+                                    name="content"
+                                    onChange={handleFormChange}
+                                    required
+                                    ></textarea>
+                                </label></li>
+                                <li className='py-2' key='cancel-btn'> <button type="button" onClick={() => (setShowForm(!showForm))}>Cancel</button></li>
+                                <li className='py-2' key='submit-btn'><button type="submit">Submit New Post</button></li>
                             </ul>
-                        </form>}
-                    </div>}
-                    {showUpdateForm && <div className='mb-10 mt-5'>
-                        {<form onSubmit={(e) => handleUpdatePost(e)} className='flex flex-col gap-5'>
-                        <ul>
-                            <li><label>Title:
-                                <input
-                                    name="title"
-                                    onChange={handleUpdateFormChange}
-                                    value={updateFormData.title}
-                                ></input>
-                            </label></li>
-                            
-                            <li><label>Content:
-                                <textarea
-                                name="content"
-                                onChange={handleUpdateFormChange}
-                                value={updateFormData.content}
-                                required
-                                ></textarea>
-                            </label></li>
-                     
-                            <li className='py-2'> <button type="button" onClick={() => (setShowUpdateForm(false))}>Cancel</button></li>
-                            <li className='py-2'><button type="submit">Save Changes</button></li>
-                            </ul>
-                        </form>}
+                        </form>
                     </div>}
         <div>
             <Link to={`/users/${params.id}/posts`} className='text-2xl font-bold'>Posts:</Link>
