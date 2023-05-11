@@ -46,6 +46,8 @@ async function handleFormSubmit(e) {
     id: id
   }
   localStorage.setItem("divorceJWT", JSON.stringify(token))
+  props.setTokenInLocalStorage(true)
+
 
   if (userData.error) {
     alert("Invalid username or password, couldn't log in!")
