@@ -50,14 +50,14 @@ export default function UserUpdateAccount(props) {
       .then(results => results.json())
       .then(data => {
           props.setUsers(data)})
-          let token = JSON.parse(localStorage.getItem('divorceJWT'))       
-          let response = await getToAccountPage(params.id, token)
-          if (response.status === 401) {
+    let token = JSON.parse(localStorage.getItem('divorceJWT'))       
+    let response = await getToAccountPage(params.id, token)
+      if (response.status === 401) {
             navigate('/users/login')
-        }
-        if (response.status === 200) {
+      }
+      if (response.status === 200) {
             navigate(`/users/${params.id}/account`)
-        }
+      }
     }
   
   
