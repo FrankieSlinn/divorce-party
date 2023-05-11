@@ -53,9 +53,6 @@ export default function Posts(props) {
   return (
     <div>
      <h1 className="font-bold text-2xl pb-4 ">Posts</h1>
-      {allPosts}
-      <br />
-      <br />
       <CreatePostForm
         id={props.id}
         setId={props.setID}
@@ -79,6 +76,7 @@ export default function Posts(props) {
         content={props.content}
         setContent={props.setContent}
       />
+      {allPosts}
     </div>
   );
 }

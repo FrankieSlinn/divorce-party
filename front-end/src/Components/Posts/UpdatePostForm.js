@@ -124,11 +124,8 @@ function handleEditFormSubmit(e) {
           <button type="submit" onClick={handleEditFormSubmit}>
           Cancel
         </button>
+        <br />
         </form>
-        <br />
-        <br />
-        <br />
-        <br />
         </>
     )
 }
