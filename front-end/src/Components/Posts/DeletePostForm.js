@@ -53,12 +53,12 @@ export default function DeletePostForm(props) {
     props.setId(e.target.value);
   }
 
-    return(
-        <>
-        <button className="px-1 border-2 border-lightpurple rounded-md"
-
-    //Ensure Delete Form is displayed if the user clicks on the button
-
+  return (
+    <>
+      <button
+        className="font-bold"
+        //Ensure Delete Form is displayed if the user clicks on the button
+        //Ensure the Add Post and Edit Post Sections are not displayed when the user is editing
         onClick={() => {
           setShowDeletePost(true);
           props.setShowAdd(false);
@@ -76,10 +76,11 @@ export default function DeletePostForm(props) {
         style={{ display: showDeletePost ? "inline-block" : "none" }}
       >
         <h4>Delete Post</h4>
-
-        <label className="mr-2" for="id">ID:</label>
+        <br />
+        <label for="id">ID</label>
+        &nbsp;&nbsp;
         {/* Here the user can type or paste the ID in the form that will reference the post to be deleted */}
-        <input className="mt-1 border-2 border-lightpurple rounded-md" id="id" value={props.id} onChange={changeId} required></input>
+        <input id="id" value={props.id} onChange={changeId} required></input>
         <br />
         <br />
         <button type="submit" onClick={handleDeleteFormSubmit}>
