@@ -1,14 +1,10 @@
-
-
 export const getAllUsers = async () => {
     return fetch('http://localhost:5000/users')
 }
 
-
 export const getOneUser = async (id) => {
     return fetch(`http://localhost:5000/users/${id}`)
 }
-
 
 export const findOnLogIn = async (loginData) => {
     const fetchOptions = {
@@ -22,9 +18,7 @@ export const findOnLogIn = async (loginData) => {
 
     const url = 'http://localhost:5000/users/login'
     const response = await fetch(url, fetchOptions);
-   
-
-return response.json();
+    return response.json();
 }
 
 
@@ -41,12 +35,12 @@ export const createNewUser = async (newUser) => {
     const url = 'http://localhost:5000/users'
     const response = await fetch(url, fetchOptions);
 
-if (!response.ok) {
-    const errorMessage = await response.text();
-    throw new Error(errorMessage);
-}
+    if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(errorMessage);
+    }
 
-return response.json();
+    return response.json();
 }
 
 
@@ -61,35 +55,33 @@ export const deleteOneUser = async (id) => {
     const url = `http://localhost:5000/users/${id}`
     const response = await fetch(url, fetchOptions);
 
-if (!response.ok) {
-    const errorMessage = await response.text();
-    throw new Error(errorMessage);
+    if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(errorMessage);
+    }
+
+    return response.json();
 }
 
-return response.json();
-}
 
-
-export const updateOneUser = async (updatedUser) => {
+export const updateOneUser = async (update, id) => {
     const fetchOptions = {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json"
         },
-        body: JSON.stringify(updatedUser)
+        body: JSON.stringify(update)
     };
-
-    const url = `http://localhost:5000/users/${updatedUser._id}`
+    const url = `http://localhost:5000/users/${id}`
     const response = await fetch(url, fetchOptions);
 
-if (!response.ok) {
-    const errorMessage = await response.text();
-    throw new Error(errorMessage);
+    if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(errorMessage);
+    }
+    return response.json();
 }
-
-}
-
 
 export const getUserPosts = (id) => {
     return fetch(`http://localhost:5000/users/${id}/posts`)
@@ -100,8 +92,6 @@ export const getOneUserPost = (id, postId) => {
 }
 
 export const getToDeleteAccountPage = async (id, token) => {
-    console.log(token.token)
-    console.log(id)
     const url = `http://localhost:5000/users/${id}/account/delete`
     const fetchOptions = {
         method: 'GET',
@@ -112,15 +102,66 @@ export const getToDeleteAccountPage = async (id, token) => {
 
     try {
         const response = await fetch(url, fetchOptions);
-        console.log(response)
         const data = await response.json()
-        console.log('data:')
-        console.log(data)
+        return data
+    } catch(error) {
+        console.log(error)
+    } 
+}
+
+
+export const getToUpdateAccountPage = async (id, token) => {
+    const url = `http://localhost:5000/users/${id}/account/update`
+    const fetchOptions = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token.token 
+    }}
+
+    try {
+        const response = await fetch(url, fetchOptions);
+        const data = await response.json()
         return data
     } catch(error) {
         console.log(error)
     }
+}
+
+    export const getToUpdatePasswordPage = async (id, token) => {
+        console.log(token.token)
+        const url = `http://localhost:5000/users/${id}/account/update/password`
+        const fetchOptions = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token.token 
+        }}
     
- 
+        try {
+            const response = await fetch(url, fetchOptions);
+            const data = await response.json()
+            return data
+        } catch(error) {
+            console.log(error)
+        } 
+}
+
+export const getToAccountPage = async (id, token) => {
+    console.log(token.token)
+    const url = `http://localhost:5000/users/${id}/account`
+    const fetchOptions = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token.token 
+    }}
+
+    try {
+        const response = await fetch(url, fetchOptions);
+        const data = await response.json()
+        return data
+    } catch(error) {
+        console.log(error)
     }
-    
+}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { getOneUser, getToDeleteAccountPage } from './api'
+import { getOneUser, getToDeleteAccountPage, getToUpdateAccountPage, getToUpdatePasswordPage } from './api'
 
 
 export default function UserAccount() {
@@ -12,8 +12,6 @@ export default function UserAccount() {
         getOneUser(params.id)
         .then(results => results.json())
         .then(data => {
-            // console.log('**DATA')
-            // console.log(data.posts)
             setUser(data)})
     }, [params.id])
 
@@ -23,7 +21,6 @@ export default function UserAccount() {
         let response = await getToDeleteAccountPage(params.id, token)
         console.log(response)
      
-
         if (response.status === 401) {
             navigate('/users/login')
         }
@@ -32,6 +29,28 @@ export default function UserAccount() {
         }
     }
 
+    async function handleUpdateAccount() {
+        let token = JSON.parse(localStorage.getItem('divorceJWT'))       
+        let response = await getToUpdateAccountPage(params.id, token)
+        if (response.status === 401) {
+            navigate('/users/login')
+        }
+        if (response.status === 200) {
+            navigate(`/users/${params.id}/account/update`)
+        }
+    }
+
+    async function handleUpdatePassword() {
+        let token = JSON.parse(localStorage.getItem('divorceJWT'))       
+        let response = await getToUpdatePasswordPage(params.id, token)
+   
+        if (response.status === 401) {
+            navigate('/users/login')
+        }
+        if (response.status === 200) {
+            navigate(`/users/${params.id}/account/update/password`)
+        } 
+    }
 
     let display;
    
@@ -51,12 +70,13 @@ export default function UserAccount() {
     
 
   return (
-    <div className='px-10 pb-5 pt-4 h-100'>
+    <div className='flex flex-col px-10 pb-5 pt-4 h-100'>
         <h2 className='text-2xl font-bold'>{user.name}</h2>
         <h2 className='text-xl pb-5'>{user.username}</h2>
-        <button onClick={handleDeleteAccount}>delete account</button>
-        <button>update account</button>
-        <button>Add new post</button>
+        <button className='pb-5' onClick={handleDeleteAccount}>delete account</button>
+        <button className='pb-5' onClick={handleUpdateAccount}>update username / display name</button>
+        <button className='pb-5' onClick={handleUpdatePassword}>update password</button>
+        <button className='pb-5'>Add new post</button>
         <div>
             <Link to={`/users/${params.id}/posts`} className='text-2xl font-bold'>Posts:</Link>
             {display}

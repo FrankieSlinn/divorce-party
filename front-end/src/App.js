@@ -16,6 +16,9 @@ import ShowUserPost from './Components/Users/ShowUserPost';
 import UserAccount from './Components/Users/UserAccount';
 import UserDeleteAccount from './Components/Users/UserDeleteAccount';
 import UserUpdateAccount from './Components/Users/UserUpdateAccount';
+import DeleteSuccessful from './Components/Users/DeleteSuccessful';
+import UserUpdatePassword from './Components/Users/UserUpdatePassword';
+import UserPasswordUpdated from './Components/Users/UserPasswordUpdated';
 
 
 function App() {
@@ -52,20 +55,32 @@ const [idUpdate, setIdUpdate]=useState("")
 <br />
       <div className='w-screen h-screen pt-40 text-black dark:lightpurple dark:text-white text-center'>
       <Routes>
+
+        {/*** HOME ***/}
         <Route path='/' element={<Homepage />}></Route>
 
-        <Route path='/users' element={<Users users={users} setUsers={setUsers}/>}></Route>
-        <Route path='/users/:id' element={<ShowUser setUsers={setUsers}/>}></Route>
-        <Route path='/users/:id/posts' element={<ShowUserPosts/>}></Route>
-        <Route path='/users/:id/posts/:postId' element={<ShowUserPost/>}></Route>
+         {/*** USER ROUTES ***/}
+            {/* USER: SHOW ROUTES */}
+            <Route path='/users' element={<Users users={users} setUsers={setUsers}/>}></Route>
+            <Route path='/users/:id' element={<ShowUser setUsers={setUsers}/>}></Route>
+            <Route path='/users/:id/posts' element={<ShowUserPosts/>}></Route>
+            <Route path='/users/:id/posts/:postId' element={<ShowUserPost/>}></Route>
 
-        <Route path='/users/create' element={<NewUserForm setUsers={setUsers} setUserLoggedIn={setUserLoggedIn}/>}></Route>
-        <Route path='/users/login' element={<UserLogin setUsers={setUsers} setUserLoggedIn={setUserLoggedIn}/>}></Route>
-        <Route path='/users/:id/account' element={<UserAccount setUsers={setUsers} setUserLoggedIn={setUserLoggedIn}/>}></Route>
-        <Route path='/users/:id/account/delete' element={<UserDeleteAccount setUsers={setUsers} setUserLoggedIn={setUserLoggedIn}/>}></Route>
-        <Route path='/users/:id/account/update' element={<UserUpdateAccount setUsers={setUsers} setUserLoggedIn={setUserLoggedIn}/>}></Route>
+            {/* USER: SIGN UP/LOGIN */}
+            <Route path='/users/create' element={<NewUserForm setUsers={setUsers} setUserLoggedIn={setUserLoggedIn}/>}></Route>
+            <Route path='/users/login' element={<UserLogin setUsers={setUsers} setUserLoggedIn={setUserLoggedIn}/>}></Route>
+            <Route path='/users/:id/account' element={<UserAccount setUsers={setUsers} setUserLoggedIn={setUserLoggedIn}/>}></Route>
 
+            {/* USER: DELETE ACCOUNT */}
+            <Route path='/users/:id/account/delete' element={<UserDeleteAccount setUsers={setUsers} setUserLoggedIn={setUserLoggedIn}/>}></Route>
+            <Route path='/users/deletesuccessful' element={<DeleteSuccessful setUsers={setUsers} setUserLoggedIn={setUserLoggedIn}/>}></Route>
 
+            {/* USER: UPDATE ACCOUNT */}
+            <Route path='/users/:id/account/update' element={<UserUpdateAccount setUsers={setUsers} setUserLoggedIn={setUserLoggedIn}/>}></Route>
+            <Route path='/users/:id/account/update/password' element={<UserUpdatePassword setUsers={setUsers} setUserLoggedIn={setUserLoggedIn}/>}></Route>
+            <Route path='/users/:id/account/update/password/success' element={<UserPasswordUpdated setUsers={setUsers} setUserLoggedIn={setUserLoggedIn}/>}></Route>
+
+        {/*** POST ROUTES ***/}
         <Route path='/posts' element={<Posts
           posts={posts}
           setPosts={setPosts}
