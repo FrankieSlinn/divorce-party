@@ -33,18 +33,14 @@ export default function CreatePostForm(props) {
   function handleCreateFormSubmit(e) {
     e.preventDefault();
     setShowCreatePost(false);
-    props.setTitle("")
+    createPost();
+    props.setTitle("");
     props.setAuthor("");
     props.setContent("");
+    
 
   }
 
-  // function handleCancel(e){
-  //   console.log("handle cancel running")
-  //   e.preventDefault();
-  //   setShowCreatePost(false)
-
-  // }
 
   //Run API if required fields present
 
@@ -77,11 +73,14 @@ export default function CreatePostForm(props) {
     e.preventDefault();
     props.setContent(e.target.value);
   }
+  function handleImage(e){
+    e.preventDefault();
+  }
 
   return (
     <>
       <button 
-        className="text-bold"
+        className="font-bold"
         onClick={() => {
           setShowCreatePost(true);
         }}
@@ -91,21 +90,22 @@ export default function CreatePostForm(props) {
       </button>
 
       <form
-        class="postform"
         style={{ display: showCreatePost ? "inline-block" : "none" }}
         onSubmit={handleCreateFormSubmit}
       >
-        <h2 className="font-bold text-xl pb-4 ">Add a Post</h2>
+        <h2 className="font-bold text-xl pb-4">Add a Post</h2>
         <br/>
-        <label for="author">Author</label>
-        <input id="author" value={props.author} onChange={changeAuthor} required></input>
+        <label className = "font-bold" for="author">Author</label>
+        &nbsp; &nbsp; <input id="author" value={props.author} onChange={changeAuthor} required></input>
         <br />
         <br />
-        <label for="title">Title</label>
+        <label className="font-bold" for="title">Title</label>
+        &nbsp; &nbsp; 
         <input id="title" value={props.title} onChange={changeTitle}></input>
         <br />
         <br />
-        <label for="content">Content</label>
+        <label className="font-bold" for="content">Content</label>
+        &nbsp; &nbsp;
         <input
           id="content"
           value={props.content}
@@ -113,10 +113,6 @@ export default function CreatePostForm(props) {
           required
         ></input>
         <br />
-        <br />
-        <button type="submit" onClick={createPost}>
-          Submit New Post
-        </button>
         <br />
         <button type="submit" onClick={handleCreateFormSubmit}>
           Cancel

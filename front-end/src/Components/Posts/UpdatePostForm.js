@@ -41,7 +41,8 @@ export default function UpdatePostForm(props){
 function handleEditFormSubmit(e) {
     e.preventDefault();
     setShowEditPost(false);
-    props.setupdateId("");
+    editPost();
+    props.setIdUpdate("");
     props.setAuthor("");
     props.setTitle("");
     props.setContent("");
@@ -96,24 +97,30 @@ function handleEditFormSubmit(e) {
     style={{ display: showEditPost ? "none" : "inline-block" }}
     >Edit a Post</button>
       {/* Run handleFormSubmit Function, Ensure Edit Form is displayed if the user clicks on the button */}
-        <form class="editform" onSubmit={handleEditFormSubmit} style={{ display: showEditPost ? "inline-block" : "none" }}>
+        <form  onSubmit={handleEditFormSubmit} style={{ display: showEditPost ? "inline-block" : "none" }}>
         <h4>Edit a Post</h4>
+        <br />
           <label for="idUpdate">ID</label>
+          &nbsp; &nbsp;
                {/* Here the user can type or paste the ID in the form that will reference the post to be edited*/}
-          <input id="idUpdate" value={props.updateId} onChange={changeUpdateId} required></input>
+          <input id="idUpdate" value={ props.updateId} onChange={changeUpdateId} required></input>
+          <br />
+          <br />
           <label for="author">Author</label>
-          <input id="author" value={props.author} onChange={changeAuthor} required></input>
+          &nbsp; &nbsp;
+          <input id="author" value={ props.author} onChange={changeAuthor} required></input>
+          <br />
+          <br />
           <label for="updateTitle">Title</label>
-          <input id="updateTitle" value={props.title} onChange={changeTitle}></input>
+          &nbsp; &nbsp;
+          <input id="updateTitle" value={ props.title} onChange={changeTitle}></input>
+          <br />
+          <br />
           <label for="updateContent">Content</label>
+          &nbsp; &nbsp;
           <input id="updateContent" value={props.content} onChange={changeContent} required></input>
           <br />
           <br />
-            {/* The API runs after the button has been clicked */}
-          <button type="submit" onClick={editPost}>
-            Edit Post
-          </button>
-          <br/>
           <button type="submit" onClick={handleEditFormSubmit}>
           Cancel
         </button>

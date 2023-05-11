@@ -6,6 +6,7 @@ export default function Post(props) {
   console.log("props in Post", props)
   return (
     <div>
+      <br />
         <div className ="post">
             <h3 className="font-bold mb-3">{props.title}</h3>
 
