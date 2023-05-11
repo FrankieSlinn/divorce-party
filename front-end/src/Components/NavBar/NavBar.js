@@ -6,13 +6,9 @@ export default function NavBar(props) {
   const navigate = useNavigate();
 
   async function gotToAccount() {
-    console.log('accout clicked')
     let token = JSON.parse(localStorage.getItem('divorceJWT')) 
-    // console.log('props:')
-    // console.log(token)
-    // if (props.userLoggedIn) {
-      // const id = props.userLoggedIn[0]._id   
-      if (token) {
+    
+    if (token) {
         const id = token.id  
         let response = await getToAccountPage(id, token)
      
@@ -22,11 +18,12 @@ export default function NavBar(props) {
     } } else {
       navigate('/users/login')
     }
+  }
 
-    
-   
-    
-
+  function logUserOut() {
+    localStorage.removeItem("divorceJWT")
+    props.setTokenInLocalStorage(false)
+    navigate('/users/logout')
   }
 
 
@@ -36,8 +33,10 @@ export default function NavBar(props) {
             <li className='p-4  hover:text-pink'><Link to='/posts'>Posts</Link></li>
             <li className='p-4  hover:text-pink'><Link to='/users'>Users</Link></li>
             <li className='p-4  hover:text-pink hover:cursor-pointer' onClick={gotToAccount}>Account</li>
-            <li className='p-4  hover:text-pink'><Link to='/users/create'>Sign Up</Link></li>
-            <li className='p-4  hover:text-pink'><Link to='/users/login'>Log In</Link></li>
+            {!props.tokenInLocalStorage && <li className='p-4  hover:text-pink'><Link to='/users/create'>Sign Up</Link></li>}
+            {!props.tokenInLocalStorage && <li className='p-4  hover:text-pink'><Link to='/users/login'>Log In</Link></li>}
+            {props.tokenInLocalStorage && <li className='p-4  hover:text-pink hover:cursor-pointer' onClick={logUserOut}>Log Out</li>}
+
         </ul>
 
         
