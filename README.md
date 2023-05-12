@@ -191,7 +191,7 @@ We decided on the team name and website theme almost immediately. We discussed e
 
 ## BUILD/CODE PROCESS
 
-The project utilised the MERN Stack. As a first step a connection with the Mongo Database was established. A seed file was then produced to populate initial data into the database. 
+We utilised the MERN Stack. As a first step a connection with the Mongo Database was established. A seed file was then produced to populate initial data into the database. 
 
 Models were then established for the Users and Posts. Once the models were completed backend routes were coded. The routes were tested in Postman API Platform. 
 

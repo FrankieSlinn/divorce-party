@@ -88,7 +88,7 @@ export default function UpdatePostForm(props) {
   return (
     <>
       <button
-        className="font-bold"
+        className="font-bold bg-lightpurple px-1 text-xl border-2 border-lightpurple rounded-md"
         //Ensure Edit Form is displayed if the user clicks on the button
         //Ensure the Delete and Add Sections are not displayed when the user is editing
         onClick={() => {

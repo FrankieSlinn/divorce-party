@@ -60,17 +60,18 @@ async function handleFormSubmit(e) {
   return (
     <div className='h-100'>
         <form onSubmit={handleFormSubmit}>
+          <br />
             <h1 className='text-2xl font-bold pb-8'>Sign Up</h1>
             <ul className='flex flex-col'>
-                <li className='py-1'><label>Username:</label></li>
+                <li className='py-1 font-bold'><label>Username:</label></li>
                 <li className='py-2'><input className='px-2 py-1' name='username' required placeholder='JaneDoe93' onChange={handleFormChange}></input></li>
-                <li className='py-1'><label>Display Name:</label></li>
+                <li className='py-1 font-bold'><label>Display Name:</label></li>
                 <li className='py-2'><input className='px-2 py-1' name='name' required placeholder='Jane D.' onChange={handleFormChange}></input></li>
-                <li className='py-1'><label>Password:</label></li>
+                <li className='py-1 font-bold'><label>Password:</label></li>
                 <li className='py-2'><input className='px-2 py-1' name='password' required type='password' placeholder='enter password' onChange={handleFormChange}></input></li>
-                <li className='py-2'><button type="submit" className='hover:text-pink'>Submit</button></li>
-                <li className='py-2'> <button type="button" onClick={handleCancel} className='hover:text-pink'>Cancel</button></li>
-                <li className='flex justify-center gap-4'><span>Already have an account?</span><Link to='/users/login' className='text-lightpurple hover:text-pink'> Log In </Link> </li>
+                <li className='py-2 font-bold'><button type="submit" className=' hover:text-pink text-lightpurple'>Submit</button></li>
+                <li className='py-2'> <button type="button" onClick={handleCancel} className='font-bold hover:text-pink text-lightpurple'>Cancel</button></li>
+                <li className='flex justify-center gap-4'><span>Already have an account?</span><Link to='/users/login' className='font-bold hover:text-pink text-lightpurple'> Log In </Link> </li>
             </ul> 
         </form>
     </div>

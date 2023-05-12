@@ -80,17 +80,18 @@ export default function UserUpdatePassword(props) {
   }
     return (
       <div className='h-100'>
+        <br />
           <form onSubmit={handleFormSubmit}>
               <h1 className='text-2xl font-bold pb-8'>Change Your Password</h1>
               <ul className='flex flex-col'>
-                  <li className='py-1'><label>Old Password:</label></li>
+                  <li className='py-1 font-bold'><label>Old Password:</label></li>
                   <li className='py-2'><input type='password' className='px-2 py-1' value={formData.old} name='old' required onChange={handleFormChange}></input></li>
-                  <li className='py-1'><label>New Password:</label></li>
+                  <li className='py-1 font-bold'><label>New Password:</label></li>
                   <li className='py-2'><input type='password' className='px-2 py-1' value={formData.new1} name='new1' required onChange={handleFormChange}></input></li>
-                  <li className='py-1'><label>Confirm New Password:</label></li>
+                  <li className='py-1 font-bold'><label>Confirm New Password:</label></li>
                   <li className='py-2'><input type='password' className='px-2 py-1' value={formData.new2} name='new2' required onChange={handleFormChange}></input></li>
-                  <li className='py-2'><button className='hover:text-pink' type="submit">Save New Password</button></li>
-                  <li className='py-2'> <button className='hover:text-pink' type="button" onClick={handleCancel}>Cancel</button></li>
+                  <li className='py-2'><button className="font-bold hover:text-pink" type="submit">Submit</button></li>
+                  <li className='py-2'> <button className="font-bold hover:text-pink" type="button" onClick={handleCancel}>Cancel</button></li>
               </ul> 
           </form>
       </div>

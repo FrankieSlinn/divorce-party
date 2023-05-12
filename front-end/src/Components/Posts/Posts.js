@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Post from "./Post";
 import { getAllPosts } from "./Postapi";
@@ -11,7 +10,6 @@ export default function Posts(props) {
   const [showDelete, setShowDelete] = useState(true);
   const [showAdd, setShowAdd] = useState(true);
   const [showEdit, setShowEdit] = useState(true);
-  const navigate = useNavigate();
 
   // API to Display Posts
 
@@ -53,8 +51,10 @@ export default function Posts(props) {
   }
 
   return (
-    <div>
-      <h1 className="font-bold text-2xl pb-4 ">Posts</h1>
+    
+    <div className="wrapper flex justify-between mt-28 lg:mt-6">
+      <div className="menu w-1/3 sticky top-72 h-screen">
+      
       {showAdd ? (
         <CreatePostForm
           id={props.id}
@@ -99,7 +99,11 @@ export default function Posts(props) {
           setShowAdd={setShowAdd}
         />
       ) : null}
+      </div>
+      <div className="main">
+      <h1 className="font-bold text-2xl pb-4 ">Posts</h1>
       {allPosts}
+      </div>
       <br />
       <br />
     </div>
