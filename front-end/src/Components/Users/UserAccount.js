@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { createNewUserPost, deleteOneUserPost, getOneUser, getToDeleteAccountPage, getToUpdateAccountPage, getToUpdatePasswordPage, updateOneUserPost } from './api'
+import { createNewUserPost, deleteOneUserPost, getOneUser, getToDeleteAccountPage, getToUpdateAccountPage, getToUpdatePasswordPage } from './api'
 
 export default function UserAccount() {
     const navigate = useNavigate();
@@ -8,8 +8,6 @@ export default function UserAccount() {
 
     const [user, setUser] = useState({})
     const [showForm, setShowForm] = useState(false)
-    const [showUpdateForm, setShowUpdateForm] = useState(false)
-    const [updatePost, setUpdatePost] = useState('')
 
     useEffect(() => {
         getOneUser(params.id)
@@ -61,16 +59,10 @@ export default function UserAccount() {
     }
 
     const [formData, setFormData] = useState(template)
-    const [updateFormData, setUpdateFormData] = useState({title: '', content: ''})
 
     function handleFormChange(e) {
         const newInput = {...formData, [e.target.name]: e.target.value}
         setFormData(newInput)
-    }
-
-    function handleUpdateFormChange(e) {
-        const newInput = {...updateFormData, [e.target.name]: e.target.value}
-        setUpdateFormData(newInput)
     }
 
     async function handleFormSubmit(e) {
@@ -98,32 +90,11 @@ export default function UserAccount() {
         })
     }
 
-    function handleShowUpdateForm(e, post) {
-        setUpdatePost(post)
-        setShowUpdateForm(true)
-        setUpdateFormData({title: post.title, content: post.content, author: post.author})
-    }
-
-    async function handleUpdatePost (e) {
-        e.preventDefault()
-        const resp = await updateOneUserPost(params.id, updatePost._id, updateFormData)
-        getOneUser(params.id)
-        .then(results => results.json())
-        .then(data => {
-            setUser(data)
-        
-        })
-        setUpdateFormData({title: '',
-        content: ''})
-
-        setShowUpdateForm(false)
-    }
-
     let display;
    
     if (user.posts) {
       display = user.posts.map((post) => {
-        return <div>
+        return <div key={post._id}>
                     <Link to={`/users/${user._id}/posts/${post._id}`} className='flex flex-col py-5 px-10 text-center items-center' key={post._id}>
                         <h2 className='block font-bold text-lg'>{post.title}</h2>
                         <br />
