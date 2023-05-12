@@ -19,7 +19,7 @@ Lots of people will attest to their experience of divorce as one of the best thi
 ## BRIEF
 A set of requirements were provided to the project team for the front-end, back-end (server), styling, formatting and deployment:
 
-- ### MVP Requirements
+### MVP Requirements
   - **Planning**
     - Have a thoroughly documented Team Expectations Google document / markdown file.
     - Have a thoroughly developed, beautiful README.md file.
