@@ -7,7 +7,7 @@ import { getAllUsers } from './Components/Users/api';
 import ShowUser from './Components/Users/ShowUser';
 import NewUserForm from './Components/Users/NewUserForm';
 import Posts from './Components/Posts/Posts'
-import Footer from './Components/Footer/Footer';
+// import Footer from './Components/Footer/Footer';
 import Header from './Components/Header/Header';
 import UserLogin from './Components/Users/UserLogin';
 import ShowUserPosts from './Components/Users/ShowUserPosts';
@@ -24,7 +24,7 @@ import UserUpdatePostForm from './Components/Users/UserUpdatePostForm';
 function App() {
 const [users, setUsers] = useState([])
 const [tokenInLocalStorage, setTokenInLocalStorage] = useState(false)
-const [darkMode, setDarkMode] = useState(false)
+// const [darkMode, setDarkMode] = useState(false)
 
 const [posts, setPosts] = useState([])
 const [author, setAuthor]=useState("")
@@ -51,12 +51,13 @@ const [idUpdate, setIdUpdate]=useState("")
 
   }, [])
 
-  function handleDarkMode() {
-    setDarkMode(!darkMode)
-  }
+  // function handleDarkMode() {
+  //   setDarkMode(!darkMode)
+  // }
   
   return (
-  <div className={darkMode ? "dark" : "bg-white text-darkpurple font-merriweather"} >
+    <div className='bg-white text-darkpurple font-merriweather'>
+  {/*<div className={darkMode ? "dark" : "bg-white text-darkpurple font-merriweather"} >*/}
     <Header tokenInLocalStorage={tokenInLocalStorage} setTokenInLocalStorage={setTokenInLocalStorage}/>
 <br />
 <br />
@@ -111,9 +112,10 @@ const [idUpdate, setIdUpdate]=useState("")
         <Route path='*' element={<PageNotFound />}></Route>
       </Routes>
       
-    <Footer handleDarkMode={handleDarkMode}/>
+        {/*<Footer handleDarkMode={handleDarkMode}/>*/}
 
     </div>
+    {/*</div>*/}
   </div>
   );
 }
