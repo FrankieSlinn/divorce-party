@@ -66,8 +66,8 @@ export default function UserUpdateAccount(props) {
                   <li className='py-2'><input className='px-2 py-1' value={formData.username} name='username' required onChange={handleFormChange}></input></li>
                   <li className='py-1'><label>Display Name:</label></li>
                   <li className='py-2'><input className='px-2 py-1' value={formData.name} name='name' required onChange={handleFormChange}></input></li>
-                         <li className='py-2'><button type="submit">Submit</button></li>
-                  <li className='py-2'> <button type="button" onClick={handleCancel}>Cancel</button></li>
+                         <li className='py-2 hover:text-pink'><button type="submit">Submit</button></li>
+                  <li className='py-2 hover:text-pink'> <button type="button" onClick={handleCancel}>Cancel</button></li>
               </ul> 
           </form>
       </div>

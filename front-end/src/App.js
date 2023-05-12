@@ -19,6 +19,7 @@ import DeleteSuccessful from './Components/Users/DeleteSuccessful';
 import UserUpdatePassword from './Components/Users/UserUpdatePassword';
 import UserPasswordUpdated from './Components/Users/UserPasswordUpdated';
 import LogOut from './Components/Users/LogOut';
+import UserUpdatePostForm from './Components/Users/UserUpdatePostForm';
 
 function App() {
 const [users, setUsers] = useState([])
@@ -86,6 +87,8 @@ const [idUpdate, setIdUpdate]=useState("")
             <Route path='/users/:id/account/update' element={<UserUpdateAccount setUsers={setUsers}/>}></Route>
             <Route path='/users/:id/account/update/password' element={<UserUpdatePassword setUsers={setUsers}/>}></Route>
             <Route path='/users/:id/account/update/password/success' element={<UserPasswordUpdated setUsers={setUsers}/>}></Route>
+            <Route path='/users/:id/posts/:postId/update' element={<UserUpdatePostForm />}></Route>
+
           
 
         {/*** POST ROUTES ***/}
