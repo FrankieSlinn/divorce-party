@@ -53,8 +53,10 @@ export default function Posts(props) {
   }
 
   return (
-    <div>
-      <h1 className="font-bold text-2xl pb-4 ">Posts</h1>
+    
+    <div className="wrapper flex justify-between mt-28 lg:mt-6">
+      <div className="menu w-1/3 sticky top-72 h-screen">
+      
       {showAdd ? (
         <CreatePostForm
           id={props.id}
@@ -99,7 +101,11 @@ export default function Posts(props) {
           setShowAdd={setShowAdd}
         />
       ) : null}
+      </div>
+      <div className="main">
+      <h1 className="font-bold text-2xl pb-4 ">Posts</h1>
       {allPosts}
+      </div>
       <br />
       <br />
     </div>
