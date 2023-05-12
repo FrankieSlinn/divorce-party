@@ -3,19 +3,9 @@
 # By Chewing the CRUD
 
 ## DESCRIPTION
-<<<<<<< HEAD
 
-<<<<<<< HEAD
-- A MERN Full-Stack Website that allows users to sign-up and read, post, edit and delete comments in a Divorce Party Guest Book. This was implemented as a group project consisting of four General Assembly Students with the amusing team name "Chewing the CRUD". 
-
-## WHY A DIVORCE PARTY GUESTBOOK? 
-
--Lots of people will experience their divorce as one of the best things that ever happened to them. Of course they
-will want to celebrate with lots of friends and family. What better way to commemorate the celebration than with a Divorce Party Guestbook? The app was developed to help recent divorcees enjoy their divorce party to the fullest and will hopefully let users relive all the happy memories.
-=======
 ## WHY A DIVORCE Party GUESTBOOK? 
 - Lots of people will experience their divorce as one of the best things that ever happened to them. Of course they will want to celebrate with lots of friends and family. What better way to commemorate the celebration than with a Divorce Party Guestbook? 
->>>>>>> dev
 =======
 A MERN Full-Stack Website that allows users to sign-up for an account, read, post, edit and delete comments in a Divorce Party Guest Book. This was implemented as a group project consisting of four General Assembly Software Engineering Immersive students with the amusing team name "Chewing the CRUD".  
 
@@ -93,16 +83,20 @@ A set of requirements were provided to the project team for the front-end, back-
 -A number of packages needed to be installed in the code as dependencies. To make the process as neat as possible it was decided that one person do the installations and the others do a git pull running a subsequent npm install.  
 -Visual Studio was utilised as a code editor. 
 
+  - To begin with a GitHub Repository called **project3-mernstack-app** was set up that was cloned by all the team members. 
+  - A number of packages needed to be installed in the code as dependencies in both the front-end and back-end directories. To make the process as neat as possible (and primarily to avoid GitHub merge conflicts) it was decided that one person would do the package installations relevant to their bit of coding and then everyone else would run a `git pull` command in their command-line interface (CLI) terminal. This would merge the *package-json* dependencies to everyone's code and then each member could run an `npm install` command in their own CLI terminal.  
+  - We all used Visual Studio as a code editor. Initially, two team members (Franziska and Hari) tried to use VS Code's **Live Share** feature to programme as a pair, but confusion relating to merge conflicts resulted in its prompt abandonment.
 
 ## TIMEFRAME & WORKING TEAM
 
+- We were given 8 days to work on this project and our team of 4 members comprised of:
 - The team of four members was provided with a timeframe of eight days to work on this project. 
 
 -Team members are:
 
   - Benjamin Khoury
   - Franziska Kissling
-  - Hari Ramanathan
+  - Hari Ramanathan (GitHub Code Owner/Team Lead)
   - Katie Loesch
 
   Hari Ramanathan took on the role of the GitHub Coordinator and the Project Manager. 
@@ -166,30 +160,23 @@ A set of requirements were provided to the project team for the front-end, back-
   - passport-jwt
     - https://www.npmjs.com/package/passport-jwt
 
-
 - ### EXTERNAL WEB RESOURCES
 
-  - icons
-    - all icons used are Scalable Vector Graphics from iconify
-    - https://iconify.design/
-
+  - Icons
+    - All icons used are Scalable Vector Graphics from iconify
+      - https://iconify.design/
 
 - ### LAYOUT
 
--A number of colour schemes were found online and shared with the team for alignment on which one to use. It was agreed to go with the first colour scheme. 
+Franziska took the lead with researching a number of colour schemes online and as a team we agreed upon the first colour scheme below:
+
 ![Colour Schemes](./documentation/ColourSchemes.png "Colour Schemes")
 
--Potential images were then provided to the group for decisioning. Warning: One of the images contains a word that could be be considered rude. 
+Franziska did the same with potential images to be used for the website. Again, as a team we went with the first one. (**WARNING**: One of the images contains a swear word.)
 
 ![Divorce Pary Images](./documentation/DivorcePartyImages.png "Divorce Party Images")
 
--As none of the team members had a particular preference the first image was utilised. 
-
--The Tailwind Framework was used for the layout with the selected colour scheme customised within Tailwind. 
-
--Image of the Layout
-
-![Layout](./documentation/Layout.png "Layout")
+We used the **Tailwind CSS** framework for our layout and styling. We added the chosen colour scheme above to our Tailwind *config* file.
 
 
 - ### FLOW CHART, USER STORIES AND WIREFRAME
