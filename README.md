@@ -193,7 +193,13 @@ We decided on the team name and website theme almost immediately. We discussed e
 
 We utilised the MERN Stack. As a first step a connection with the Mongo Database was established. A seed file was then produced to populate initial data into the database. 
 
-Models were then established for the Users and Posts. Once the models were completed backend routes were coded. The routes were tested in Postman API Platform. 
+Models were then established for the Users and Posts. 
+
+  ![User Model](./documentation/UserModel.png "User Model")
+
+Once the models were completed backend routes were coded. The routes were tested in Postman API Platform. 
+
+  ![Example Backend Route](./documentation/ExampleBackendRoute.png "Example Backend Route")
 
 After the backend routes were successfully tested the frontend routes were implemented.
 
