@@ -97,15 +97,11 @@ export default function UserAccount() {
         return <div key={post._id}>
                     <Link to={`/users/${user._id}/posts/${post._id}`} className='flex flex-col py-5 px-10 text-center items-center' key={post._id}>
                         <h2 className='block font-bold text-lg'>{post.title}</h2>
-                        <br />
                         <p className='text-justify'>{post.content}</p>
-                        <br />
                         <p>Entry ID: {post._id}</p>
                     </Link>
-                        <button class="font-bold hover:text-pink" onClick={(e) => (handleDeletePost(e, post._id))}>Delete Post</button>
-                        <br />
-                        <br />
-                        <button class="font-bold hover:text-pink" onClick={(e) => (handleShowUpdateForm(e, post))}>Edit Post</button>
+                        <button onClick={(e) => (handleDeletePost(e, post._id))}>Delete Post</button>
+                        <button onClick={(e) => navigate(`/users/${params.id}/posts/${post._id}/update`)}>Edit Post</button>
                 </div>
     })
 
@@ -115,66 +111,28 @@ export default function UserAccount() {
     
   return (
     <div className='flex flex-col px-10 pb-5 pt-4 h-100'>
-        <br />
-        <h2 className='text-2xl font-bold'>Name: {user.name}</h2>
-        <br />
-        <h2 className='text-xl pb-5 font-bold'>User Name: {user.username}</h2>
-        <button className='pb-5 font-bold hover:text-pink' onClick={handleDeleteAccount}>delete account</button>
-        <button className='pb-5 font-bold hover:text-pink' onClick={handleUpdateAccount}>update username / display name</button>
-        <button className='pb-5 font-bold hover:text-pink' onClick={handleUpdatePassword}>update password</button>
-        {!showForm && <button className='pb-5 font-bold hover:text-pink' onClick={() => (setShowForm(!showForm))}>Add new post</button>}
-        {showForm && <div className='mb-10 mt-5 font-bold'>
-                   {    <form onSubmit={handleFormSubmit} className='flex flex-col gap-5'>
-                        <ul>
-                            <li><label>Title:&nbsp;&nbsp;
-                                <input className="font-normal" name="title" onChange={handleFormChange}></input>
-                            </label></li>
-                            <br />
-                            
-                            <li><label>Content:&nbsp;&nbsp;
-                                <input
-                                className="font-normal"
-                                name="content"
-                                onChange={handleFormChange}
-                                required
-                                ></input>
-                            </label></li>
-                            <br />
-                     
-                            <li className='py-2'> <button className="hover:text-pink" type="button" onClick={() => (setShowForm(!showForm))}>Cancel</button></li>
-                            <li className='py-2'><button className="hover:text-pink" type="submit">Submit New Post</button></li>
+        <h2 className='text-2xl font-bold'>{user.name}</h2>
+        <h2 className='text-xl pb-5'>{user.username}</h2>
+        <button className='pb-5 hover:text-pink' onClick={handleDeleteAccount}>delete account</button>
+        <button className='pb-5 hover:text-pink' onClick={handleUpdateAccount}>update username / display name</button>
+        <button className='pb-5 hover:text-pink' onClick={handleUpdatePassword}>update password</button>
+        {!showForm && <button className='pb-5 hover:text-pink' onClick={() => (setShowForm(!showForm))}>Add new post</button>}
+        {showForm && <div className='mb-10 mt-2'>
+                        <form onSubmit={handleFormSubmit} className='flex flex-col gap-5'>
+                            <ul>
+                                <li key='title' className='mb-1'><label>Title: </label></li>
+                                <li className='mb-5'> <input name="title" onChange={handleFormChange} style={{ width: "25vw" }}></input></li>
+                                <li key='content'  className='mb-1'><label>Content: </label></li>
+                                <li><textarea
+                                    name="content"
+                                    onChange={handleFormChange}
+                                    required
+                                    style={{ width: "25vw", height: "10vh"}}
+                                ></textarea></li>
+                                <li className='py-2 hover:text-pink' key='cancel-btn'> <button type="button" onClick={() => (setShowForm(!showForm))}>Cancel</button></li>
+                                <li className='py-2 hover:text-pink' key='submit-btn'><button type="submit">Submit New Post</button></li>
                             </ul>
-                        </form>}
-                    </div>}
-                    {showUpdateForm && <div className='mb-10 mt-5'>
-                        {<form onSubmit={(e) => handleUpdatePost(e)} className='flex flex-col gap-5'>
-                        <ul>
-                            <li><label className="font-bold">Title: &nbsp;&nbsp;
-                                <input
-                                className="font-normal"
-                                    name="title"
-                                    onChange={handleUpdateFormChange}
-                                    value={updateFormData.title}
-                                ></input>
-                            </label></li>
-                            <br />
-                            <br />
-
-                            
-                            <li><label className="font-bold">Content:&nbsp;&nbsp;
-                                <input
-                                className="font-normal"
-                                name="content"
-                                onChange={handleUpdateFormChange}
-                                value={updateFormData.content}
-                                required
-                                ></input>
-                            </label></li>
-                     
-                            <li className='py-2'> <button type="button" className="font-bold hover:text-pink" onClick={() => (setShowUpdateForm(false))}>Cancel</button></li>
-                            <li className='py-2'><button type="submit" className="font-bold hover:text-pink">Save Changes</button></li>
-                            </ul>
-                        </form>}
+                        </form>
                     </div>}
         <div>
             <Link to={`/users/${params.id}/posts`} className='text-2xl font-bold'>Posts:</Link>
