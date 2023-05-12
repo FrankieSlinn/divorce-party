@@ -3,11 +3,16 @@
 # By Chewing the CRUD
 
 ## DESCRIPTION
+
+## WHY A DIVORCE Party GUESTBOOK? 
+- Lots of people will experience their divorce as one of the best things that ever happened to them. Of course they will want to celebrate with lots of friends and family. What better way to commemorate the celebration than with a Divorce Party Guestbook? 
+=======
 A MERN Full-Stack Website that allows users to sign-up for an account, read, post, edit and delete comments in a Divorce Party Guest Book. This was implemented as a group project consisting of four General Assembly Software Engineering Immersive students with the amusing team name "Chewing the CRUD".  
 
 
 ## WHY A DIVORCE PARTY GUESTBOOK? 
 Lots of people will attest to their experience of divorce as one of the best things that ever happened to them. Of course they will want to celebrate with lots of friends and family. What better way to commemorate the celebration than with a Divorce Party Guestbook? The app was developed to help recent divorcees enjoy their divorce party to the fullest and will hopefully let users re-live all the happy memories. A divorce isn't the end; merely the beginning to either a new chapter or a whole new sequel.
+>>>>>>> dev
 
 
 ## DEPLOYMENT LINK
@@ -17,6 +22,12 @@ Lots of people will attest to their experience of divorce as one of the best thi
 
 
 ## BRIEF
+<<<<<<< HEAD
+
+-A set of Requirements was provided to the project team for the front-end, back-end and layout. These are captured here: 
+
+[MVP](https://docs.google.com/document/d/11-8h-0BhooCWmEsl-5tARRfb_azYPBD5/edit)
+=======
 A set of requirements were provided to the project team for the front-end, back-end (server), styling, formatting and deployment:
 
 ### MVP Requirements
@@ -64,8 +75,13 @@ A set of requirements were provided to the project team for the front-end, back-
     - Deploy the back-end via Heroku (or vercel).
     - Deploy the MongoDB database on MongoDB Atlas.
 
+>>>>>>> dev
 
 ## GETTING STARTED/CODE INSTALLATION
+
+-To begin with a GitHub Repository was set up with was cloned by the team members. 
+-A number of packages needed to be installed in the code as dependencies. To make the process as neat as possible it was decided that one person do the installations and the others do a git pull running a subsequent npm install.  
+-Visual Studio was utilised as a code editor. 
 
   - To begin with a GitHub Repository called **project3-mernstack-app** was set up that was cloned by all the team members. 
   - A number of packages needed to be installed in the code as dependencies in both the front-end and back-end directories. To make the process as neat as possible (and primarily to avoid GitHub merge conflicts) it was decided that one person would do the package installations relevant to their bit of coding and then everyone else would run a `git pull` command in their command-line interface (CLI) terminal. This would merge the *package-json* dependencies to everyone's code and then each member could run an `npm install` command in their own CLI terminal.  
@@ -74,10 +90,16 @@ A set of requirements were provided to the project team for the front-end, back-
 ## TIMEFRAME & WORKING TEAM
 
 - We were given 8 days to work on this project and our team of 4 members comprised of:
+- The team of four members was provided with a timeframe of eight days to work on this project. 
+
+-Team members are:
+
   - Benjamin Khoury
   - Franziska Kissling
   - Hari Ramanathan (GitHub Code Owner/Team Lead)
   - Katie Loesch
+
+  Hari Ramanathan took on the role of the GitHub Coordinator and the Project Manager. 
 
 
 ## TECHNOLOGIES USED
@@ -159,8 +181,8 @@ We used the **Tailwind CSS** framework for our layout and styling. We added the 
 
 - ### FLOW CHART, USER STORIES AND WIREFRAME
 
-The design was done in a meeting with all the members of the team. 
-User stories, wireframes, a schema containing the models and a flowchart were produced during this session. These were consolidated into a README document. 
+The design was done in a meeting with all the members of the team present. 
+User stories, wireframes, a schema containing the models and a flowchart were produced during this session. These were consolidated into a README document. Please note that this is a Google Drive Document which may need access granted to view this. 
 
 [README](https://docs.google.com/document/d/1cIHDD5IY5U9jJfRezuFAYF1JMcIhAnN69uqpn7qwLw8/edit)
 
@@ -183,7 +205,13 @@ This was captured within a Team Expectations Document stored on the team's share
 
 The project utilised the MERN Stack. As a first step a connection with the Mongo Database was established. A seed file was then produced to populate initial data into the database. 
 
-Models were then established for the Users and Posts. Once the models were completed backend routes were coded. The routes were tested in Postman API Platform. 
+Models were then established for the Users and Posts. 
+
+![User Model](./documentation/UserModel.png)
+
+Once the models were completed backend routes were coded. The routes were tested in Postman API Platform. 
+
+![Backend Routes](./documentation/ExampleBackendRoute.png)
 
 After the backend routes were successfully tested the frontend routes were implemented.
 
@@ -192,32 +220,33 @@ The user authentication was developed using bcrypt for password hashing and Pass
 Github provided version control. To minimise merge conflicts commits and pulls were done frequently. 
 
 
-
-
 ## CHALLENGES
 
-- Seeding
-- Authentication
+- Authentication was one of the biggest challenges given its complexity. To solve the challenge extensive research was done by multiple team members. The authentication took a few days to implement. 
+-GIT was a challenge with merge conflicts, limited experience of using GIT within the team. As the team members got used to GIT the process started to run more smoothly. 
 
 
 ## WINS
 
-- Authentication
-- Tailwind CSS
-- Git conflicts
-
+- As mentioned above, the authentication was the most complex and time-consuming piece to implement. As this could be developed successfully it is considered to be a key win for the project. 
+- Tailwind CSS was new to the team members who managed to learn and apply this layout framework.
+- Most team members hadn't used GIT on a project before. Towards the end of the project the team felt a lot more comfortable with GIT. 
+With GIT being a key skill in the work place this was a good win to have. 
 
 ## KEY LEARNING/TAKEAWAYS
 
-- Ba Ba Black Sheep
+- An interesting learning was that with node.js not being sequential that error handling can be carried out before the preceding code is processed. A solution to this was to use async functions. 
+- One of the team members wasn't able to uses the localhost:3000 with npm start for React. A resolution was found by upgrading WSL. 
+-On occasions the port was amended in the server.js file. This prevented other team members from being able to use the site and from APIs running. It was aligned to only make updates to the port with agreement from all the team members. 
 
 
 ## BUGS
 
-- Not insects 😂😂
+- At the time of writing the team isn't aware of any bugs. However, as with most projects a number of bugs were found during development such as a new post being updated many times or users being able to login wiht any credentials. These have now been fixed. 
 
 
 ## FUTURE IMPROVEMENTS
 
 - Create a file upload facility for user profile pictures and party pictures within a post. 
 - Get quotes about divorce via an external API. 
+-Allow a user to generate a customised Divorce Party Guestbook so that multiple users could have their Divorce Party Guestbook on the site. 

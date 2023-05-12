@@ -33,8 +33,9 @@ export default function ShowUser() {
 
   return (
     <div className='px-10 pb-5 pt-4 h-100'>
-        <h2 className='text-2xl font-bold'>{user.name}</h2>
-        <h2 className='text-xl pb-5'>{user.username}</h2>
+        <h2 className='text-2x font-bold'>{user.name}</h2>
+        <br/>
+        <h2 className='text-xl pb-5 font-bold'>{user.username}</h2>
         <div>
             <Link to={`/users/${params.id}/posts`} className='text-2xl font-bold'>Posts:</Link>
             {display}

@@ -30,15 +30,17 @@ export default function NavBarSmallScreen(props) {
   }
  
   return (
-    <ul className={props.hamburger ? 'flex-col flex fixed inset-0 top-1/4  bg-black/60 backdrop-blur-lg text-white text-xl dark:bg-slate-600/50 md:hidden' : 'hidden'}>
-        <li className='p-4 mt-20 flex justify-center items-center cursor-pointer text-pink'>{props.close}</li>
-        <li onClick={props.showMenu} className='p-4 text-pink'><Link to='/'>Home</Link></li>
-        <li onClick={props.showMenu} className='p-4 text-pink'><Link to='/posts'>Posts</Link></li>
-        <li onClick={props.showMenu} className='p-4 text-pink'><Link to='/users'>Users</Link></li>
-        <li className='p-4  text-pink hover:cursor-pointer' onClick={gotToAccount}>Account</li>
-        {!props.tokenInLocalStorage && <li className='p-4  text-pink' onClick={props.showMenu}><Link to='/users/create'>Sign Up</Link></li>}
-        {!props.tokenInLocalStorage && <li className='p-4  text-pink' onClick={props.showMenu}><Link to='/users/login'>Log In</Link></li>}
-        {props.tokenInLocalStorage && <li className='p-4  text-pink hover:cursor-pointer' onClick={logUserOut}>Log Out</li>}
+    <>
+    <ul className={props.hamburger ? 'flex-col flex fixed inset-0 mt-1/4 bg-white backdrop-blur-lg text-white text-xl dark:bg-slate-600/50 md:hidden' : 'hidden'}>
+        <li className='hover:text-pink p-4 mt-10 flex justify-center items-center cursor-pointer text-darkpurple'>{props.close}</li>
+        <li onClick={props.showMenu} className='hover:text-pink p-4 font-bold text-darkpurple'><Link to='/posts'>Posts</Link></li>
+        <li onClick={props.showMenu} className='hover:text-pink p-4 font-bold text-darkpurple'><Link to='/users'>Users</Link></li>
+        <li className='hover:text-pink p-4 font-bold  text-darkpurple hover:cursor-pointer' onClick={gotToAccount}>Account</li>
+        {!props.tokenInLocalStorage && <li className='hover:text-pink p-4 font-bold text-darkpurple' onClick={props.showMenu}><Link to='/users/create'>Sign Up</Link></li>}
+        {!props.tokenInLocalStorage && <li className='hover:text-pink p-4 font-bold text-darkpurple' onClick={props.showMenu}><Link to='/users/login'>Log In</Link></li>}
+        {props.tokenInLocalStorage && <li className='hover:text-pink p-4 font-bold text-darkpurple hover:cursor-pointer' onClick={logUserOut}>Log Out</li>}
     </ul>
+    <br />
+    </>
   )
 }

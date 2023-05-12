@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
 export default function CreatePostForm(props) {
-
   //CREATE A POST
 
   //Set up use state to display the form as needed
-  
+
   const [showCreatePost, setShowCreatePost] = useState(false);
 
-  //Define API 
+  //Define API
 
   const postAPI = function () {
     fetch("http://localhost:5000/posts", {
@@ -39,7 +38,6 @@ export default function CreatePostForm(props) {
     props.setContent("");
   }
 
-
   //Run API if required fields present
 
   function createPost(e) {
@@ -56,7 +54,7 @@ export default function CreatePostForm(props) {
     }
   }, []);
 
-  //Update the fields that will be used in the API based on what the user types in the input field. 
+  //Update the fields that will be used in the API based on what the user types in the input field.
 
   function changeAuthor(e) {
     e.preventDefault();
@@ -92,17 +90,29 @@ export default function CreatePostForm(props) {
         onSubmit={handleCreateFormSubmit}
       >
         <h2 className="font-bold text-xl pb-4">Add a Post</h2>
-        <br/>
-        <label className = "font-bold" for="author">Author</label>
-        &nbsp; &nbsp; <input id="author" value={props.author} onChange={changeAuthor} required></input>
+        <br />
+        <label className="font-bold" for="author">
+          Author
+        </label>
+        &nbsp; &nbsp;{" "}
+        <input
+          id="author"
+          value={props.author}
+          onChange={changeAuthor}
+          required
+        ></input>
         <br />
         <br />
-        <label className="font-bold" for="title">Title</label>
-        &nbsp; &nbsp; 
+        <label className="font-bold" for="title">
+          Title
+        </label>
+        &nbsp; &nbsp;
         <input id="title" value={props.title} onChange={changeTitle}></input>
         <br />
         <br />
-        <label className="font-bold" for="content">Content</label>
+        <label className="font-bold" for="content">
+          Content
+        </label>
         &nbsp; &nbsp;
         <input
           id="content"
@@ -112,7 +122,7 @@ export default function CreatePostForm(props) {
         ></input>
         <br />
         <br />
-        <button type="submit" onClick={handleCreateFormSubmit}>
+        <button  type="submit" onClick={handleCreateFormSubmit}>
           Cancel
         </button>
       </form>
