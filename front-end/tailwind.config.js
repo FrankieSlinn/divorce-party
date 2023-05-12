@@ -23,7 +23,7 @@ module.exports = {
       lightpurple: '#8E87B3',
       pink: '#A92239',
       white: '#F1EAE0',
-      darkpurple: '#252330'
+      darkpurple: '#252330',
     },
     fontFamily: {
       'merriweather': ['Merriweather Sans'],

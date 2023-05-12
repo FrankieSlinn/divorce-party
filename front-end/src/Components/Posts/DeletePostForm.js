@@ -56,7 +56,7 @@ export default function DeletePostForm(props) {
   return (
     <>
       <button
-        className="font-bold"
+        className="font-bold bg-lightpurple px-1 text-xl border-2 border-lightpurple rounded-md"
         //Ensure Delete Form is displayed if the user clicks on the button
         //Ensure the Add Post and Edit Post Sections are not displayed when the user is editing
         onClick={() => {
