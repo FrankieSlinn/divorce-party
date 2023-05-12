@@ -1,4 +1,3 @@
-import Posts from "./Posts"
 
 //getAPI
 
