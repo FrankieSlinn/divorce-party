@@ -7,12 +7,12 @@ A MERN Full-Stack Website that allows users to sign-up for an account, read, pos
 
 
 ## WHY A DIVORCE PARTY GUESTBOOK? 
-Lots of people will attest to their experience of divorce as one of the best things that ever happened to them. Of course they will want to celebrate with lots of friends and family. What better way to commemorate the celebration than with a Divorce Party Guestbook? The app was developed to help recent divorcees enjoy their divorce party to the fullest and will hopefully let users re-live all the happy memories. A divorce isn't the end; merely the beginning to either a new chapter or a whole new sequel.
+Lots of people will remember their experience of divorce as one of the best things that ever happened to them. Of course they will want to celebrate with lots of friends and family. What better way to commemorate the celebration than with a Divorce Party Guestbook? The app was developed to help recent divorcees enjoy their divorce party to the fullest and will hopefully let users relive all the happy memories. A divorce isn't the end; merely the beginning to either a new chapter or a whole new sequel.
 
 
 ## DEPLOYMENT LINK
 
-- [The Divorce Party Guest Book](https://hpramanathan.github.io/project3-mernstack-app/).
+- [The Divorce Party Guest Book](https://hpramanathan.github.io/project3-mernstack-app/). At the time of writing the project has not yet been fully deployed. 
 - GitHub Repository: https://github.com/hpramanathan/project3-mernstack-app
 
 
@@ -69,7 +69,7 @@ A set of requirements were provided to the project team for the front-end, back-
 
   - To begin with a GitHub Repository called **project3-mernstack-app** was set up that was cloned by all the team members. 
   - A number of packages needed to be installed in the code as dependencies in both the front-end and back-end directories. To make the process as neat as possible (and primarily to avoid GitHub merge conflicts) it was decided that one person would do the package installations relevant to their bit of coding and then everyone else would run a `git pull` command in their command-line interface (CLI) terminal. This would merge the *package-json* dependencies to everyone's code and then each member could run an `npm install` command in their own CLI terminal.  
-  - We all used Visual Studio as a code editor. Initially, two team members (Franziska and Hari) tried to use VS Code's **Live Share** feature to programme as a pair, but confusion relating to merge conflicts resulted in its prompt abandonment.
+  - We all used Visual Studio as a code editor. 
 
 ## TIMEFRAME & WORKING TEAM
 
@@ -177,13 +177,14 @@ We decided on the team name and website theme almost immediately. We discussed e
 
 - ### LAYOUT
 
-  Franziska took the lead with researching a number of colour schemes online and as a team we agreed upon the first colour scheme below:
+  I researched a number of colour schemes online and as a team we agreed upon the first colour scheme below:
   ![Colour Schemes](./documentation/ColourSchemes.png "Colour Schemes")
 
-  Franziska did the same with potential images to be used for the website. Again, as a team we went with the first one. (**WARNING**: One of the images contains a swear word.)
+ I did the same with potential images to be used for the website. Again, as a team we went with the first one. (**WARNING**: One of the images contains a swear word.)
   ![Divorce Party Images](./documentation/DivorcePartyImages.png "Divorce Party Images")
 
   We used the **Tailwind CSS** framework for our layout and styling. We added the chosen colour scheme above to our Tailwind *config* file.
+  I carried out the styling for the home page and a number of other post-related pages as well as responsiveness. 
 
   This is what our final homepage layout looked like:
   ![Layout](./documentation/Layout.png "Layout")
@@ -191,17 +192,17 @@ We decided on the team name and website theme almost immediately. We discussed e
 
 ## BUILD/CODE PROCESS
 
-We utilised the MERN Stack. As a first step a connection with the Mongo Database was established. A seed file was then produced to populate initial data into the database. 
+We utilised the MERN Stack. As a first step I established a connection with the Mongo Database. A seed file was then produced to populate initial data into the database. 
 
 Models were then established for the Users and Posts. 
 
   ![User Model](./documentation/UserModel.png "User Model")
 
-Once the models were completed backend routes were coded. The routes were tested in Postman API Platform. 
+Once the models were completed backend routes were coded. I set up the Post Routes to  Create, Read, Update and Delete Data. This was done using Node.js. The routes were tested in the Postman API Platform. 
 
   ![Example Backend Route](./documentation/ExampleBackendRoute.png "Example Backend Route")
 
-After the backend routes were successfully tested the frontend routes were implemented.
+After the backend routes were successfully tested I implemented the frontend routes for these paths in React. 
 
 The user authentication was developed using bcrypt for password hashing and Passport JWT for user authentication.  The authentication was integrated into the routes.
 
@@ -223,7 +224,9 @@ Github provided version control. To minimise merge conflicts commits and pulls w
 
 ## KEY LEARNING/TAKEAWAYS
 
-- In the immortal words of Big Chris, *It's been emotional*.
+- It was observed that a persistent issue could be resolved by changing the order of the middleware within the server.js file. 
+- Another interesting issue arose in a route, where the error state was processed instead of the route, even when there was no error. It was found that this was due to the timing of the API being called. The issue was fixed by converting the function into an async function. This had the consequence that the error route would wait for the initial processing so that if this was successful, the error route would not be taken. 
+
 
 
 ## BUGS
